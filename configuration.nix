@@ -11,15 +11,14 @@
 
       ./boot.nix
       ./hardware-bis.nix
+      ./home.nix
+      ./host.nix
       ./networking.nix
       ./shell.nix
       ./tmux.nix
       ./vim.nix
       ./x.nix
     ];
-
-  networking.hostName = "meh"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Select internationalisation properties.
   i18n = {
@@ -40,7 +39,7 @@
     vim tmux htop ripgrep fd tree lsof
     wipe
     git
-    nox
+    nox nix-prefetch-scripts
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

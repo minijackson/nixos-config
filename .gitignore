@@ -1,2 +1,5 @@
 /hardware-configuration.nix
+/host.nix
+*-secret.nix
+
 result

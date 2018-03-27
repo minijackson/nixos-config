@@ -1,0 +1,12 @@
+{ config, ... }:
+
+{
+
+  # Import some usecases
+  imports = [
+      ./usecases/my-usecase.nix
+  ];
+
+  networking.hostName = "myAwesomeHostname";
+
+}
