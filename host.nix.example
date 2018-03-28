@@ -8,5 +8,6 @@
   ];
 
   networking.hostName = "myAwesomeHostname";
+  theme.colors.dominant = "#d3869b";
 
 }
