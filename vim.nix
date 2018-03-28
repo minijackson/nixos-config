@@ -2,13 +2,20 @@
 
 {
 
+  imports = [
+    ./theme.nix
+  ];
+
   environment.systemPackages = with pkgs; [
     python27Packages.neovim python36Packages.neovim neovim-qt
     (neovim.override {
 
       configure = {
 
-        customRC = builtins.readFile ./dotfiles/vimrc.vim;
+        customRC = with config.theme;
+        ''
+          let g:dominant_color = '${colors.dominant}'
+        '' + builtins.readFile ./dotfiles/vimrc.vim;
 
         vam = {
           knownPlugins = vimPlugins // {

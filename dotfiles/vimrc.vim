@@ -1,3 +1,5 @@
+" Some global variables are defined in ../vim.nix
+
 set undofile
 set backup
 set backupdir-=.
@@ -11,6 +13,7 @@ set termguicolors
 let g:gruvbox_contrast_dark = 'soft'
 set background=dark
 colorscheme gruvbox
+exe "hi! TabLineSel guifg=" . g:dominant_color
 
 set listchars=tab:│\ ,trail:-,nbsp:+
 set list
