@@ -1,0 +1,44 @@
+# Some variables are defined in ../shell.nix
+
+# ======================
+# Grml Zsh configuration
+# ======================
+
+function get_escape_code() {
+	local hex="$1"
+
+	local red="$((16#${hex:1:2}))"
+	local green="$((16#${hex:3:2}))"
+	local blue="$((16#${hex:5:2}))"
+
+	echo -n "[38;2;${red};${green};${blue}m"
+}
+
+local dominant_escape_code="$(get_escape_code "${dominant_color}")"
+local dim_fg_escape_code="$(get_escape_code "${dim_fg_color}")"
+
+# With prompt specific sequences
+local dominated="%{${dominant_escape_code}%}"
+local dimmed="%{${dim_fg_escape_code}%}"
+
+# Use the dominant color in the prompt
+# In the username item for non-root, in the host item for root
+if [ "$EUID" -ne 0 ]; then
+	zstyle ':prompt:grml:left:items:user' pre "${dominated}%B"
+else
+	zstyle ':prompt:grml:left:items:host' pre "${dominated}"
+	zstyle ':prompt:grml:left:items:host' post "%f"
+fi
+
+# Change the style of VCS prompt info
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' stagedstr "s"
+zstyle ':vcs_info:*' unstagedstr "u"
+zstyle ':vcs_info:*' formats "${dimmed}(%f%s${dimmed})-[${dominated}%b${dimmed}]-{%f%c%u${dimmed}}%f " "zsh: %r"
+zstyle ':vcs_info:*' actionformats "${dimmed}(%f%s${dimmed})-[${dominated}%b${dimmed}|%F{yellow}%a${dimmed}]-{%f%c%u${dimmed}}%f " "zsh: %r"
+
+# ====================
+# Global configuration
+# ====================
+
+bindkey -v

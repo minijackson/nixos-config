@@ -13,23 +13,14 @@
     enable = true;
 
     interactiveShellInit = ''
-      # Use the dominant color in the prompt
-      dominant="${config.theme.colors.dominant}"
-      dominant_red="$((16#''${dominant:1:2}))"
-      dominant_green="$((16#''${dominant:3:2}))"
-      dominant_blue="$((16#''${dominant:5:2}))"
+      source "${pkgs.grml-zsh-config}/etc/zsh/zshrc"
 
-      # In the username item for non-root, in the host item for root
-      if [ "$EUID" -ne 0 ]; then
-        zstyle ':prompt:grml:left:items:user' pre "%{[38;2;''${dominant_red};''${dominant_green};''${dominant_blue}m%}%B"
-      else
-        zstyle ':prompt:grml:left:items:host' pre "%{[38;2;''${dominant_red};''${dominant_green};''${dominant_blue}m%}"
-        zstyle ':prompt:grml:left:items:host' post "%f"
-      fi
+      function () {
+        local dominant_color="${config.theme.colors.dominant}"
+        local dim_fg_color="${config.theme.colors.dimForeground}"
 
-      source ${pkgs.grml-zsh-config}/etc/zsh/zshrc
-
-      bindkey -v
+        ${builtins.readFile ./dotfiles/zshrc}
+      }
     '';
     promptInit = ""; # otherwise it'll override the grml prompt
 
