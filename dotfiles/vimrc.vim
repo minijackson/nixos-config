@@ -24,7 +24,8 @@ highlight ExtraWhitespace term=inverse cterm=inverse gui=inverse
 " Show trailing whitespace and spaces before tabs:
 autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/ containedin=ALL
 
-set cindent
+set smartindent
+set tabstop=4
 
 set completefunc=syntaxcomplete#Complete
 
