@@ -54,4 +54,21 @@ in
     };
   };
 
+  security.sudo.extraConfig =
+  let
+    lectureFile = builtins.toFile "sudoers.lecture" ''
+    [1m
+         ${dominantEscapeCode}"Bee" careful    [34m__
+           ${dominantEscapeCode}with sudo!    [34m// \
+                         \\_/ [33m//
+       [35m'''-.._.-'''-.._.. [33m-(||)(')
+                         ''''[0m
+
+    '';
+  in
+    ''
+    Defaults lecture = always
+    Defaults lecture_file = "${lectureFile}"
+    '';
+
 }
