@@ -10,11 +10,11 @@
       ./hardware-configuration.nix
 
       ./boot.nix
+      ./commandline.nix
       ./hardware-bis.nix
       ./home.nix
       ./host.nix
       ./networking.nix
-      ./shell.nix
       ./tmux.nix
       ./vim.nix
       ./x.nix
@@ -39,6 +39,7 @@
     vim tmux htop ripgrep fd tree lsof
     wipe
     git
+    gnupg
     nox nix-prefetch-scripts
   ];
 
