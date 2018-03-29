@@ -4,19 +4,6 @@
 # Grml Zsh configuration
 # ======================
 
-function get_escape_code() {
-	local hex="$1"
-
-	local red="$((16#${hex:1:2}))"
-	local green="$((16#${hex:3:2}))"
-	local blue="$((16#${hex:5:2}))"
-
-	echo -n "[38;2;${red};${green};${blue}m"
-}
-
-local dominant_escape_code="$(get_escape_code "${dominant_color}")"
-local dim_fg_escape_code="$(get_escape_code "${dim_fg_color}")"
-
 # With prompt specific sequences
 local dominated="%{${dominant_escape_code}%}"
 local dimmed="%{${dim_fg_escape_code}%}"
