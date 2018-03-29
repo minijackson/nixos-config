@@ -13,6 +13,9 @@
     zathura
   ];
 
+  # 8080 for Kodi remote control
+  networking.firewall.allowedTCPPorts = [ 8080 ];
+
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;

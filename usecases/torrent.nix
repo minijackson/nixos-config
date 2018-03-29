@@ -50,5 +50,7 @@ in
       8989
       # Radarr WebUI
       7878
+      # Jackett WebUI
+      9117
     ];
   }

@@ -2,19 +2,12 @@
 
 {
 
-  # Open ports in the firewall.
-  # 8080 for Kodi remote control
-  # 4713 for PulseAudio TCP streaming
-  # TODO: move this out of here!
-  networking.firewall.allowedTCPPorts = [ 8080 4713 ];
+  networking.firewall.allowedTCPPorts = [];
   # networking.firewall.allowedUDPPorts = [ ... ];
   networking.firewall.allowPing = true;
-  # Or disable the firewall altogether.
-  #networking.firewall.enable = false;
 
   networking.networkmanager = {
     enable = true;
-    # Not via NetworkManager
     useDnsmasq = true;
     insertNameservers = [
       # ns2.he.de
