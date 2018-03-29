@@ -26,7 +26,7 @@ zstyle ':vcs_info:*' actionformats "${dimmed}(%f%s${dimmed})-[${dominated}%b${di
 
 # Change completion messages
 zstyle ':completion:*:corrections'  format "${dominated}%BFTFY: %b${dominated}(errors: %e)%f"
-zstyle ':completion:*:descriptions' format "${dominated}So you want a %B%d%b?%f"
+zstyle ':completion:*:descriptions' format "${dominated} -- So you want a %B%d%b${dominated}? --%f"
 zstyle ':completion:*:messages'     format "${dominated}You got mail: %f%d"
 zstyle ':completion:*:warnings'     format "%F{red}I'm sorry Dave, but I cannot allow you to find%f %d"
 
