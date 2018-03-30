@@ -6,7 +6,7 @@
 
   programs.tmux = {
     enable = true;
-    #shortcut = "q";
+    shortcut = "q";
     escapeTime = 10;
     keyMode = "vi";
     terminal = "screen-256color";
@@ -14,6 +14,10 @@
 
     extraTmuxConf = with config.theme;
     ''
+      # Be faster switching windows
+      bind C-n next-window
+      bind C-p previous-window
+
       # Force true colors
       set-option -ga terminal-overrides ",*:Tc"
 
