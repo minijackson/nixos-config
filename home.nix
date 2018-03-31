@@ -354,6 +354,12 @@ in
         lockCmd = "${pkgs.i3lock}/bin/i3lock -n -c 000000";
       };
 
+      random-background = {
+        enable = true;
+        imageDirectory = toString ./res/wallpapers;
+        interval = "20 minutes";
+      };
+
     };
 
     programs = {
