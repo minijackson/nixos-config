@@ -37,7 +37,7 @@ in
 
     syntaxHighlighting = {
       enable = true;
-      highlighters = [ "main" "brackets" "cursor" "line" ];
+      highlighters = [ "main" "brackets" "line" ];
     };
 
     shellAliases = {
