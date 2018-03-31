@@ -441,6 +441,10 @@ in
             "XF86MonBrightnessDown" = "exec light -U 5";
           };
 
+          startup = [
+            { command = "systemctl --user restart polybar"; always = true; notification = false; }
+          ];
+
         };
       };
 
