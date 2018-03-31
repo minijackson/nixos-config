@@ -5,7 +5,7 @@
   users.extraUsers.minijackson.packages = with pkgs; [
     alacritty
     polkit_gnome
-    gnome3.nautilus
+    gnome3.dconf gnome3.nautilus
     xsel
     qutebrowser
     kodi mpv
