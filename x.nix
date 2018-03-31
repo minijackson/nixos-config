@@ -53,21 +53,17 @@
       extraPackages = with pkgs; [
         feh
         i3lock
-        (polybar.override {
-          i3GapsSupport = true;
-          mpdSupport = true;
-        })
         rofi
       ];
-      configFile =
-        let extraConfig = ''
-          exec feh --bg-fill "$(find ${./res/wallpapers} -type f -print0 | shuf -zn1)"
-          exec polybar --config=${./dotfiles/polybar} main
-        '';
-        in builtins.toFile "i3config" ''
-          ${builtins.readFile ./dotfiles/i3}
-          ${extraConfig}
-        '';
+      #configFile =
+      #  let extraConfig = ''
+      #    exec feh --bg-fill "$(find ${./res/wallpapers} -type f -print0 | shuf -zn1)"
+      #    exec polybar --config=${./dotfiles/polybar} main
+      #  '';
+      #  in builtins.toFile "i3config" ''
+      #    ${builtins.readFile ./dotfiles/i3}
+      #    ${extraConfig}
+      #  '';
     };
 
   };
