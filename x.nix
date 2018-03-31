@@ -4,7 +4,6 @@
 
   users.extraUsers.minijackson.packages = with pkgs; [
     alacritty
-    arc-theme arc-icon-theme
     polkit_gnome
     gnome3.nautilus
     xsel
@@ -52,7 +51,6 @@
       enable = true;
       package = pkgs.i3-gaps;
       extraPackages = with pkgs; [
-        dunst
         feh
         i3lock
         (polybar.override {
