@@ -2,7 +2,7 @@
 
 {
 
-  # Import some usecases
+  # Import some usecases or hardware-specific configs
   imports = [
       ./usecases/my-usecase.nix
   ];
