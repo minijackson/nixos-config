@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 let
   common-home-configuration = {
@@ -15,11 +15,37 @@ in
     ./home-manager/nixos
   ];
 
+  users.extraUsers.minijackson.packages = with pkgs; [
+    pass
+    tmuxp
+    tokei
+    neofetch
+    ffmpeg beets mpv youtube-dl
+    pandoc poppler_utils
+    rr rtags
+  ];
+
   home-manager.users.root = { ... }:
   common-home-configuration // {
   };
 
   home-manager.users.minijackson = { ... }:
   common-home-configuration // {
+
+    services = {
+      udiskie.enable = true;
+      redshift = {
+        enable = true;
+        latitude = "48.864716";
+        longitude = "2.349014";
+      };
+    };
+
+    programs = {
+      browserpass.enable = true;
+      firefox.enable = true;
+      pidgin.enable = true;
+    };
   };
+
 }
