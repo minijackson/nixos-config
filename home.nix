@@ -72,6 +72,10 @@ in
           urgency_critical = {
             background = background;
           };
+          shortcuts = {
+            close = "ctrl+space";
+            close_all = "ctrl+shift+space";
+          };
         };
       };
 
