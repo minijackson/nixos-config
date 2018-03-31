@@ -21,8 +21,8 @@
   boot.blacklistedKernelModules = [ "i915" ];
   boot.extraModulePackages = [ pkgs.linuxPackages.nvidia_x11 ];
 
-  # TODO: add these commands for when starting X
-
-  # ${pkgs.xlibs.xrandr}/bin/xrandr --setprovideroutputsource modesetting NVIDIA-0
-  # ${pkgs.xlibs.xrandr}/bin/xrandr --auto
+  services.xserver.displayManager.sessionCommands = ''
+    ${pkgs.xlibs.xrandr}/bin/xrandr --setprovideroutputsource modesetting NVIDIA-0
+    ${pkgs.xlibs.xrandr}/bin/xrandr --auto
+  '';
 }
