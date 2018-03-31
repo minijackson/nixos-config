@@ -20,7 +20,7 @@ in
     tmuxp
     tokei
     neofetch
-    ffmpeg beets mpv youtube-dl
+    ffmpeg beets mpv youtube-dl pavucontrol
     pandoc poppler_utils
     rr rtags
   ];
@@ -46,6 +46,8 @@ in
       firefox.enable = true;
       pidgin.enable = true;
     };
+
+    xdg.configFile."alacritty/alacritty.yml".source = ./dotfiles/alacritty.yml;
   };
 
 }
