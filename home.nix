@@ -9,6 +9,8 @@ let
       userName = "Minijackson";
     };
   };
+
+  globalConfig = config;
 in
 {
   imports = [
@@ -30,7 +32,7 @@ in
   common-home-configuration // {
   };
 
-  home-manager.users.minijackson = { ... }:
+  home-manager.users.minijackson = { config, ... }:
   common-home-configuration // {
 
     services = {
@@ -45,7 +47,7 @@ in
 
       dunst = {
         enable = true;
-        settings = with config.theme.colors;
+        settings = with globalConfig.theme.colors;
         {
           global = {
             geometry = "300x5-30+50";
@@ -82,7 +84,7 @@ in
         # Fix for polybar to be able to find i3's socket
         # https://github.com/rycee/home-manager/issues/206
         script = "PATH=$PATH:${pkgs.i3}/bin polybar main &";
-        config = with config.theme.colors;
+        config = with globalConfig.theme.colors;
         {
 
           "bar/main" = {
@@ -347,6 +349,11 @@ in
         };
       };
 
+      screen-locker = {
+        enable = true;
+        lockCmd = "${pkgs.i3lock}/bin/i3lock -n -c 000000";
+      };
+
     };
 
     programs = {
@@ -369,7 +376,7 @@ in
       };
     };
 
-    home.keyboard = with config.services.xserver;
+    home.keyboard = with globalConfig.services.xserver;
     {
       layout  = layout;
       variant = xkbVariant;
@@ -383,6 +390,7 @@ in
         config = {
           bars = [];
           floating.modifier = "Mod4";
+          floating.border = 0;
 
           keybindings = {
             "Mod4+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
@@ -439,11 +447,18 @@ in
 
             "XF86MonBrightnessUp"   = "exec light -A 5";
             "XF86MonBrightnessDown" = "exec light -U 5";
+
+            "Mod4+m" = "exec ${config.services.screen-locker.lockCmd}";
           };
 
           startup = [
             { command = "systemctl --user restart polybar"; always = true; notification = false; }
           ];
+
+          window = {
+            border = 0;
+            titlebar = false;
+          };
 
         };
       };
@@ -451,6 +466,7 @@ in
       pointerCursor = {
         package = pkgs.vanilla-dmz;
         name = "Vanilla-DMZ";
+        size = 24;
       };
 
     };
