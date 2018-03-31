@@ -4,11 +4,14 @@
 
   users.extraUsers.minijackson.packages = with pkgs; [
     alacritty
-    arc-theme arc-icon-theme lxappearance-gtk3
+    arc-theme arc-icon-theme
     polkit_gnome
+    gnome3.nautilus
     xsel
     qutebrowser
     kodi mpv
+    calibre
+    gnome3.evolution
     steam kodiPlugins.steam-launcher
     zathura
   ];
@@ -20,6 +23,7 @@
   services.xserver = {
     enable = true;
     layout = "fr";
+    xkbVariant = "oss";
     xkbOptions = "eurosign:e";
     libinput.enable = true;
 
