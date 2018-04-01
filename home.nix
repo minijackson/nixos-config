@@ -370,14 +370,6 @@ in
       browserpass.enable = true;
       firefox.enable = true;
       pidgin.enable = true;
-      beets.settings = {
-        plugins = "convert edit fromfilename mbsync missing mpdupdate the";
-        paths = {
-          default   = "%the{$albumartist}/%the{$album}%aunique{}/$track $title";
-          singleton = "Non-Album/%the{$artist}/%the{$title}";
-          comp      = "Compilations/%the{$album}%aunique{}/$track $title";
-        };
-      };
     };
 
     xdg.configFile."alacritty/alacritty.yml".source = ./dotfiles/alacritty.yml;
