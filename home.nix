@@ -364,6 +364,8 @@ in
         interval = "20 minutes";
       };
 
+      gnome-keyring.enable = true;
+
     };
 
     programs = {

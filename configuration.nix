@@ -63,6 +63,8 @@
   # Update the mlocate db daily
   services.locate.enable = true;
 
+  services.gnome3.gnome-keyring.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.minijackson = {
     isNormalUser = true;
