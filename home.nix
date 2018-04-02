@@ -372,6 +372,98 @@ in
       browserpass.enable = true;
       firefox.enable = true;
       pidgin.enable = true;
+
+      rofi = {
+        enable = true;
+
+        theme = with globalConfig.theme.colors;
+        builtins.toFile "theme.rasi" ''
+          * {
+            dominant: ${dominant};
+
+            foreground: ${foreground};
+            dim-foreground: ${dimForeground};
+
+            text-color: @foreground;
+            border-color: @dim-foreground;
+
+            background-color: ${background};
+            light-background: ${lightBackground};
+          }
+
+          #window {
+            padding: 8px;
+
+            border:  1px solid;
+            background-color: @background;
+          }
+
+          #mainbox {
+            border:  0;
+            padding: 0;
+          }
+
+          #inputbar {
+            spacing: 0;
+            padding: 5px;
+            border: 0 0 1px 0;
+            margin: 0 0 8px 0;
+          }
+
+          #prompt {
+            background-color: @background;
+            text-color: @dim-foreground;
+            margin: 0 8px 0 0;
+          }
+
+          #message {
+            spacing: 0;
+            padding: 5px;
+            border: 0 0 1px 0;
+            margin: 0 0 8px 0;
+          }
+
+          #listview {
+            spacing: 0;
+          }
+
+          #element {
+            border:  0;
+            padding: 5px;
+
+            background-color: @background;
+          }
+
+          #element.selected.normal {
+            background-color: @dominant;
+          }
+
+          #element.urgent {
+            background-color: ${fadedRed};
+          }
+
+          #element.selected.urgent {
+            background-color: ${neutralRed};
+          }
+
+          #element.active {
+            background-color: ${dimForeground};
+            text-color: ${background};
+          }
+
+          #element.selected.active {
+            background-color: ${foreground};
+            text-color: ${background};
+          }
+
+          #scrollbar {
+            width: 4px;
+            handle-width: 8px;
+          }
+
+        '';
+
+      };
     };
 
     xdg.configFile."alacritty/alacritty.yml".source = ./dotfiles/alacritty.yml;
