@@ -50,6 +50,8 @@
   # programs.mtr.enable = true;
   programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
 
+  programs.ccache.enable = true;
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
