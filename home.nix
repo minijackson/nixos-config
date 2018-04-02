@@ -408,10 +408,17 @@ in
             padding: 5px;
             border: 0 0 1px 0;
             margin: 0 0 8px 0;
+            children: [ prompt, textbox-prompt-sep, entry ];
           }
 
           #prompt {
             background-color: @background;
+            text-color: @dim-foreground;
+          }
+
+          textbox-prompt-sep {
+            expand: false;
+            str: ":";
             text-color: @dim-foreground;
             margin: 0 8px 0 0;
           }
@@ -498,7 +505,7 @@ in
 
           keybindings = {
             "Mod4+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
-            "Mod4+d"      = "exec ${pkgs.rofi}/bin/rofi -modi run -show drun";
+            "Mod4+d"      = "exec \"${pkgs.rofi}/bin/rofi -modi drun,window,run -show drun\"";
 
             "Mod4+Shift+q" = "kill";
 
