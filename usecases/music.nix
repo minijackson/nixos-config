@@ -24,6 +24,8 @@
         format "44100:16:2"
       }
     '';
+
+    startWhenNeeded = true;
   };
 
   home-manager.users.minijackson = { ... }:

@@ -50,6 +50,8 @@
   # programs.mtr.enable = true;
   programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
 
+  programs.ccache.enable = true;
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
@@ -60,6 +62,8 @@
 
   # Update the mlocate db daily
   services.locate.enable = true;
+
+  services.gnome3.gnome-keyring.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.minijackson = {

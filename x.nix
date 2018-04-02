@@ -6,6 +6,8 @@
     alacritty
     polkit_gnome
     gnome3.dconf gnome3.nautilus
+    gnome3.gucharmap
+    kdeconnect
     xsel
     qutebrowser
     kodi mpv
@@ -17,6 +19,32 @@
 
   # 8080 for Kodi remote control
   networking.firewall.allowedTCPPorts = [ 8080 ];
+
+  # For KDEConnect
+  networking.firewall.allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];
+  networking.firewall.allowedUDPPortRanges = [ { from = 1714; to = 1764; } ];
+
+  home-manager.users.minijackson = { config, ... }:
+  {
+    systemd.user.services.kdeconnect = {
+      Unit = {
+        Description = "Start the KDEConnect indicator";
+        After = [ "graphical-session-pre.target" ];
+        PartOf = [ "graphical-session.target" ];
+      };
+
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
+
+      Service = {
+        # Source /etc/profile before to have the right QT_PLUGIN_PATH environment vairables and such
+        ExecStart = "${pkgs.bash}/bin/sh -c 'source /etc/profile && ${pkgs.kdeconnect}/bin/kdeconnect-indicator'";
+      };
+    };
+  };
+
+  security.pam.services.slim.enableGnomeKeyring = true;
 
   # Enable the X11 windowing system.
   services.xserver = {
