@@ -44,6 +44,11 @@ in
     services.sonarr.enable = true;
     services.jackett.enable = true;
 
+    users.users.radarr.extraGroups = [ "transmission" ];
+    users.users.sonarr.extraGroups = [ "transmission" ];
+
+    users.users.minijackson.extraGroups = [ "transmission" "sonarr" "radarr" ];
+
     networking.firewall.allowedTCPPorts = [
       transmission-rpc-port transmission-peer-port
       # Sonarr WebUI
