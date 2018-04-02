@@ -97,7 +97,7 @@
   };
 
   fonts = {
-    fonts = with pkgs; [ fira-mono dejavu_fonts unifont siji ];
+    fonts = with pkgs; [ fira-mono dejavu_fonts freefont_ttf liberation_ttf noto-fonts-cjk unifont siji ];
 
     fontconfig = {
       ultimate.enable = true;
