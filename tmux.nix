@@ -18,6 +18,8 @@
       bind C-n next-window
       bind C-p previous-window
 
+      bind C-y run "${pkgs.tmux}/bin/tmux show-buffer > /dev/null 2>&1 && ${pkgs.tmux}/bin/tmux show-buffer | ${pkgs.xsel}/bin/xsel -ib"
+
       # Force true colors
       set-option -ga terminal-overrides ",*:Tc"
 
