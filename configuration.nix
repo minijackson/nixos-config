@@ -42,7 +42,7 @@
     wipe
     git
     gnupg
-    nox nix-prefetch-scripts
+    nox nix-prefetch-scripts nix-repl
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
