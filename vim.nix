@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
-{
+let
+  myPackages = import ./packages { inherit pkgs; };
+in {
 
   imports = [
     ./theme.nix
@@ -14,7 +16,17 @@
 
         customRC = with config.theme;
         ''
+          " Colors
           let g:dominant_color = '${colors.dominant}'
+
+          " Executable paths
+          let g:cquery_path = '${myPackages.cquery}/bin/cquery'
+
+          let g:clang_c_stdlib_flags = ["-idirafter", "${pkgs.glibc.dev}/include"]
+          let g:clang_cxx_stdlib_flags = split(system('bash -c "echo -n \"${pkgs.clang.default_cxx_stdlib_compile}\""')) + g:clang_c_stdlib_flags
+
+          let g:clang_cxx_stdlib_flags_json = tr(string(g:clang_cxx_stdlib_flags), "'", '"')
+          let g:clang_c_stdlib_flags_json   = tr(string(g:clang_c_stdlib_flags),   "'", '"')
         '' + builtins.readFile ./dotfiles/vimrc.vim;
 
         vam = {
