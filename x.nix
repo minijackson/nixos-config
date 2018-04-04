@@ -52,7 +52,11 @@
     layout = "fr";
     xkbVariant = "oss";
     xkbOptions = "eurosign:e";
-    libinput.enable = true;
+
+    libinput = {
+      enable = true;
+      disableWhileTyping = true;
+    };
 
     displayManager = {
       slim.enable = true;
