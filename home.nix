@@ -25,7 +25,8 @@ in
     neofetch
     ffmpeg beets mpv youtube-dl pavucontrol
     pandoc poppler_utils
-    rr rtags
+    rr rtags gcc clang clang-tools
+    aspell aspellDicts.en aspellDicts.en-computers aspellDicts.en-science aspellDicts.fr
   ];
 
   home-manager.users.root = { ... }:
@@ -52,7 +53,7 @@ in
           global = {
             geometry = "300x5-30+50";
 
-            format = "<b>%a</b>: %s\n%b";
+            format = "<b>%a</b>: %s\\n%b";
             alignment = "center";
             word_wrap = "yes";
             stack_duplicates = "yes";
@@ -491,7 +492,7 @@ in
     {
       layout  = layout;
       variant = xkbVariant;
-      options = [ xkbOptions ];
+      options = [ xkbOptions "compose:caps" ];
     };
 
     xsession = {
