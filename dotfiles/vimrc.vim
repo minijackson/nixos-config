@@ -74,8 +74,8 @@ augroup END
 
 let g:LanguageClient_serverCommands = {
 			\ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-			\ 'cpp' : [ g:cquery_path, '--init={"extraClangArguments": ' . g:clang_cxx_stdlib_flags_json . ', "cacheDirectory": "/tmp/' . $USER . '/cquery"}' ],
-			\ 'c'   : [ g:cquery_path, '--init={"extraClangArguments": ' . g:clang_c_stdlib_flags_json   . ', "cacheDirectory": "/tmp/' . $USER . '/cquery"}' ],
+			\ 'cpp' : [ g:cquery_path, '--init={"extraClangArguments": ' . g:clang_cxx_flags_json . ', "cacheDirectory": "/tmp/' . $USER . '/cquery"}' ],
+			\ 'c'   : [ g:cquery_path, '--init={"extraClangArguments": ' . g:clang_c_flags_json   . ', "cacheDirectory": "/tmp/' . $USER . '/cquery"}' ],
 			\ }
 
 " }}}

@@ -8,12 +8,13 @@ function update_from_github() {
 	local releaseFile="$1"
 	local url="$2"
 
-	userrepo="${url##*github\.com/}"
+	local userrepo="${url##*github\.com/}"
 
-	user="${userrepo%%/*}"
-	repo="${userrepo#$user/}"
+	local user="${userrepo%%/*}"
+	local repo="${userrepo#$user/}"
 	repo="${repo%.git}"
 
+	local tag
 	if tag="$(jq -er .tag "$releaseFile")"; then
 		update_from_tag "$releaseFile" "$url" "$user" "$repo" "$tag"
 	#elif branch="$(jq -er .tag "$releaseFile")"; then
@@ -29,7 +30,10 @@ function update_from_branch() {
 
 	echo "Updating from branch"
 
-	nix-prefetch-git "$url" --fetch-submodules --quiet > "$releaseFile"
+	local newContent
+	newContent="$(nix-prefetch-git "$url" --fetch-submodules --quiet)" 
+
+	overwrite-release-file "$newContent" "$releaseFile"
 }
 
 function update_from_tag() {
@@ -39,9 +43,10 @@ function update_from_tag() {
 	local repo="$4"
 	local currentTag="$5"
 
+	local latestRelease
 	set +e
 	latestRelease="$(curl -sSf "https://api.github.com/repos/$user/$repo/releases/latest" 2>&1)"
-	releaseResult=$?
+	local releaseResult=$?
 	set -e
 
 	if [[ "$releaseResult" != 0 ]]; then
@@ -54,6 +59,7 @@ function update_from_tag() {
 		fi
 	fi
 
+	local latestTag
 	latestTag="$(echo "$latestRelease" | jq -er .tag_name)"
 
 	if [[ "$currentTag" == "$latestTag" ]]; then
@@ -65,14 +71,51 @@ function update_from_tag() {
 
 	echo "Updating $package from '$currentTag' to '$latestTag'"
 
-	nix-prefetch-git "$url" "$latestTag" --fetch-submodules --quiet | jq ". + {\"tag\": \"$latestTag\"}" > "$releaseFile"
+	local newContent
+	newContent="$(nix-prefetch-git "$url" "$latestTag" --fetch-submodules --quiet | jq ". + {\"tag\": \"$latestTag\"}")"
+
+	overwrite-release-file "$newContent" "$releaseFile"
 }
 
-for releaseFile in **/release-info.json; do
-	package="${releaseFile%/release-info.json}"
-	package="${package##*/}"
+function overwrite-release-file() {
+	local newContent="$1"
+	local releaseFile="$2"
 
-	echo "Processing $package"
+	local oldRev newRev
+	oldRev="$(jq -er .rev < "$releaseFile")"
+	newRev="$(echo "$newContent" | jq -er .rev)"
+
+	if [[ "$oldRev" == "$newRev" ]]; then
+		echo "Commit didn't change, doing nothing"
+		return
+	fi
+
+	local url
+	url="$(jq -er .url < "$releaseFile")"
+
+	if [[ "$url" =~ ^(https?|git)://github\.com/ ]]; then
+		local userrepo="${url##*github\.com/}"
+
+		local user="${userrepo%%/*}"
+		local repo="${userrepo#$user/}"
+		local repo="${repo%.git}"
+
+		echo "View changes: https://github.com/$user/$repo/compare/$oldRev..$newRev"
+	fi
+
+	echo "$newContent" > "$releaseFile"
+}
+
+for releaseFile in ./vim-plugins/*.json **/release-info.json ; do
+	if [[ "$releaseFile" =~ ^./vim-plugins/ ]]; then
+		package="${releaseFile#./vim-plugins/}"
+		package="Vim plugin ${package%.json}"
+	else
+		package="${releaseFile%/*.json}"
+		package="${package##*/}"
+	fi
+
+	echo "* Processing $package"
 
 	url="$(jq -er .url "$releaseFile")"
 
@@ -82,6 +125,8 @@ for releaseFile in **/release-info.json; do
 	fi
 
 	update_from_github "$releaseFile" "$url"
+
+	echo
 done
 
 echo "All done!"

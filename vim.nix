@@ -22,51 +22,33 @@ in {
           " Executable paths
           let g:cquery_path = '${myPackages.cquery}/bin/cquery'
 
-          let g:clang_c_stdlib_flags = ["-idirafter", "${pkgs.glibc.dev}/include"]
-          let g:clang_cxx_stdlib_flags = split(system('bash -c "echo -n \"${pkgs.clang.default_cxx_stdlib_compile}\""')) + g:clang_c_stdlib_flags
+          let g:clang_glibc_flags = ["-idirafter", "${pkgs.glibc.dev}/include"]
+          let g:clang_cxx_stdlib_flags = split(system('bash -c "echo -n \"${pkgs.clang.default_cxx_stdlib_compile}\""'))
 
-          let g:clang_cxx_stdlib_flags_json = tr(string(g:clang_cxx_stdlib_flags), "'", '"')
-          let g:clang_c_stdlib_flags_json   = tr(string(g:clang_c_stdlib_flags),   "'", '"')
+          let g:clang_cxx_flags_json = json_encode(g:clang_cxx_stdlib_flags + g:clang_glibc_flags)
+          let g:clang_c_flags_json   = json_encode(g:clang_glibc_flags)
         '' + builtins.readFile ./dotfiles/vimrc.vim;
 
         vam = {
-          knownPlugins = vimPlugins // {
+          knownPlugins = let
 
-            tmux-complete = vimUtils.buildVimPluginFrom2Nix {
-              name = "tmux-complete";
+            releaseInfo = pluginName: builtins.fromJSON (builtins.readFile (./packages/vim-plugins + "/${pluginName}.json"));
+
+            vimPluginFromGit = pluginName: vimUtils.buildVimPluginFrom2Nix {
+              name = pluginName;
               src = fetchgit {
-                url = "https://github.com/wellle/tmux-complete.vim";
-                rev = "c71a00272f5142b2a05918d3c689459fc3dd8858";
-                sha256 = "14rrwd2kh3bv7zah1yib85cbl43qv6nklswzdw1gla190gyhwfix";
+                inherit (releaseInfo pluginName) url rev sha256;
               };
             };
 
-            neco-syntax = vimUtils.buildVimPluginFrom2Nix {
-              name = "neco-syntax";
-              src = fetchgit {
-                url = "https://github.com/Shougo/neco-syntax.git";
-                rev = "98cba4a98a4f44dcff80216d0b4aa6f41c2ce3e3";
-                sha256 = "1cjcbgx3h00g91ifgw30q5n97x4nprsr4kwirydws79fcs4vkgip";
-              };
-            };
+          in vimPlugins // {
 
-            neco-vim = vimUtils.buildVimPluginFrom2Nix {
-              name = "neco-vim";
-              src = fetchgit {
-                url = "https://github.com/Shougo/neco-vim.git";
-                rev = "f5397c5e800d65a58c56d8f1b1b92686b05f4ca9";
-                sha256 = "0yb7ja6qgrazszk4i01cwjj00j9vd43zs2r11b08iy8n10jnzr73";
-              };
-            };
-
-            vim-unimpaired = vimUtils.buildVimPluginFrom2Nix {
-              name = "vim-unimpaired";
-              src = fetchgit {
-                url = "https://github.com/tpope/vim-unimpaired.git";
-                rev = "c77939c4aff30b2ed68deb1752400ec15f17c3a2";
-                sha256 = "0qd9as008r2vycls48bfb163rp7dddw7l495xn4l1gl00sh79cxy";
-              };
-            };
+            CamelCaseMotion = vimPluginFromGit "CamelCaseMotion";
+            deoplete-zsh    = vimPluginFromGit "deoplete-zsh";
+            neco-syntax     = vimPluginFromGit "neco-syntax";
+            neco-vim        = vimPluginFromGit "neco-vim";
+            tmux-complete   = vimPluginFromGit "tmux-complete";
+            vim-unimpaired  = vimPluginFromGit "vim-unimpaired";
 
           };
 
@@ -78,6 +60,7 @@ in {
             { name = "lightline-vim"; }
 
             # Motions
+            { name = "CamelCaseMotion"; }
             { name = "surround"; }
             { name = "targets-vim"; }
 
@@ -94,6 +77,7 @@ in {
             { name = "editorconfig-vim"; }
             # Vim completion for deoplete
             { name = "neco-vim"; }
+            { name = "deoplete-zsh"; }
 
             # C / C++
             { name = "neoinclude"; }
