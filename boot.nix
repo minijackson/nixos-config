@@ -7,6 +7,8 @@
   boot.loader.systemd-boot.editor = false;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.tmpOnTmpfs = true;
+
   boot.kernel.sysctl = {
     "fs.inotify.max_user_watches" = 524288;
     "vm.swappiness" = 10;
