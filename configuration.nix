@@ -43,6 +43,7 @@
     git
     gnupg
     nox nix-prefetch-scripts nix-repl
+    shellcheck
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
