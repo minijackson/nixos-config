@@ -80,6 +80,12 @@ let g:LanguageClient_serverCommands = {
 
 " }}}
 
+" Mappings {{{
+
+call camelcasemotion#CreateMotionMappings(g:maplocalleader)
+
+" }}}
+
 set completefunc=syntaxcomplete#Complete
 
 let g:deoplete#enable_at_startup = 1
