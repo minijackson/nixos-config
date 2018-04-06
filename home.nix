@@ -325,7 +325,20 @@ in
             label = "%date% %time%";
           };
 
-          "module/powermenu" = {
+          "module/redshift" = let systemctl = "${pkgs.systemd}/bin/systemctl";
+          in {
+            type = "custom/script";
+
+            exec = "${systemctl} --user is-active --quiet redshift.service && echo '%{F${neutralOrange}}' || echo '%{F${brightBlue}}'";
+            interval = 10;
+
+            label = "%output%%{F-}";
+
+            click-left = "${systemctl} --user is-active --quiet redshift.service && ${systemctl} --user stop redshift.service || ${systemctl} --user start redshift.service";
+          };
+
+          "module/powermenu" = let systemctl = "${pkgs.systemd}/bin/systemctl";
+          in {
             type = "custom/menu";
 
             label-open = " power";
@@ -343,10 +356,10 @@ in
             menu-1-0 = "cancel";
             menu-1-0-exec = "menu-open-0";
             menu-1-1 = "reboot";
-            menu-1-1-exec = "systemctl reboot";
+            menu-1-1-exec = "${systemctl} reboot";
 
             menu-2-0 = "power off";
-            menu-2-0-exec = "systemctl poweroff";
+            menu-2-0-exec = "${systemctl} poweroff";
             menu-2-1 = "cancel";
             menu-2-1-exec = "menu-open-0";
           };
@@ -468,7 +481,6 @@ in
             width: 4px;
             handle-width: 8px;
           }
-
         '';
 
       };
@@ -557,10 +569,30 @@ in
             "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%";
             "XF86AudioMute"        = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle";
 
-            "XF86MonBrightnessUp"   = "exec light -A 5";
-            "XF86MonBrightnessDown" = "exec light -U 5";
+            "XF86MonBrightnessUp"   = "exec --no-startup-id light -A 5";
+            "XF86MonBrightnessDown" = "exec --no-startup-id light -U 5";
 
-            "Mod4+m" = "exec ${config.services.screen-locker.lockCmd}";
+            "KP_Left"  = "exec --no-startup-id ${pkgs.mpc_cli}/bin/mpc prev";
+            "KP_Begin" = "exec --no-startup-id ${pkgs.mpc_cli}/bin/mpc toggle";
+            "KP_Right" = "exec --no-startup-id ${pkgs.mpc_cli}/bin/mpc next";
+            "KP_Up"    = "exec --no-startup-id ${pkgs.mpc_cli}/bin/mpc stop";
+
+            "KP_Home" = let
+              choose_album = pkgs.substituteAll {
+                src = ./scripts/choose_album.sh;
+                isExecutable = true;
+
+                mpc = pkgs.mpc_cli + /bin/mpc;
+                uniq = pkgs.coreutils + /bin/uniq;
+                rofi = pkgs.rofi + /bin/rofi;
+              };
+            in "exec --no-startup-id ${choose_album}";
+
+            "XF86AudioPlay" = "exec --no-startup-id ${pkgs.mpc_cli}/bin/mpc toggle";
+            "XF86AudioNext" = "exec --no-startup-id ${pkgs.mpc_cli}/bin/mpc next";
+            "XF86AudioPrev" = "exec --no-startup-id ${pkgs.mpc_cli}/bin/mpc prev";
+
+            "Mod4+m" = "exec --no-startup-id ${config.services.screen-locker.lockCmd}";
           };
 
           startup = [
