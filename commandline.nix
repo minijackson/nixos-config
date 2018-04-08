@@ -5,8 +5,6 @@ let
   dominantEscapeCode = fgEscapeCode config.theme.colors.dominant;
 in
 {
-  environment.systemPackages = with pkgs; [ zsh grml-zsh-config zsh-completions ];
-
   environment.shellAliases = {
     ll = "ls -l";
     e = "\${EDITOR}";
@@ -19,6 +17,7 @@ in
     interactiveShellInit = with lib;
     ''
       source "${pkgs.grml-zsh-config}/etc/zsh/zshrc"
+      eval "$(${pkgs.fasd}/bin/fasd --init auto)"
 
       function () {
         local dominant_escape_code="${dominantEscapeCode}"
