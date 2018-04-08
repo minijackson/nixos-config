@@ -582,11 +582,18 @@ in
                 src = ./scripts/choose_album.sh;
                 isExecutable = true;
 
-                mpc = pkgs.mpc_cli + /bin/mpc;
-                uniq = pkgs.coreutils + /bin/uniq;
-                rofi = pkgs.rofi + /bin/rofi;
+                inherit (pkgs) mpc_cli coreutils rofi;
               };
             in "exec --no-startup-id ${choose_album}";
+
+            "KP_Prior" = let
+              choose_artist = pkgs.substituteAll {
+                src = ./scripts/choose_artist.sh;
+                isExecutable = true;
+
+                inherit (pkgs) mpc_cli rofi;
+              };
+            in "exec --no-startup-id ${choose_artist}";
 
             "XF86AudioPlay" = "exec --no-startup-id ${pkgs.mpc_cli}/bin/mpc toggle";
             "XF86AudioNext" = "exec --no-startup-id ${pkgs.mpc_cli}/bin/mpc next";

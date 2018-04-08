@@ -5,7 +5,7 @@ IFS=$'\n\t'
 
 separator="―"
 
-result="$(@mpc@ --format="%albumartist% $separator %album%" listall | @uniq@ | @rofi@ -dmenu -fullscreen -columns 2 -i)"
+result="$(@mpc_cli@/bin/mpc --format="%albumartist% $separator %album%" listall | @coreutils@/bin/uniq | @rofi@/bin/rofi -dmenu -fullscreen -columns 2 -i)"
 
 IFS="$separator" read -ra artistalbum <<< "$result"
 
@@ -13,4 +13,4 @@ IFS="$separator" read -ra artistalbum <<< "$result"
 artist="${artistalbum[0]% }"
 album="${artistalbum[1]# }"
 
-@mpc@ findadd albumartist "$artist" album "$album"
+@mpc_cli@/bin/mpc findadd albumartist "$artist" album "$album"
