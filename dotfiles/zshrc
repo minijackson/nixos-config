@@ -111,6 +111,29 @@ alias gwD='git diff --word-diff'
 
 # }}}
 
+# Abbreviations {{{
+# =================
+
+# Abbreviation system provided by the grml config
+# More info here:
+# http://www.zshwiki.org/home/examples/zleiab
+
+abk=(
+	'P' '|& ${PAGER}'
+	'L' '|& ${PAGER}'
+
+	'HL' ' --help |& ${PAGER}'
+
+	'G'  '|& rg'
+	'FG' '|& rg -F'
+
+	'H' '| head'
+	'T' '| tail'
+	'C' '| wc -l'
+)
+
+# }}}
+
 # Global configuration
 # ====================
 
