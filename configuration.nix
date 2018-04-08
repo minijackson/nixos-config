@@ -36,8 +36,11 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     wget
-    vim tmux htop ripgrep fd file tree lsof progress nethogs
-    fasd
+    vim tmux
+    htop
+    ripgrep file progress psmisc lsof nethogs
+    fd tree ncdu
+    lm_sensors hddtemp smartmontools
     elinks
     wipe
     git
