@@ -17,7 +17,8 @@ in
     interactiveShellInit = with lib;
     ''
       source "${pkgs.grml-zsh-config}/etc/zsh/zshrc"
-      eval "$(${pkgs.fasd}/bin/fasd --init auto)"
+      PATH="${pkgs.fasd}/bin:$PATH"
+      eval "$(fasd --init auto)"
 
       function () {
         local dominant_escape_code="${dominantEscapeCode}"
