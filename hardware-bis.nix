@@ -25,6 +25,6 @@
 
   zramSwap = {
     enable = true;
-    memoryPercent = 200;
+    memoryPercent = 50;
   };
 }
