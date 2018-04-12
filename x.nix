@@ -46,6 +46,8 @@
 
   security.pam.services.slim.enableGnomeKeyring = true;
 
+  services.gnome3.evolution-data-server.enable = true;
+
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
