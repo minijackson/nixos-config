@@ -69,6 +69,11 @@
 
   services.gnome3.gnome-keyring.enable = true;
 
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.gutenprint ];
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.minijackson = {
     isNormalUser = true;
