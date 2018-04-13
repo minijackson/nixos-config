@@ -82,9 +82,13 @@ in {
             # C / C++
             { name = "neoinclude"; }
 
+            # LaTeX
+            { name = "vimtex"; }
+
             # Other
             { name = "tmux-complete"; }
             { name = "fugitive"; }
+            { name = "rhubarb"; }
             { name = "repeat"; }
             { name = "vim-unimpaired"; }
           ];

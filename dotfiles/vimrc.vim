@@ -86,8 +86,33 @@ call camelcasemotion#CreateMotionMappings(g:maplocalleader)
 
 " }}}
 
+" VimTex {{{
+
+" Disbale LaTeX-Box
+let g:polyglot_disabled = [ 'latex' ]
+
+let g:vimtex_compiler_latexmk = {}
+let g:vimtex_compiler_latexmk.build_dir = './latexmk-build'
+let g:vimtex_compiler_latexmk.options = ['-pdf', '-verbose', '-file-line-error', '-synctex=1', '-interaction=nonstopmode', '-shell-escape', '-xelatex', '-8bit']
+
+let g:vimtex_view_method = 'zathura'
+let g:vimtex_view_general_viewer = 'zathura'
+
+" }}}
+
 set completefunc=syntaxcomplete#Complete
 
+" Deoplete {{{
+
+if !exists('g:deoplete#omni#input_patterns')
+    let g:deoplete#omni#input_patterns = {}
+endif
+
+" From *vimtex-complete-deoplete* documentation
+let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
+
 let g:deoplete#enable_at_startup = 1
+
+" }}}
 
 " vim: fdm=marker
