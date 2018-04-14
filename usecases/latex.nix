@@ -39,9 +39,32 @@ in {
     texliveEnv
     biber
     myPackages.tomorrowPygments
-    zathura xdotool
+    xdotool
   ];
 
   # Fira Code is nice for code reading
   fonts.fonts = with pkgs; [ fira-code cm_unicode ];
+
+  vim = {
+
+    extraPlugins = [
+      { name = "vimtex"; }
+    ];
+
+    extraConfig = ''
+      " Disbale LaTeX-Box
+      let g:polyglot_disabled = [ 'latex' ]
+
+      let g:vimtex_compiler_latexmk = {}
+      let g:vimtex_compiler_latexmk.build_dir = './latexmk-build'
+      let g:vimtex_compiler_latexmk.options = ['-pdf', '-verbose', '-file-line-error', '-synctex=1', '-interaction=nonstopmode', '-shell-escape', '-xelatex', '-8bit']
+
+      let g:vimtex_view_method = 'zathura'
+      let g:vimtex_view_general_viewer = '${pkgs.zathura}/bin/zathura'
+
+      let g:vimtex_fold_enabled = 1
+      let g:vimtex_format_enabled = 1
+    '';
+
+  };
 }

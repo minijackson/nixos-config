@@ -27,6 +27,9 @@ set modeline
 let g:maplocalleader = ','
 let g:mapleader = ';'
 
+" If previously opened jump to the last position in the file
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
 " }}}
 
 " Colors, Statusline, Tabline, Code display {{{
@@ -58,45 +61,11 @@ autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/ containedin=ALL
 
 " }}}
 
-" LanguageClient {{{
-
-let g:LanguageClient_autoStart = 1
-augroup LanguageClient_config
-	autocmd!
-	autocmd User LanguageClientStarted nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-	autocmd User LanguageClientStarted nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-	autocmd User LanguageClientStarted nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-	autocmd User LanguageClientStarted setlocal formatexpr=LanguageClient_textDocument_rangeFormatting()
-
-	autocmd User LanguageClientStarted nnoremap <silent> <Leader>sr :call LanguageClient_textDocument_references()<CR>
-	autocmd User LanguageClientStarted nnoremap <silent> <Leader>ss :call LanguageClient_textDocument_documentSymbol()<CR>
-augroup END
-
-let g:LanguageClient_serverCommands = {
-			\ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-			\ 'cpp' : [ g:cquery_path, '--init={"extraClangArguments": ' . g:clang_cxx_flags_json . ', "cacheDirectory": "/tmp/' . $USER . '/cquery"}' ],
-			\ 'c'   : [ g:cquery_path, '--init={"extraClangArguments": ' . g:clang_c_flags_json   . ', "cacheDirectory": "/tmp/' . $USER . '/cquery"}' ],
-			\ }
-
-" }}}
-
 " Mappings {{{
 
 call camelcasemotion#CreateMotionMappings(g:maplocalleader)
 
-" }}}
-
-" VimTex {{{
-
-" Disbale LaTeX-Box
-let g:polyglot_disabled = [ 'latex' ]
-
-let g:vimtex_compiler_latexmk = {}
-let g:vimtex_compiler_latexmk.build_dir = './latexmk-build'
-let g:vimtex_compiler_latexmk.options = ['-pdf', '-verbose', '-file-line-error', '-synctex=1', '-interaction=nonstopmode', '-shell-escape', '-xelatex', '-8bit']
-
-let g:vimtex_view_method = 'zathura'
-let g:vimtex_view_general_viewer = 'zathura'
+nmap =of :set <C-R>=(&formatoptions =~ "a") ? 'formatoptions-=a' : 'formatoptions+=a'<CR><CR>
 
 " }}}
 

@@ -1,106 +1,129 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
-let
-  myPackages = import ./packages { inherit pkgs; };
-in {
+{
 
   imports = [
     ./theme.nix
   ];
 
-  environment.systemPackages = with pkgs; [
-    python27Packages.neovim python36Packages.neovim neovim-qt
-    (neovim.override {
+  options.vim = with lib; {
 
-      configure = {
+    variables = mkOption {
+      type = types.attrsOf types.str;
+      default = {
+        dominant_color = "'${config.theme.colors.dominant}'";
+      };
+      description = ''
+        Extra global variables to add at the beginning of the vim configuration.
 
-        customRC = with config.theme;
-        ''
-          " Colors
-          let g:dominant_color = '${colors.dominant}'
+        Remember to escape strings with single-quotes.
+      '';
+    };
 
-          " Executable paths
-          let g:cquery_path = '${myPackages.cquery}/bin/cquery'
+    extraPlugins = mkOption {
+      type = types.listOf (types.attrsOf types.str);
+      default = [];
+      description = "Names of extra plugins to add";
+    };
 
-          let g:clang_glibc_flags = ["-idirafter", "${pkgs.glibc.dev}/include"]
-          let g:clang_cxx_stdlib_flags = split(system('bash -c "echo -n \"${pkgs.clang.default_cxx_stdlib_compile}\""'))
+    extraRepoPlugins = mkOption {
+      type = types.listOf (types.attrsOf types.str);
+      default = [];
+      description = "Names of extra plugins to add that are present in the local repository";
+    };
 
-          let g:clang_cxx_flags_json = json_encode(g:clang_cxx_stdlib_flags + g:clang_glibc_flags)
-          let g:clang_c_flags_json   = json_encode(g:clang_glibc_flags)
-        '' + builtins.readFile ./dotfiles/vimrc.vim;
+    extraConfig = mkOption {
+      type = types.lines;
+      default = "";
+      description = "Extra lines to add at the end of the vim configuration";
+    };
+  };
 
-        vam = {
-          knownPlugins = let
+  config = {
+    environment.systemPackages = with pkgs; [
+      python27Packages.neovim python36Packages.neovim neovim-qt
+      (neovim.override {
 
-            releaseInfo = pluginName: builtins.fromJSON (builtins.readFile (./packages/vim-plugins + "/${pluginName}.json"));
+        configure = {
 
-            vimPluginFromGit = pluginName: vimUtils.buildVimPluginFrom2Nix {
-              name = pluginName;
-              src = fetchgit {
-                inherit (releaseInfo pluginName) url rev sha256;
+          customRC = with lib;
+            (concatStringsSep
+              "\n"
+              (mapAttrsToList
+                (variable: value: "let g:${variable} = ${value}")
+                config.vim.variables))
+            + "\n" + builtins.readFile ./dotfiles/vimrc.vim + config.vim.extraConfig;
+
+          vam = {
+            knownPlugins = let
+
+              releaseInfo = pluginName: builtins.fromJSON (builtins.readFile (./packages/vim-plugins + "/${pluginName}.json"));
+
+              vimPluginFromGit = pluginName: vimUtils.buildVimPluginFrom2Nix {
+                name = pluginName;
+                src = fetchgit {
+                  inherit (releaseInfo pluginName) url rev sha256;
+                };
               };
+
+            in vimPlugins // {
+
+              CamelCaseMotion = vimPluginFromGit "CamelCaseMotion";
+              deoplete-zsh    = vimPluginFromGit "deoplete-zsh";
+              neco-syntax     = vimPluginFromGit "neco-syntax";
+              neco-vim        = vimPluginFromGit "neco-vim";
+              tmux-complete   = vimPluginFromGit "tmux-complete";
+              vim-unimpaired  = vimPluginFromGit "vim-unimpaired";
+
             };
 
-          in vimPlugins // {
+            pluginDictionaries = [
+              # UI
+              { name = "undotree"; }
+              { name = "gruvbox"; }
+              { name = "gitgutter"; }
+              { name = "lightline-vim"; }
 
-            CamelCaseMotion = vimPluginFromGit "CamelCaseMotion";
-            deoplete-zsh    = vimPluginFromGit "deoplete-zsh";
-            neco-syntax     = vimPluginFromGit "neco-syntax";
-            neco-vim        = vimPluginFromGit "neco-vim";
-            tmux-complete   = vimPluginFromGit "tmux-complete";
-            vim-unimpaired  = vimPluginFromGit "vim-unimpaired";
+              # Motions
+              { name = "CamelCaseMotion"; }
+              { name = "surround"; }
+              { name = "targets-vim"; }
+
+              # Frameworks
+              { name = "deoplete-nvim"; }
+              { name = "neoformat"; }
+              { name = "ctrlp"; }
+              # Syntax generic completion for deoplete
+              { name = "neco-syntax"; }
+
+              # Languages
+              { name = "vim-polyglot"; }
+              { name = "editorconfig-vim"; }
+              # Vim completion for deoplete
+              { name = "neco-vim"; }
+              { name = "deoplete-zsh"; }
+
+              # Languages (but not programming languages)
+              { name = "vim-grammarous"; }
+
+              # Other
+              { name = "tmux-complete"; }
+              { name = "fugitive"; }
+              { name = "rhubarb"; }
+              { name = "repeat"; }
+              { name = "vim-unimpaired"; }
+
+            ] ++ config.vim.extraPlugins;
 
           };
 
-          pluginDictionaries = [
-            # UI
-            { name = "undotree"; }
-            { name = "gruvbox"; }
-            { name = "gitgutter"; }
-            { name = "lightline-vim"; }
-
-            # Motions
-            { name = "CamelCaseMotion"; }
-            { name = "surround"; }
-            { name = "targets-vim"; }
-
-            # Frameworks
-            { name = "deoplete-nvim"; }
-            { name = "LanguageClient-neovim"; }
-            { name = "neoformat"; }
-            { name = "ctrlp"; }
-            # Syntax generic completion for deoplete
-            { name = "neco-syntax"; }
-
-            # Languages
-            { name = "vim-polyglot"; }
-            { name = "editorconfig-vim"; }
-            # Vim completion for deoplete
-            { name = "neco-vim"; }
-            { name = "deoplete-zsh"; }
-
-            # C / C++
-            { name = "neoinclude"; }
-
-            # LaTeX
-            { name = "vimtex"; }
-
-            # Other
-            { name = "tmux-complete"; }
-            { name = "fugitive"; }
-            { name = "rhubarb"; }
-            { name = "repeat"; }
-            { name = "vim-unimpaired"; }
-          ];
-
         };
+      })
+    ];
 
-      };
-    })
-  ];
-
-  environment.sessionVariables = {
-    EDITOR = "nvim";
+    environment.sessionVariables = {
+      EDITOR = "nvim";
+    };
   };
 
 }

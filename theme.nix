@@ -153,6 +153,5 @@ with lib;
       default = "#af3a03";
     };
 
-
   };
 }
