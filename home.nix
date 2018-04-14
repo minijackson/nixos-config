@@ -527,6 +527,11 @@ in
             "Mod4+Up"    = "focus up";
             "Mod4+Right" = "focus right";
 
+            "Mod4+Shift+Left"  = "move left";
+            "Mod4+Shift+Down"  = "move down";
+            "Mod4+Shift+Up"    = "move up";
+            "Mod4+Shift+Right" = "move right";
+
             "Mod4+h" = "split h";
             "Mod4+v" = "split v";
             "Mod4+f" = "fullscreen toggle";
@@ -535,7 +540,10 @@ in
             "Mod4+z" = "layout tabbed";
             "Mod4+e" = "layout toggle split";
 
+            "Mod4+space"       = "focus mode_toggle";
             "Mod4+Shift+space" = "floating toggle";
+
+            "Mod4+a" = "focus parent";
 
             "Mod4+1" = "workspace 1";
             "Mod4+2" = "workspace 2";
@@ -563,7 +571,7 @@ in
             "Mod4+Shift+r" = "restart";
             "Mod4+Shift+e" = "exec i3-nagbar -t warning -m 'Do you want to exit i3?' -b 'Yes' 'i3-msg exit'";
 
-            "Mod4+r" = "resize";
+            "Mod4+r" = "mode resize";
 
             "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%";
             "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%";
