@@ -554,6 +554,7 @@ in
               { title = "Steam - News"; }
               { class = "Pavucontrol"; }
             ];
+            border = 1;
           };
 
           keybindings = {
