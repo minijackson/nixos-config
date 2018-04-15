@@ -548,8 +548,13 @@ in
         enable = true;
         config = {
           bars = [];
-          floating.modifier = "Mod4";
-          floating.border = 0;
+          floating = {
+            modifier = "Mod4";
+            criteria = [
+              { title = "Steam - News"; }
+              { class = "Pavucontrol"; }
+            ];
+          };
 
           keybindings = {
             "Mod4+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
@@ -623,11 +628,36 @@ in
           ];
 
           window = {
-            border = 0;
+            border = 1;
+            hideEdgeBorders = "smart";
             titlebar = false;
           };
 
+          colors = with globalConfig.theme.colors; rec {
+
+            focused = {
+              background = lightBackground;
+              text = foreground;
+              border = lightBackground;
+
+              childBorder = dominant;
+              indicator = brightOrange;
+            };
+
+            focusedInactive = unfocused;
+            unfocused = {
+              inherit background;
+              text = dimForeground;
+              border = background;
+
+              childBorder = background;
+              indicator = brightOrange;
+            };
+
+          };
+
         };
+
       };
 
       pointerCursor = {
