@@ -73,13 +73,6 @@ set completefunc=syntaxcomplete#Complete
 
 " Deoplete {{{
 
-if !exists('g:deoplete#omni#input_patterns')
-    let g:deoplete#omni#input_patterns = {}
-endif
-
-" From *vimtex-complete-deoplete* documentation
-let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
-
 let g:deoplete#enable_at_startup = 1
 
 " }}}
