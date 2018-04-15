@@ -580,33 +580,6 @@ in
             "XF86MonBrightnessUp"   = "exec --no-startup-id light -A 5";
             "XF86MonBrightnessDown" = "exec --no-startup-id light -U 5";
 
-            "KP_Left"  = "exec --no-startup-id ${pkgs.mpc_cli}/bin/mpc prev";
-            "KP_Begin" = "exec --no-startup-id ${pkgs.mpc_cli}/bin/mpc toggle";
-            "KP_Right" = "exec --no-startup-id ${pkgs.mpc_cli}/bin/mpc next";
-            "KP_Up"    = "exec --no-startup-id ${pkgs.mpc_cli}/bin/mpc stop";
-
-            "KP_Home" = let
-              choose_album = pkgs.substituteAll {
-                src = ./scripts/choose_album.sh;
-                isExecutable = true;
-
-                inherit (pkgs) mpc_cli coreutils rofi;
-              };
-            in "exec --no-startup-id ${choose_album}";
-
-            "KP_Prior" = let
-              choose_artist = pkgs.substituteAll {
-                src = ./scripts/choose_artist.sh;
-                isExecutable = true;
-
-                inherit (pkgs) mpc_cli rofi;
-              };
-            in "exec --no-startup-id ${choose_artist}";
-
-            "XF86AudioPlay" = "exec --no-startup-id ${pkgs.mpc_cli}/bin/mpc toggle";
-            "XF86AudioNext" = "exec --no-startup-id ${pkgs.mpc_cli}/bin/mpc next";
-            "XF86AudioPrev" = "exec --no-startup-id ${pkgs.mpc_cli}/bin/mpc prev";
-
             "Mod4+m" = "exec --no-startup-id ${config.services.screen-locker.lockCmd}";
           };
 
