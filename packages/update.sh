@@ -100,11 +100,14 @@ function overwrite-release-file() {
 		local repo="${userrepo#$user/}"
 		local repo="${repo%.git}"
 
-		echo "View changes: https://github.com/$user/$repo/compare/$oldRev..$newRev"
+		echo "View changes: https://github.com/$user/$repo/compare/$oldRev...$newRev"
 	fi
 
 	echo "$newContent" > "$releaseFile"
 }
+
+echo "Cding into ${0%/*}"
+cd "${0%/*}"
 
 for releaseFile in ./vim-plugins/*.json **/release-info.json ; do
 	if [[ "$releaseFile" =~ ^./vim-plugins/ ]]; then
