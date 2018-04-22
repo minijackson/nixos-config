@@ -37,7 +37,6 @@
   environment.systemPackages = with pkgs; [
     wget
     vim tmux
-    htop
     ripgrep file progress psmisc lsof nethogs
     fd tree ncdu
     lm_sensors hddtemp smartmontools

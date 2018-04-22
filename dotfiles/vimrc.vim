@@ -24,6 +24,8 @@ set colorcolumn=80
 
 set modeline
 
+set cursorline
+
 let g:maplocalleader = ','
 let g:mapleader = ';'
 

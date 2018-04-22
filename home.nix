@@ -1,12 +1,45 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   common-home-configuration = {
     manual.manpages.enable = true;
-    programs.git = {
-      enable = true;
-      userEmail = "minijackson@riseup.net";
-      userName = "Minijackson";
+    programs = {
+      git = {
+        enable = true;
+        userEmail = "minijackson@riseup.net";
+        userName = "Minijackson";
+      };
+
+      htop = {
+        enable = true;
+
+        fields = [
+          "PID" "USER"
+          "PRIORITY" "NICE"
+          "STATE"
+          "IO_PRIORITY" "IO_READ_RATE" "IO_WRITE_RATE"
+          "PERCENT_CPU" "PERCENT_MEM"
+          "TIME"
+          "COMM"
+        ];
+
+        hideThreads = true;
+        hideUserlandThreads = true;
+        showThreadNames = true;
+
+        highlightBaseName = true;
+
+        # On NixOS? NO.
+        showProgramPath = false;
+
+        treeView = true;
+
+        meters = {
+          left = [ "LeftCPUs" "Memory"  "Swap" "Blank" { kind = "Battery"; mode = 1; } ];
+          right = [ "RightCPUs" "Blank" "Tasks" "LoadAverage" "Uptime" ];
+        };
+
+      };
     };
   };
 
@@ -30,11 +63,11 @@ in
   ];
 
   home-manager.users.root = { ... }:
-  common-home-configuration // {
+  lib.recursiveUpdate common-home-configuration {
   };
 
   home-manager.users.minijackson = { config, ... }:
-  common-home-configuration // {
+  lib.recursiveUpdate common-home-configuration {
 
     services = {
 
@@ -387,6 +420,8 @@ in
       firefox.enable = true;
       pidgin.enable = true;
 
+      htop.shadowOtherUsers = true;
+
       rofi = {
         enable = true;
 
@@ -513,8 +548,14 @@ in
         enable = true;
         config = {
           bars = [];
-          floating.modifier = "Mod4";
-          floating.border = 0;
+          floating = {
+            modifier = "Mod4";
+            criteria = [
+              { title = "Steam - News"; }
+              { class = "Pavucontrol"; }
+            ];
+            border = 1;
+          };
 
           keybindings = {
             "Mod4+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
@@ -588,11 +629,36 @@ in
           ];
 
           window = {
-            border = 0;
+            border = 1;
+            hideEdgeBorders = "smart";
             titlebar = false;
           };
 
+          colors = with globalConfig.theme.colors; rec {
+
+            focused = {
+              background = lightBackground;
+              text = foreground;
+              border = lightBackground;
+
+              childBorder = dominant;
+              indicator = brightOrange;
+            };
+
+            focusedInactive = unfocused;
+            unfocused = {
+              inherit background;
+              text = dimForeground;
+              border = background;
+
+              childBorder = background;
+              indicator = brightOrange;
+            };
+
+          };
+
         };
+
       };
 
       pointerCursor = {
