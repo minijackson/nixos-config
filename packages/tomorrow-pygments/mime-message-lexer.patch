@@ -1,0 +1,159 @@
+diff -r 7941677dc77d pygments/lexers/_mapping.py
+--- a/pygments/lexers/_mapping.py	Mon Mar 13 19:16:03 2017 +0000
++++ b/pygments/lexers/_mapping.py	Sat Apr 21 11:39:43 2018 +0200
+@@ -259,6 +259,7 @@
+     'MathematicaLexer': ('pygments.lexers.algebra', 'Mathematica', ('mathematica', 'mma', 'nb'), ('*.nb', '*.cdf', '*.nbp', '*.ma'), ('application/mathematica', 'application/vnd.wolfram.mathematica', 'application/vnd.wolfram.mathematica.package', 'application/vnd.wolfram.cdf')),
+     'MatlabLexer': ('pygments.lexers.matlab', 'Matlab', ('matlab',), ('*.m',), ('text/matlab',)),
+     'MatlabSessionLexer': ('pygments.lexers.matlab', 'Matlab session', ('matlabsession',), (), ()),
++    'MimeMessageLexer': ('pygments.lexers.textfmts', 'MimeMessage', ('mimemessage', 'email', 'imf', 'rfc822'), ('*.mbox', '*.imf', '*.eml'), ('message/rfc822',)),
+     'MiniDLexer': ('pygments.lexers.d', 'MiniD', ('minid',), (), ('text/x-minidsrc',)),
+     'ModelicaLexer': ('pygments.lexers.modeling', 'Modelica', ('modelica',), ('*.mo',), ('text/x-modelica',)),
+     'Modula2Lexer': ('pygments.lexers.modula2', 'Modula-2', ('modula2', 'm2'), ('*.def', '*.mod'), ('text/x-modula2',)),
+diff -r 7941677dc77d pygments/lexers/textfmts.py
+--- a/pygments/lexers/textfmts.py	Mon Mar 13 19:16:03 2017 +0000
++++ b/pygments/lexers/textfmts.py	Sat Apr 21 11:39:43 2018 +0200
+@@ -11,12 +11,13 @@
+ 
+ import re
+ 
+-from pygments.lexer import RegexLexer, bygroups
++from pygments.lexer import RegexLexer, ExtendedRegexLexer, bygroups
+ from pygments.token import Text, Comment, Operator, Keyword, Name, String, \
+     Number, Generic, Literal
+ from pygments.util import ClassNotFound
+ 
+-__all__ = ['IrcLogsLexer', 'TodotxtLexer', 'HttpLexer', 'GettextLexer']
++__all__ = ['IrcLogsLexer', 'TodotxtLexer', 'HttpLexer', 'MimeMessageLexer',
++           'GettextLexer']
+ 
+ 
+ class IrcLogsLexer(RegexLexer):
+@@ -197,6 +198,128 @@
+                                 'OPTIONS /', 'TRACE /', 'PATCH /'))
+ 
+ 
++class MimeMessageLexer(ExtendedRegexLexer):
++    """
++    Lexer for MIME Messages (emails)
++
++    .. versionadded:: 2.2
++    """
++
++    name = 'MimeMessage'
++    aliases = ['mimemessage', 'email', 'imf', 'rfc822']
++    filenames = ['*.mbox', '*.imf', '*.eml']
++    mimetypes = ['message/rfc822']
++
++    flags = re.DOTALL
++
++    content_type = None
++    boundaries = []
++
++    def header_callback(self, match, ctx):
++        if match.group(1).lower() == 'content-type':
++            content_type = match.group(5).strip()
++            if ';' in content_type:
++                content_type = content_type[:content_type.find(';')].strip()
++            self.content_type = content_type
++            if content_type.startswith('multipart/'):
++                search_zone = match.group(5)
++                search_zone = search_zone[search_zone.find(';'):]
++                boundary_match = re.search(r'boundary="(.+)"', search_zone)
++                if boundary_match:
++                    self.boundaries.append(boundary_match.group(1))
++        yield match.start(1), Name.Attribute, match.group(1)
++        yield match.start(2), Text, match.group(2)
++        yield match.start(3), Operator, match.group(3)
++        yield match.start(4), Text, match.group(4)
++        yield match.start(5), Literal, match.group(5)
++        yield match.start(6), Text, match.group(6)
++        ctx.pos = match.end()
++
++    def continuous_header_callback(self, match, ctx):
++        boundary_match = re.search(r'boundary="(.+)"', match.group())
++        if boundary_match:
++            self.boundaries.append(boundary_match.group(1))
++        yield match.start(1), Text, match.group(1)
++        yield match.start(2), Literal, match.group(2)
++        yield match.start(3), Text, match.group(3)
++        ctx.pos = match.end()
++
++    def content_callback(self, match, ctx):
++        content_type = getattr(self, 'content_type', None)
++        content = match.group()
++        offset = match.start()
++
++        subcontent = content
++        subcontent_end = match.end()
++
++        boundary = ""
++        boundary_end = subcontent_end
++
++        rest = ""
++
++        for candidate in re.finditer(r'--([a-zA-Z0-9\'\(\)\+_\./:=\?,-]{1,70}?)(--)?(\r?\n|\Z)', content):
++            if candidate.group(1) in self.boundaries:
++                subcontent = content[:candidate.start()]
++                subcontent_end = offset + candidate.start()
++
++                boundary = candidate.group()
++                boundary_end = offset + candidate.end()
++
++                rest = content[boundary_end:]
++
++                if candidate.group(2):
++                    self.boundaries.remove(candidate.group(1))
++                break
++
++        if content_type:
++            from pygments.lexers import get_lexer_for_mimetype
++            possible_lexer_mimetypes = [content_type]
++            if '+' in content_type:
++                # application/calendar+xml can be treated as application/xml
++                # if there's not a better match.
++                general_type = re.sub(r'^(.*)/.*\+(.*)$', r'\1/\2',
++                                      content_type)
++                possible_lexer_mimetypes.append(general_type)
++
++            for i in possible_lexer_mimetypes:
++                try:
++                    lexer = get_lexer_for_mimetype(i)
++                except ClassNotFound:
++                    pass
++                else:
++                    for idx, token, value in lexer.get_tokens_unprocessed(subcontent):
++                        yield offset + idx, token, value
++                    yield subcontent_end, Operator.Word, boundary
++                    ctx.pos = boundary_end
++                    ctx.stack.pop()
++                    return
++        yield offset, Text, content
++        yield subcontent_end, Operator.Word, content[subcontent_end:]
++        ctx.pos = match.end()
++
++    def boundary_callback(self, match, ctx):
++        candidate_boundary = match.group(1)
++        if candidate_boundary in self.boundaries:
++            yield match.start(), Operator.Word, match.group()
++            if match.group(2):
++                self.boundaries.remove(candidate_boundary)
++            ctx.stack.pop()
++        else:
++            yield match.start(), Text, match.group()
++        ctx.pos = match.end()
++
++    tokens = {
++        'root': [
++            (r'([^\s:]+)( *)(:)( *)([^\r\n]+)(\r?\n|\Z)', header_callback),
++            (r'([\t ]+)([^\r\n]+)(\r?\n|\Z)', continuous_header_callback),
++            (r'\r?\n', Text, 'content')
++        ],
++        'content': [
++            (r'--([a-zA-Z0-9\'\(\)\+_\./:=\?,-]{1,70}?)(--)?(\r?\n|\Z)', boundary_callback),
++            (r'.+', content_callback)
++        ]
++    }
++
+ class TodotxtLexer(RegexLexer):
+     """
+     Lexer for `Todo.txt <http://todotxt.com/>`_ todo list format.

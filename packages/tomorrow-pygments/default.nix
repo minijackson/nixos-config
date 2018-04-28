@@ -2,6 +2,6 @@
 
 {
   tomorrowPygments = pkgs.python36Packages.pygments.overrideAttrs ( oldAttrs: {
-    patches = [ ./add-tomorrow-themes.patch ];
+    patches = [ ./add-tomorrow-themes.patch ./mime-message-lexer.patch ];
   });
 }
