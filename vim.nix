@@ -73,6 +73,7 @@
               neco-syntax     = vimPluginFromGit "neco-syntax";
               neco-vim        = vimPluginFromGit "neco-vim";
               tmux-complete   = vimPluginFromGit "tmux-complete";
+              vim-dirvish     = vimPluginFromGit "vim-dirvish";
               vim-unimpaired  = vimPluginFromGit "vim-unimpaired";
 
             };
@@ -83,6 +84,7 @@
               { name = "gruvbox"; }
               { name = "gitgutter"; }
               { name = "lightline-vim"; }
+              { name = "vim-dirvish"; }
 
               # Motions
               { name = "CamelCaseMotion"; }
