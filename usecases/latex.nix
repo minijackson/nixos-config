@@ -16,6 +16,11 @@ let
       collection-langfrench
       csquotes
 
+      glossaries
+      glossaries-english
+      glossaries-french
+      glossaries-extra
+
       microtype
       fontspec
       cm-super
@@ -31,10 +36,18 @@ let
 
       standalone
 
+      cleveref
+
+      morewrites
+
       # Dependencies somehow missing
       logreq xstring fvextra ifplatform framed
       # For standalone
       currfile
+      # For glossaries
+      xindy mfirstuc xfor datatool tracklang
+      # For datatool
+      substr
       ;
   };
 in {
