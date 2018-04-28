@@ -9,7 +9,7 @@
     gnome3.gucharmap
     kdeconnect
     xsel
-    qutebrowser
+    qutebrowser opera
     kodi mpv
     calibre
     gnome3.evolution
