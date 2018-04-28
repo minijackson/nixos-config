@@ -4,6 +4,9 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+echo "Cding into ${0%/*}"
+cd "${0%/*}"
+
 url="$1"
 
 pluginName="${url#*github\.com/*/}"

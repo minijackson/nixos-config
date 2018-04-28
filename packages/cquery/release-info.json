@@ -1,7 +1,7 @@
 {
   "url": "https://github.com/cquery-project/cquery.git",
-  "rev": "c14e562eea7fc227a28cd8adef018584d6ce20f2",
-  "date": "2018-04-03T22:28:41-07:00",
-  "sha256": "0sxlc9l9qmddz13525z3xllv2r55kv52cmd1hlj118bmj2wzylgk",
+  "rev": "34b357bc5e873d52d2aa41287c6e138244cea109",
+  "date": "2018-04-24T11:16:47-07:00",
+  "sha256": "0i34v30cl73485bzpbis539x0iq9whpv0403ca5a9h6vqwnvdn7c",
   "fetchSubmodules": true
 }
