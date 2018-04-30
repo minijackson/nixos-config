@@ -29,6 +29,8 @@ let
       biblatex
       biblatex-ieee
 
+      placeins
+
       algorithms
       minted
 
