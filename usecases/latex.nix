@@ -39,6 +39,8 @@ let
       standalone
 
       cleveref
+      # For varioref
+      tools
 
       morewrites
 
