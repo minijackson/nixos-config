@@ -12,6 +12,7 @@
       type = types.attrsOf types.str;
       default = {
         dominant_color = "'${config.theme.colors.dominant}'";
+        ripgrep_path = "'${pkgs.ripgrep}/bin/rg'";
       };
       description = ''
         Extra global variables to add at the beginning of the vim configuration.

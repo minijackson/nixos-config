@@ -21,16 +21,19 @@ set scrolloff=1
 set sidescrolloff=5
 
 set colorcolumn=80
+set cursorline
 
 set modeline
 
-set cursorline
+set title
 
 let g:maplocalleader = ','
 let g:mapleader = ';'
 
 " If previously opened jump to the last position in the file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+let &grepprg = g:ripgrep_path . ' --vimgrep $*'
 
 " }}}
 
