@@ -403,6 +403,10 @@ in
       screen-locker = {
         enable = true;
         lockCmd = "${pkgs.i3lock}/bin/i3lock -n -c 000000";
+        xautolockExtraOptions = [
+          "-corners" "00-0"
+          "-cornerdelay" "3"
+        ];
       };
 
       random-background = {
