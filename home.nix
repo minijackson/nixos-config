@@ -542,6 +542,8 @@ in
     xdg.configFile = {
       "alacritty/alacritty.yml".source = ./dotfiles/alacritty.yml;
 
+      "zathura/zathurarc".source = ./dotfiles/zathurarc;
+
       "user-dirs.dirs".text = ''
         XDG_DESKTOP_DIR="$HOME/Desktop"
         XDG_DOCUMENTS_DIR="$HOME/Documents"
