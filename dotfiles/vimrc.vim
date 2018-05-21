@@ -34,6 +34,7 @@ let g:mapleader = ';'
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 let &grepprg = g:ripgrep_path . ' --vimgrep $*'
+let &grepformat = '%f:%l:%c:%m,' . &grepformat
 
 " }}}
 
@@ -80,6 +81,11 @@ set completefunc=syntaxcomplete#Complete
 
 let g:deoplete#enable_at_startup = 1
 
+" }}}
+
+" CtrlP {{{
+let g:ctrlp_user_command = g:fd_path . ' --type f --color never "" %s'
+let g:ctrlp_use_caching = 0
 " }}}
 
 " vim: fdm=marker
