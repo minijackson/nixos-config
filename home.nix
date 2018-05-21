@@ -54,6 +54,7 @@ in
   users.extraUsers.minijackson.packages = with pkgs; [
     pass
     tmuxp
+    taskwarrior
     tokei
     neofetch
     ffmpeg beets mpv youtube-dl pavucontrol
