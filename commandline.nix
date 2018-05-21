@@ -3,6 +3,7 @@
 with import ./lib/theme.nix { inherit lib; };
 let
   dominantEscapeCode = fgEscapeCode config.theme.colors.dominant;
+  myPackages = import ./packages { inherit pkgs; };
 in
 {
   environment.shellAliases = {
@@ -19,6 +20,8 @@ in
       source "${pkgs.grml-zsh-config}/etc/zsh/zshrc"
       PATH="${pkgs.fasd}/bin:$PATH"
       eval "$(fasd --init auto)"
+
+      source "${myPackages.zsh-history-substring-search}"
 
       function () {
         local dominant_escape_code="${dominantEscapeCode}"
