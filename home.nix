@@ -145,7 +145,7 @@ in
 
             modules-left = "i3";
             modules-center = "mpd";
-            modules-right = "backlight volume memory cpu wlan eth battery temperature date redshift powermenu";
+            modules-right = "backlight volume memory cpu wlan eth battery temperature date redshift autolock powermenu";
 
             fixed-center = false;
 
@@ -368,6 +368,19 @@ in
             label = "%output%%{F-}";
 
             click-left = "${systemctl} --user is-active --quiet redshift.service && ${systemctl} --user stop redshift.service || ${systemctl} --user start redshift.service";
+          };
+
+          "module/autolock" = let
+            systemctl = "${pkgs.systemd}/bin/systemctl";
+            xset = "${pkgs.xorg.xset}/bin/xset";
+          in {
+            type = "custom/script";
+
+            exec = "${systemctl} --user is-active --quiet xautolock-session.service && echo '%{F${neutralGreen}}' || echo '%{F${neutralRed}}'";
+
+            label = "%output%%{F-}";
+
+            click-left = "${systemctl} --user is-active --quiet xautolock-session.service && (${systemctl} --user stop xautolock-session.service; ${xset} s 0 0; ${xset} -dpms) || (${systemctl} --user start xautolock-session.service; ${xset} s; ${xset} +dpms)";
           };
 
           "module/powermenu" = let systemctl = "${pkgs.systemd}/bin/systemctl";
