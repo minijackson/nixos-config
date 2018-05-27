@@ -83,8 +83,11 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  nix.gc.automatic = true;
-  nix.gc.dates = "03:15";
+  nix.gc = {
+    automatic = true;
+    dates = "03:15";
+    options = "--delete-older-than 30d";
+  };
 
   system.autoUpgrade.enable = true;
 
