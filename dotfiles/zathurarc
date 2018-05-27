@@ -10,7 +10,7 @@ set selection-clipboard "clipboard"
 # Colors {{{
 # ==========
 
-set default-bg "#282828"
+set default-bg "#32302f"
 set default-fg "#ebdbb1"
 
 set notification-error-bg "#cc241d"
