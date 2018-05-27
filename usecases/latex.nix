@@ -42,6 +42,8 @@ let
       # For varioref
       tools
 
+      footmisc
+
       morewrites
 
       # Dependencies somehow missing
