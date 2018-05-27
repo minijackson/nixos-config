@@ -191,10 +191,10 @@ alias gwD='git diff --word-diff'
 # http://www.zshwiki.org/home/examples/zleiab
 
 abk=(
-	'P' '|& ${PAGER}'
-	'L' '|& ${PAGER}'
+	'P' '|& ${(z)PAGER}'
+	'L' '|& ${(z)PAGER}'
 
-	'HL' ' --help |& ${PAGER}'
+	'HL' ' --help |& ${(z)PAGER}'
 
 	'G'  '|& rg'
 	'FG' '|& rg -F'
