@@ -40,6 +40,12 @@ with lib;
       description = "The background color";
     };
 
+    softBackground = mkOption {
+      type = types.str;
+      default = "#32302f";
+      description = "Like the background color, but a little bit softer.";
+    };
+
     lightBackground = mkOption {
       type = types.str;
       default = "#504945";
