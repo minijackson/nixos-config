@@ -95,7 +95,10 @@ in {
 
       let g:vimtex_compiler_latexmk = {}
       let g:vimtex_compiler_latexmk.build_dir = './latexmk-build'
-      let g:vimtex_compiler_latexmk.options = ['-pdf', '-verbose', '-file-line-error', '-synctex=1', '-interaction=nonstopmode', '-shell-escape', '-use-make', '-xelatex', '-8bit']
+      let g:vimtex_compiler_latexmk.options = ['-verbose', '-file-line-error', '-synctex=1', '-interaction=nonstopmode', '-shell-escape', '-use-make', '-8bit']
+
+      " Set default engine to be XeLaTeX
+      let g:vimtex_compiler_latexmk_engines = { '_': '-xelatex' }
 
       let g:vimtex_view_method = 'zathura'
       let g:vimtex_view_general_viewer = '${pkgs.zathura}/bin/zathura'
