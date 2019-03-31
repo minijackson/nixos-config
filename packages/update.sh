@@ -1,4 +1,6 @@
-#! /usr/bin/env nix-shell
+#!/usr/bin/env bash
+
+#!/usr/bin/env nix-shell
 #! nix-shell -i bash -p curl jq nix-prefetch-scripts
 
 set -euo pipefail

@@ -1,7 +1,7 @@
 {
   "url": "https://github.com/tpope/vim-unimpaired.git",
-  "rev": "d6325994b3c16ce36fd494c47dae4dab8d21a3da",
-  "date": "2018-07-26T16:18:56-04:00",
-  "sha256": "0l5g3xq0azplaq3i2rblg8d61czpj47k0126zi8x48na9sj0aslv",
+  "rev": "e77923053fbce11323194ed04113b8d966be959c",
+  "date": "2019-03-21T07:36:32-04:00",
+  "sha256": "1cka410c94wa6mz0pr4m8n9j7s9jhqnw513479pkmzx435ffb6ak",
   "fetchSubmodules": true
 }

@@ -1,7 +1,7 @@
 {
   "url": "https://github.com/jaakkopasanen/AutoEq.git",
-  "rev": "ce6282529abc65a7b034c27f130e948d80c8a094",
-  "date": "2018-09-29T10:16:34+03:00",
-  "sha256": "1l71nxxfm4h5j0m1q3ah07ppf568ww5y892mk47c3g9fcrf23jxd",
+  "rev": "2dff3b2666357204076e9e064426a8762b992718",
+  "date": "2019-03-30T18:48:11+02:00",
+  "sha256": "089lnz4a9fsq46nd44cvyzvagzb02nwsc9pvxg912wbfi8b4vqhl",
   "fetchSubmodules": true
 }

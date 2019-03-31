@@ -1,7 +1,7 @@
 {
   "url": "https://github.com/justinmk/vim-dirvish.git",
-  "rev": "c273c462d774ed2db5f6d382265cf5897e554de0",
-  "date": "2018-06-20T21:42:44+02:00",
-  "sha256": "1fv1kk7y280kx8c0iy9rg43i8gr0h8308al8sm85qvmfx5fcbi9d",
+  "rev": "6fb15d43078b55f30cce5cb73571e6a8f1634124",
+  "date": "2019-03-27T09:37:13+01:00",
+  "sha256": "198c61vz5j27n07r1dx94cr0fzc9pfnz28zl86b3v02y2ry39q27",
   "fetchSubmodules": true
 }
