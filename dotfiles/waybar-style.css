@@ -1,0 +1,126 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: mono;
+    font-size: 11px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: @background@;
+    border-bottom: 3px solid @lightBackground@;
+    color: @foreground@;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button {
+    padding: 0 5px;
+    background: transparent;
+    color: @foreground@;
+    border-bottom: 3px solid transparent;
+}
+
+#workspaces button.focused {
+    background: @dominant@;
+    border-bottom: 3px solid @foreground@;
+}
+
+#mode {
+    background: @lightBackground@;
+    border-bottom: 3px solid @foreground@;
+}
+
+#clock, #battery, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio, #custom-mpd, #tray, #mode, #idle_inhibitor {
+    padding: 0 10px;
+    margin: 0 5px;
+}
+
+#clock {
+    background-color: @neutralPurple@;
+	color: @background@;
+}
+
+#battery {
+    background-color: @neutralYellow@;
+    color: @background@;
+}
+
+/*
+#battery.charging {
+    color: @foreground@;
+    background-color: #26A65B;
+}
+*/
+
+@keyframes blink {
+    to {
+        background-color: @foreground@;
+        color: @background@;
+    }
+}
+
+#battery.critical:not(.charging) {
+    background: @fadedRed@;
+    color: @foreground@;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#cpu {
+    background: @neutralOrange@;
+	color: @background@;
+}
+
+#memory {
+    background: @brightBlue@;
+	color: @background@;
+}
+
+#backlight {
+    background: @background6@;
+	color: @background@;
+}
+
+#network {
+    background: @neutralGreen@;
+	color: @background@;
+}
+
+#network.disconnected {
+    background: @lightBackground@;
+	color: @foreground@;
+}
+
+#pulseaudio {
+    background: @neutralAqua@;
+    color: @background@;
+}
+
+#pulseaudio.muted {
+    background: @foreground@;
+}
+
+#temperature {
+	background: @brightAqua@;
+	color: @background@;
+}
+
+#temperature.critical {
+	background: @fadedRed@;
+	color: @foreground@;
+}
+
+#tray {
+    background-color: #2980b9;
+}
+
+#idle_inhibitor {
+    background-color: @lightBackground@;
+}
+
+#custom-mpd {
+	background-color: @dominant@;
+}

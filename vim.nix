@@ -72,8 +72,6 @@
 
               CamelCaseMotion = vimPluginFromGit "CamelCaseMotion";
               deoplete-zsh    = vimPluginFromGit "deoplete-zsh";
-              neco-syntax     = vimPluginFromGit "neco-syntax";
-              neco-vim        = vimPluginFromGit "neco-vim";
               tmux-complete   = vimPluginFromGit "tmux-complete";
               vim-dirvish     = vimPluginFromGit "vim-dirvish";
               vim-unimpaired  = vimPluginFromGit "vim-unimpaired";
@@ -116,6 +114,7 @@
               { name = "rhubarb"; }
               { name = "repeat"; }
               { name = "vim-unimpaired"; }
+              { name = "tabular"; }
 
             ] ++ config.vim.extraPlugins;
 

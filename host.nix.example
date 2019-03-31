@@ -9,5 +9,6 @@
 
   networking.hostName = "myAwesomeHostname";
   theme.colors.dominant = "#d3869b";
+  topology.myMeshAddress = "4.3.2.1";
 
 }

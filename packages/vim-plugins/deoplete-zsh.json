@@ -1,7 +1,7 @@
 {
   "url": "https://github.com/zchee/deoplete-zsh.git",
-  "rev": "1d4228a9afa2f344b3784a7c5b977fb755fe0ffa",
-  "date": "2017-08-05T13:17:58+09:00",
-  "sha256": "0x7hyhb00vf6jplp6b75a82yc5x8bfi50k9qxi06mh1jcd9jjasn",
+  "rev": "07ba117d0ca441124614bd88d14490411ee97479",
+  "date": "2018-07-19T08:29:49+09:00",
+  "sha256": "0hlz58w4inlvjlbwbxi80drxqd6p8g89lkb94vg8k38xs72kkkv4",
   "fetchSubmodules": true
 }

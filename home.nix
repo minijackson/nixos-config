@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
+  myPackages = import ./packages { inherit pkgs config; };
   common-home-configuration = {
     manual.manpages.enable = true;
     programs = {
@@ -44,10 +45,21 @@ let
   };
 
   globalConfig = config;
+
+  wRedshift = pkgs.redshift.overrideAttrs (oldAttrs: {
+    src = pkgs.fetchFromGitHub {
+      owner = "giucam";
+      repo = "redshift";
+      rev = "1b9c8ac11125e2df0b8f9779376dd35cd56d5951";
+      sha256 = "0llylabqp38y7mq3wzvnwm82f079n24gzf2hy53v1zpwklvcwjg9";
+    };
+  });
+
 in
 {
   imports = [
     ./home-manager/nixos
+    ./taskwarrior-secret.nix
     ./theme.nix
   ];
 
@@ -57,10 +69,12 @@ in
     taskwarrior
     tokei
     neofetch
-    ffmpeg beets mpv youtube-dl pavucontrol
+    ffmpeg beets youtube-dl pavucontrol
     pandoc poppler_utils
     rr rtags gcc clang clang-tools
     aspell aspellDicts.en aspellDicts.en-computers aspellDicts.en-science aspellDicts.fr
+
+    wRedshift
   ];
 
   home-manager.users.root = { ... }:
@@ -76,12 +90,19 @@ in
 
       redshift = {
         enable = true;
+
         latitude = "48.864716";
         longitude = "2.349014";
+
+        # Reduce blue light anyways
+        temperature = {
+          day = 4000;
+          night = 2500;
+        };
       };
 
       dunst = {
-        enable = true;
+        enable = false;
         settings = with globalConfig.theme.colors;
         {
           global = {
@@ -434,11 +455,26 @@ in
     };
 
     programs = {
-      browserpass.enable = true;
       firefox.enable = true;
       pidgin.enable = true;
 
       htop.shadowOtherUsers = true;
+
+      taskwarrior = {
+        enable = true;
+        colorTheme = "dark-16";
+
+        config = {
+          taskd = {
+            certificate = "/etc/nixos/res/taskwarrior/private.certificate.pem";
+            key         = "/etc/nixos/res/taskwarrior/private.key.pem";
+            ca          = "/etc/nixos/res/taskwarrior/ca.cert.pem";
+            server      = "${globalConfig.topology.serverAddress}:53589";
+            # credentials set in taskwarrior-secret.nix
+            trust       = "ignore hostname";
+          };
+        };
+      };
 
       rofi = {
         enable = true;
@@ -542,6 +578,10 @@ in
     xdg.configFile = {
       "alacritty/alacritty.yml".source = ./dotfiles/alacritty.yml;
 
+      "mpv/mpv.conf".text = ''
+        hwdec=auto
+      '';
+
       "zathura/zathurarc".source = ./dotfiles/zathurarc;
 
       "user-dirs.dirs".text = ''
@@ -554,6 +594,177 @@ in
         XDG_TEMPLATES_DIR="$HOME/Templates"
         XDG_VIDEOS_DIR="$HOME/Videos"
       '';
+
+      "sway/config".source = pkgs.substituteAll {
+
+        src = ./dotfiles/sway;
+
+        inherit (globalConfig.theme.colors) dominant;
+        inherit (pkgs) mpc_cli pulseaudio;
+
+        choose_password = pkgs.substituteAll {
+          src = ./scripts/choose_password.sh;
+          isExecutable = true;
+
+          inherit (pkgs) rofi pass;
+        };
+
+        choose_album = pkgs.substituteAll {
+          src = ./scripts/choose_album.sh;
+          isExecutable = true;
+
+          inherit (pkgs) sqlite mpc_cli rofi;
+        };
+
+        choose_artist = pkgs.substituteAll {
+          src = ./scripts/choose_artist.sh;
+          isExecutable = true;
+
+          inherit (pkgs) mpc_cli rofi;
+        };
+
+        random_albums = pkgs.substituteAll {
+          src = ./scripts/random_albums.sh;
+          isExecutable = true;
+
+          inherit (pkgs) mpc_cli beets;
+        };
+
+        import_gsettings = pkgs.substituteAll {
+          src = ./scripts/import_gsettings.sh;
+          isExecutable = true;
+
+          gsettings = pkgs.glib.dev;
+          gsettings_desktop_schemas = pkgs.gsettings-desktop-schemas;
+          gsettings_desktop_schemas_name = pkgs.gsettings-desktop-schemas.name;
+          dconf_lib = pkgs.gnome3.dconf.lib;
+        };
+      };
+
+      "waybar/style.css".source = pkgs.substituteAll {
+        src = ./dotfiles/waybar-style.css;
+
+        # TODO: maybe add transparency?
+        inherit (globalConfig.theme.colors)
+          dominant
+          background lightBackground background6
+          foreground
+          neutralPurple neutralYellow fadedRed neutralOrange brightBlue neutralGreen neutralAqua brightAqua;
+      };
+
+      "waybar/config".text = builtins.toJSON {
+        layer = "top";
+        position = "bottom";
+        height = 25;
+        modules-left = [ "sway/workspaces" "sway/mode" ];
+        modules-right = [ "idle_inhibitor" "custom/mpd" "pulseaudio" "network#eth" "network#wlan" "cpu" "memory" "temperature" "backlight" "battery" "clock" "tray" ];
+
+        idle_inhibitor = {
+          format = "{icon}";
+          format-icons = {
+            activated = "";
+            deactivated = "";
+          };
+        };
+
+        clock = {
+          tooltip-format = "{:%Y-%m-%d | %H:%M}";
+          format-alt = "{:%Y-%m-%d}";
+        };
+
+        cpu = { format = "{usage}% "; };
+
+        memory = { format = "{}% "; };
+
+        battery = {
+          states = { good = 90; };
+          format = "{capacity}% {icon}";
+          format-icons = [
+            "<span font_desc='Font Awesome 5 Free'></span>"
+            "<span font_desc='Font Awesome 5 Free'></span>"
+            "<span font_desc='Font Awesome 5 Free'></span>"
+            "<span font_desc='Font Awesome 5 Free'></span>"
+            "<span font_desc='Font Awesome 5 Free'></span>"
+          ];
+        };
+
+        "network#eth" = {
+          interface = "enp3s0";
+          format-ethernet = "{ipaddr}/{cidr} ";
+          format-disconnected = "Disconnected ";
+        };
+
+        "network#wlan" = {
+          interface = "wlp2s0";
+          format-wifi = "{essid} ({signalStrength}%) <span font_desc='Font Awesome 5 Free'></span>";
+          format-disconnected = "Disconnected <span font_desc='Font Awesome 5 Free'></span>";
+          tooltip = true;
+          tooltip-format-wifi = "{ipaddr}/{cidr}";
+        };
+
+        temperature = { format = "{temperatureC} °C "; };
+
+        backlight = {
+          format = "{percent}% <span font_desc='Font Awesome 5 Free'>{icon}</span>";
+          format-icons = [ "" "" ];
+        };
+
+        pulseaudio = {
+          format = "{volume}% {icon}";
+          format-bluetooth = "{volume}% {icon}";
+          format-muted = "";
+          format-icons = {
+            headphones = "";
+            handsfree = "";
+            headset = "";
+            phone = "";
+            portable = "";
+            car = "";
+            default = [ "" "" ];
+          };
+          on-click = "pavucontrol";
+        };
+
+        # TODO: move that into usecases/music.nix
+        "custom/mpd" = {
+          exec = "${pkgs.mpc_cli}/bin/mpc current --format '%artist% - %album% - %title%'";
+          interval = 10;
+          format = "{} <span font_desc='Font Awesome 5 Free'></span>";
+          tooltip = false;
+          on-click = "${pkgs.mpc_cli}/bin/mpc toggle";
+          # TODO: hardcoded package(s) :-/
+          on-click-right = "alacritty --dimensions 200 50 --command ncmpcpp";
+        };
+
+      };
+
+      "mako/config".text = with globalConfig.theme.colors; ''
+        font=monospace 11
+
+        background-color=${background}EE
+        text-color=${foreground}FF
+        border-size=1
+        border-color=${dimForeground}EE
+
+        width=350
+        # Maximum height
+        height=500
+
+        margin=30,50
+        padding=20,30
+
+        default-timeout=7000
+
+        [urgency=high]
+        text-color=${neutralRed}
+
+        [urgency=low]
+        text-color=${neutralBlue}
+
+        [actionable]
+        border-color=${dominant}FF
+        border-size=2
+      '';
     };
 
     gtk = {
@@ -563,8 +774,8 @@ in
         name = "Arc";
       };
       theme = {
-        package = pkgs.arc-theme;
-        name = "Arc-Darker";
+        package = myPackages.gruvbox-arc-theme;
+        name = "Arc-Dark";
       };
     };
 
@@ -655,6 +866,13 @@ in
             "XF86MonBrightnessDown" = "exec --no-startup-id light -U 5";
 
             "Mod4+m" = "exec --no-startup-id ${config.services.screen-locker.lockCmd}";
+
+            "Mod4+p" = "exec --no-startup-id ${pkgs.substituteAll {
+              src = ./scripts/choose_password.sh;
+              isExecutable = true;
+
+              inherit (pkgs) rofi pass;
+            }}";
           };
 
           startup = [

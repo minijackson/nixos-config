@@ -2,4 +2,8 @@
 /host.nix
 *-secret.nix
 
+/res/tinc
+/res/taskwarrior
+/res/rsync
+
 result

@@ -3,6 +3,7 @@
 {
 
   users.extraUsers.minijackson.packages = with pkgs; [
+    qt5.qtwayland
     alacritty
     polkit_gnome
     gnome3.dconf gnome3.nautilus gnome3.file-roller
@@ -10,12 +11,15 @@
     kdeconnect
     xsel
     qutebrowser opera
-    kodi mpv
+    kodi #mpv
     calibre
     gnome3.evolution
-    steam kodiPlugins.steam-launcher
+    #steam kodiPlugins.steam-launcher
     zathura
   ];
+
+  # Uncomment when using UPnP / DNLA
+  #networking.firewall.enable = false;
 
   # 8080 for Kodi remote control
   networking.firewall.allowedTCPPorts = [ 8080 ];
@@ -26,27 +30,21 @@
 
   home-manager.users.minijackson = { config, ... }:
   {
-    systemd.user.services.kdeconnect = {
-      Unit = {
-        Description = "Start the KDEConnect indicator";
-        After = [ "graphical-session-pre.target" ];
-        PartOf = [ "graphical-session.target" ];
-      };
-
-      Install = {
-        WantedBy = [ "graphical-session.target" ];
-      };
-
-      Service = {
-        # Source /etc/profile before to have the right QT_PLUGIN_PATH environment vairables and such
-        ExecStart = "${pkgs.bash}/bin/sh -c 'source /etc/profile && ${pkgs.kdeconnect}/bin/kdeconnect-indicator'";
-      };
+    services.kdeconnect = {
+      enable = true;
+      indicator = true;
     };
   };
 
   security.pam.services.slim.enableGnomeKeyring = true;
 
   services.gnome3.evolution-data-server.enable = true;
+
+  services.gnome3.gvfs.enable = true;
+
+  nixpkgs.config.kodi = {
+    enableVFSSFTP = true;
+  };
 
   # Enable the X11 windowing system.
   services.xserver = {
@@ -75,11 +73,13 @@
     desktopManager = {
       kodi.enable = true;
       xfce.enable = true;
-      xfce.screenLock = "xscreensaver";
+      #xfce.screenLock = "xscreensaver";
       #gnome3.enable = true;
 
       default = "xfce";
     };
+
+    wacom.enable = true;
 
     windowManager.i3 = {
       enable = true;
@@ -103,7 +103,7 @@
   };
 
   fonts = {
-    fonts = with pkgs; [ fira-mono dejavu_fonts freefont_ttf liberation_ttf noto-fonts-cjk unifont siji ];
+    fonts = with pkgs; [ fira-mono dejavu_fonts freefont_ttf liberation_ttf noto-fonts-cjk unifont siji font-awesome_5 ];
 
     fontconfig = {
       ultimate.enable = true;

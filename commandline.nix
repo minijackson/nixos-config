@@ -3,7 +3,11 @@
 with import ./lib/theme.nix { inherit lib; };
 let
   dominantEscapeCode = fgEscapeCode config.theme.colors.dominant;
-  myPackages = import ./packages { inherit pkgs; };
+  myPackages = import ./packages { inherit pkgs config; };
+
+  shellScripts = {
+    split-cue = ./scripts/standalone/split-cue.sh;
+  };
 in
 {
   environment.shellAliases = {
@@ -22,6 +26,11 @@ in
       eval "$(fasd --init auto)"
 
       source "${myPackages.zsh-history-substring-search}"
+
+      alias ${concatStringsSep " "
+        (mapAttrsToList
+          (name: script: "${name}=\"${script}\"")
+          shellScripts)}
 
       function () {
         local dominant_escape_code="${dominantEscapeCode}"

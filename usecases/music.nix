@@ -31,12 +31,13 @@
   home-manager.users.minijackson = { ... }:
   {
     programs.beets.settings = {
-      plugins = "convert edit fromfilename mbsync missing mpdupdate the";
+      plugins = "convert edit fromfilename mbsync mbsubmit missing mpdupdate the fetchart random zero";
       paths = {
         default   = "%the{$albumartist}/%the{$album}%aunique{}/$track $title";
         singleton = "Non-Album/%the{$artist}/%the{$title}";
         comp      = "Compilations/%the{$album}%aunique{}/$track $title";
       };
+      zero.fields = "comments";
     };
 
     xdg.configFile."ncmpcpp/config".source = ../dotfiles/ncmpcpp;
@@ -68,6 +69,15 @@
           inherit (pkgs) mpc_cli rofi;
         };
       in "exec --no-startup-id ${choose_artist}";
+
+      "KP_End" = let
+        random_albums = pkgs.substituteAll {
+          src = ../scripts/random_albums.sh;
+          isExecutable = true;
+
+          inherit (pkgs) mpc_cli beets;
+        };
+      in "exec --no-startup-id ${random_albums}";
 
     };
 

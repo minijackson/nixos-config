@@ -15,10 +15,13 @@ in {
 
       # C / C++
       { name = "neoinclude"; }
+
+      # Elixir
+      { name = "alchemist-vim"; }
     ];
 
     extraConfig = let
-      cqueryPath = "${myPackages.cquery}/bin/cquery";
+      cqueryPath = "${pkgs.cquery}/bin/cquery";
       clangGlibcFlags = "['-idirafter', '${pkgs.glibc.dev}/include']";
       clangCxxStdlibFlags = "split(system('bash -c \"echo -n \\\"${pkgs.clang.default_cxx_stdlib_compile}\\\"\"'))";
       clangCxxFlagsJson = "json_encode(${clangGlibcFlags} + ${clangCxxStdlibFlags})";
@@ -38,11 +41,26 @@ in {
 
       let g:LanguageClient_serverCommands = {
             \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-            \ 'cpp' : [ '${cqueryPath}', '--init={"extraClangArguments": ' . ${clangCxxFlagsJson} . ', "cacheDirectory": "/tmp/' . $USER . '/cquery"}' ],
-            \ 'c'   : [ '${cqueryPath}', '--init={"extraClangArguments": ' . ${clangCFlagsJson}   . ', "cacheDirectory": "/tmp/' . $USER . '/cquery"}' ],
+            \ 'cpp' : [ '${cqueryPath}' ],
+            \ 'c'   : [ '${cqueryPath}' ],
             \ }
     '';
+            #\ 'cpp' : [ '${cqueryPath}', '--init={"extraClangArguments": ' . ${clangCxxFlagsJson} . ', "cacheDirectory": "/tmp/' . $USER . '/cquery"}' ],
+            #\ 'c'   : [ '${cqueryPath}', '--init={"extraClangArguments": ' . ${clangCFlagsJson}   . ', "cacheDirectory": "/tmp/' . $USER . '/cquery"}' ],
 
+  };
+
+  users.extraUsers.minijackson.packages = with pkgs; [
+    gdb rr
+    beam.packages.erlangR20.elixir
+    man-pages
+  ];
+
+  documentation.dev.enable = true;
+
+  boot.kernel.sysctl = {
+    # For RR
+    "kernel.perf_event_paranoid" = 1;
   };
 
 }

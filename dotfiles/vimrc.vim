@@ -88,4 +88,9 @@ let g:ctrlp_user_command = g:fd_path . ' --type f --color never "" %s'
 let g:ctrlp_use_caching = 0
 " }}}
 
+" LanguageClient {{{
+let g:LanguageClient_loggingFile  = stdpath('data') . '/LanguageClient.log'
+let g:LanguageClient_serverStderr = stdpath('data') . '/LanguageServer.log'
+" }}}
+
 " vim: fdm=marker

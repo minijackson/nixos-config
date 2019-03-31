@@ -19,10 +19,17 @@ let
     let genComponent = hex2dec color;
     in "${toString (genComponent 1)};${toString (genComponent 3)};${toString (genComponent 5)}";
 
+  hex2RGB = color:
+    let genComponent = hex2dec color;
+    in {
+      red = genComponent 1;
+      green = genComponent 3;
+      blue = genComponent 5;
+    };
+
   fgEscapeCode = hexCode: "[38;2;${makeColorCode hexCode}m";
   bgEscapeCode = hexCode: "[48;2;${makeColorCode hexCode}m";
 in
 {
-  inherit fgEscapeCode;
-  inherit bgEscapeCode;
+  inherit fgEscapeCode bgEscapeCode hex2RGB;
 }

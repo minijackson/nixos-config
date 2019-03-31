@@ -2,6 +2,7 @@
 
 {
   hardware  = {
+    enableRedistributableFirmware = true;
     cpu.intel.updateMicrocode = true;
 
     pulseaudio = {
@@ -16,10 +17,19 @@
         alternate-sample-rate = 48000;
         resample-method = "speex-float-7";
       };
+      extraConfig = ''
+        load-module module-equalizer-sink
+        load-module module-dbus-protocol
+      '';
     };
 
-    # For Steam
-    opengl.driSupport32Bit = true;
+    opengl = {
+      # For Steam
+      driSupport32Bit = true;
+
+      extraPackages = with pkgs; [ vaapiIntel libvdpau-va-gl vaapiVdpau intel-ocl ];
+      extraPackages32 = with pkgs.pkgsi686Linux; [ vaapiIntel libvdpau-va-gl vaapiVdpau ];
+    };
 
   };
 
@@ -27,4 +37,6 @@
     enable = true;
     memoryPercent = 50;
   };
+
+  services.fwupd.enable = true;
 }

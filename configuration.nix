@@ -16,6 +16,7 @@
       ./host.nix
       ./networking.nix
       ./tmux.nix
+      ./topology-secret.nix
       ./vim.nix
       ./x.nix
     ];
@@ -44,7 +45,7 @@
     wipe
     git
     gnupg
-    nox nix-prefetch-scripts nix-repl
+    nox nix-prefetch-scripts
     shellcheck
   ];
 
@@ -70,23 +71,36 @@
 
   services.printing = {
     enable = true;
-    drivers = [ pkgs.gutenprint ];
+    drivers = [ pkgs.gutenprint pkgs.mfcl2720dwcupswrapper ];
   };
+
+  services.journald.rateLimitBurst = 1000;
+
+  programs.adb.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.minijackson = {
     isNormalUser = true;
     uid = 1000;
-    extraGroups = [ "users" "wheel" "networkmanager" "lp" "video" "input" ];
+    extraGroups = [ "users" "wheel" "networkmanager" "lp" "video" "input" "adbusers" ];
     openssh.authorizedKeys.keys = ["ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCmyjB5yuU8GK3ZVFznELVEwXN7zzjQJcPYZ89YCGTANjPHpHxZv5R9/kgjTtIKrqqHdTvfr8V8sao9Nr7PhtcV9UywrFn+kplyGf9WDl2oDF9eZprX3beR9zwDj/YIcFRx3wXk4JK/ioZJjcVZ3+xWPixiFplvHIyMsTjKfgRplntHpvoyLM8vURjLOCdPr6SRPReVXuSR2DRlVO7q7y+4FwA1FKAndg9YACoM1g2bEJ6eGyCPp2kFde+GvMv1y6FlBS1OFddGmBpUJzJ4mQ4ebqDVFsKQMx1xCkiz0l7tfVpXqXToHF+baTESEKbC4654PunD99BC0J4otHKrerdmX0HdTgHKtAnslSwRD5NZVAojk/CR3DiSQYFSO9OhFVjHNQsc1zpoKPtJYMe1ax3pcvc+XLCrKLUdHH8x9rVGefZXwIyLrrGrB7fVlyIyX7j04dNALQZiuFOKCInaYypVLHLy0k+buhQlVqKCS6N1xP5O6JiWUKXFYYyoRmSoX9+bfPiwsMrPL+rYXkee0K67BI1NiFAYPmdFFM0jtdFaYuvgEAWw7b9WyWyO/JAdHRwtlqfAqraPBrb4sldvQfLBm8RdORBYMaVbg4EUKMOJjIeAAK+7xWPtg2XeJNnsje/IsWaVXIBx2IAC50uAnIZ/ksw5lyAZP+HyGIHhCAQChQ== minijackson@riseup.net"];
   };
 
   nixpkgs.config.allowUnfree = true;
 
-  nix.gc = {
-    automatic = true;
-    dates = "03:15";
-    options = "--delete-older-than 30d";
+  nix = {
+    binaryCaches = [ "https://hydra.huh.gdn/" "https://cache.nixos.org/" ];
+    binaryCachePublicKeys = [
+      "hydra.nixos.org-1:CNHJZBh9K4tP3EKF6FkkgeVYsS3ohTl+oS0Qa8bezVs="
+      "hydra.huh.gdn-1:MZDmrn/p0MxBN2ScynKJd7v6TVC7vxRTGK8E9vxkxEk="
+    ];
+
+    autoOptimiseStore = true;
+    gc = {
+      automatic = true;
+      dates = "03:15";
+      options = "--delete-older-than 30d";
+    };
   };
 
   system.autoUpgrade.enable = true;
@@ -95,6 +109,5 @@
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "18.03"; # Did you read the comment?
-
+  system.stateVersion = "18.09"; # Did you read the comment?
 }

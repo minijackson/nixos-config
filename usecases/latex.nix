@@ -1,8 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 let
-  myPackages = import ../packages { inherit pkgs; };
+  myPackages = import ../packages { inherit pkgs config; };
 # TODO: https://github.com/MozMorris/tomorrow-pygments
+# TODO: add latexmkrc
   texliveEnv = with pkgs; texlive.combine {
     inherit (texlive)
       scheme-small
@@ -24,15 +25,23 @@ let
       microtype
       fontspec
       cm-super
+      a4wide
 
       biber
       biblatex
       biblatex-ieee
 
+      nath
+      stmaryrd
+
       placeins
+      wrapfig
 
       algorithms
+      algorithmicx
       minted
+
+      asymptote
 
       todonotes
 
@@ -46,6 +55,9 @@ let
 
       morewrites
 
+      # For Metropolis Beamer theme (TODO: install in Nix configuration)
+      pgfopts
+
       # Dependencies somehow missing
       logreq xstring fvextra ifplatform framed
       # For standalone
@@ -54,6 +66,8 @@ let
       xindy mfirstuc xfor datatool tracklang
       # For datatool
       substr
+      # For asymptote
+      everypage media9 ocgx2
       ;
   };
 in {
@@ -62,6 +76,7 @@ in {
     texliveEnv
     biber
     myPackages.tomorrowPygments
+    asymptote ghostscript
     xdotool
   ];
 

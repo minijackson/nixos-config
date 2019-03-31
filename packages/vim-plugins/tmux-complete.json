@@ -1,7 +1,7 @@
 {
   "url": "https://github.com/wellle/tmux-complete.vim",
-  "rev": "47fb9625926b16afd138610fbb6f80b206555a2f",
-  "date": "2018-03-26T18:33:13+09:00",
-  "sha256": "0w2lfk29n7jr4hi388lwwgm8v46lpnvv5b1y452qk7j0zmdpwvx8",
+  "rev": "aeb935abd8f9ba0bc5978c667619f81c9fa1578b",
+  "date": "2018-07-21T13:54:32+02:00",
+  "sha256": "1pj8gxlk0hcgbp5ccb90rg4701fmywdsps74skvj21qlk1pxy9yx",
   "fetchSubmodules": true
 }

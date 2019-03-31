@@ -22,6 +22,14 @@ with lib;
       '';
     };
 
+    dimDominant = mkOption {
+      type = types.str;
+      default = "#79740e";
+      description = ''
+        The dominant color of the theme, but dimmed.
+      '';
+    };
+
     foreground = mkOption {
       type = types.str;
       default = "#ebdbb1";
@@ -50,6 +58,48 @@ with lib;
       type = types.str;
       default = "#504945";
       description = "Like the background color, but one which burns the eyes a little bit more.";
+    };
+
+    background0 = mkOption {
+      type = types.str;
+      default = "#1d2021";
+      description = "Background level 0";
+    };
+
+    background1 = mkOption {
+      type = types.str;
+      default = "#282828";
+      description = "Background level 1";
+    };
+
+    background2 = mkOption {
+      type = types.str;
+      default = "#3c3836";
+      description = "Background level 2";
+    };
+
+    background3 = mkOption {
+      type = types.str;
+      default = "#504945";
+      description = "Background level 3";
+    };
+
+    background4 = mkOption {
+      type = types.str;
+      default = "#665c54";
+      description = "Background level 4";
+    };
+
+    background5 = mkOption {
+      type = types.str;
+      default = "#7c6f64";
+      description = "Background level 5";
+    };
+
+    background6 = mkOption {
+      type = types.str;
+      default = "#928374";
+      description = "Background level 6";
     };
 
     brightRed = mkOption {
