@@ -97,6 +97,9 @@ input "1:1:AT_Translated_Set_2_keyboard" {
     # reload the configuration file
     bindsym $mod+Shift+c reload
 
+	# lock
+	bindsym $mod+m exec swaylock
+
     # exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 #
@@ -212,7 +215,9 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+#
 # Music
+#
 bindsym $mod+KP_5 exec --no-startup-id @mpc_cli@/bin/mpc toggle
 bindsym $mod+KP_1 exec --no-startup-id @random_albums@
 bindsym $mod+KP_7 exec --no-startup-id @choose_album@
@@ -228,6 +233,9 @@ bindsym XF86AudioPlay exec --no-startup-id @mpc_cli@/bin/mpc toggle
 bindsym XF86AudioPrev exec --no-startup-id @mpc_cli@/bin/mpc prev
 bindsym XF86AudioRaiseVolume exec --no-startup-id @pulseaudio@/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%
 
+#
+# Other scripts
+#
 bindsym $mod+p exec --no-startup-id @choose_password@
 
 # TODO: hardcoded applications
@@ -289,4 +297,4 @@ exec mako
 bindsym $mod+comma exec makoctl dismiss
 bindsym $mod+Shift+comma exec makoctl dismiss --all
 
-# vim: ft=i3
+# vim: ft=i3config

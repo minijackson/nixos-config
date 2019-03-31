@@ -648,6 +648,41 @@ in
         };
       };
 
+      "swaylock/config".text = with globalConfig.theme.colors; ''
+        ignore-empty-password
+        image=/etc/nixos/res/wallpapers/wallpaper-1920x1080-kernel-card-black.png
+
+        font=monospace
+
+        inside-color=${lib.removePrefix "#" dominant}dd
+        inside-clear-color=${lib.removePrefix "#" neutralOrange}dd
+        inside-ver-color=${lib.removePrefix "#" neutralOrange}dd
+        inside-wrong-color=${lib.removePrefix "#" neutralRed}dd
+
+        key-hl-color=${lib.removePrefix "#" brightGreen}ee
+        bs-hl-color=${lib.removePrefix "#" neutralRed}ee
+
+        line-color=${lib.removePrefix "#" background}ee
+        line-clear-color=${lib.removePrefix "#" background}ee
+        line-ver-color=${lib.removePrefix "#" background}ee
+        line-wrong-color=${lib.removePrefix "#" background}ee
+
+        ring-color=${lib.removePrefix "#" dominant}ee
+        ring-clear-color=${lib.removePrefix "#" brightOrange}ee
+        ring-ver-color=${lib.removePrefix "#" brightOrange}ee
+        ring-wrong-color=${lib.removePrefix "#" brightRed}ee
+
+        separator-color=${lib.removePrefix "#" background}ee
+
+        text-color=${lib.removePrefix "#" background}ff
+        text-clear-color=${lib.removePrefix "#" background}ff
+        text-ver-color=${lib.removePrefix "#" background}ff
+        text-wrong-color=${lib.removePrefix "#" background}ff
+
+        indicator-radius=75
+        indicator-thickness=10
+      '';
+
       "waybar/style.css".source = pkgs.substituteAll {
         src = ./dotfiles/waybar-style.css;
 
