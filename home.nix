@@ -11,6 +11,13 @@ let
         userName = "Minijackson";
       };
 
+      bat = {
+        enable = true;
+        config = {
+          theme = "TwoDark";
+        };
+      };
+
       htop = {
         enable = true;
 
