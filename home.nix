@@ -650,7 +650,7 @@ in
 
       "swaylock/config".text = with globalConfig.theme.colors; ''
         ignore-empty-password
-        image=/etc/nixos/res/wallpapers/wallpaper-1920x1080-kernel-card-black.png
+        image=/etc/nixos/res/wallpapers/wallpaper-1920x1080-install-gentoo.png
 
         font=monospace
 
