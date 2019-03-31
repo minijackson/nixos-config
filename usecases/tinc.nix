@@ -24,8 +24,8 @@
   config = {
     networking = {
       interfaces."tinc.${config.tinc.networkName}" = {
-        #virtual = true;
-        #virtualType = "tun";
+        virtual = true;
+        virtualType = "tun";
         ipv4.addresses = [{ address = config.topology.myMeshAddress; prefixLength = 24; }];
       };
       firewall.allowedUDPPorts = [ 655 ];
