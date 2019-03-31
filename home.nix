@@ -776,6 +776,7 @@ in
           on-click = "${pkgs.mpc_cli}/bin/mpc toggle";
           # TODO: hardcoded package(s) :-/
           on-click-right = "alacritty --dimensions 200 50 --command ncmpcpp";
+          escape = true;
         };
 
       };
