@@ -298,7 +298,7 @@ in
             format-connected-underline = brightGreen;
 
             label-connected = "%essid%";
-            label-disconnected = null;
+            label-disconnected = "";
 
             ramp-signal-0 = "";
             ramp-signal-1 = "";
@@ -317,7 +317,7 @@ in
             format-connected-foreground = brightGreen;
 
             label-connected = "%local_ip%";
-            label-disconnected = null;
+            label-disconnected = "";
           };
 
           "module/battery" = {
@@ -367,7 +367,7 @@ in
           "module/date" = {
             type = "internal/date";
 
-            date = null;
+            date = "";
             date-alt = " %Y-%m-%d";
 
             time = "%H:%M";

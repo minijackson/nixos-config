@@ -30,14 +30,17 @@
 
   home-manager.users.minijackson = { ... }:
   {
-    programs.beets.settings = {
-      plugins = "convert edit fromfilename mbsync mbsubmit missing mpdupdate the fetchart random zero";
-      paths = {
-        default   = "%the{$albumartist}/%the{$album}%aunique{}/$track $title";
-        singleton = "Non-Album/%the{$artist}/%the{$title}";
-        comp      = "Compilations/%the{$album}%aunique{}/$track $title";
+    programs.beets = {
+      enable = true;
+      settings = {
+        plugins = "convert edit fromfilename mbsync mbsubmit missing mpdupdate the fetchart random zero";
+        paths = {
+          default   = "%the{$albumartist}/%the{$album}%aunique{}/$track $title";
+          singleton = "Non-Album/%the{$artist}/%the{$title}";
+          comp      = "Compilations/%the{$album}%aunique{}/$track $title";
+        };
+        zero.fields = "comments";
       };
-      zero.fields = "comments";
     };
 
     xdg.configFile."ncmpcpp/config".source = ../dotfiles/ncmpcpp;
