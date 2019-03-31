@@ -46,6 +46,16 @@
     enableVFSSFTP = true;
   };
 
+  programs.sway = {
+    enable = true;
+    extraPackages = with pkgs; [ swaylock swayidle xwayland ];
+    extraSessionCommands = ''
+      unset GDK_PIXBUF_MODULE_FILE
+      export QT_QPA_PLATFORM=wayland
+      export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+    '';
+  };
+
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
@@ -59,11 +69,11 @@
     };
 
     displayManager = {
-      slim.enable = true;
+      slim.enable = false;
       slim.defaultUser = "minijackson";
-      slim.theme =
-        let path = builtins.fetchTarball "https://github.com/adi1090x/slim_themes/archive/master.tar.gz";
-        in "${path}/themes/greeny_dark";
+      #slim.theme =
+      #  let path = builtins.fetchTarball "https://github.com/adi1090x/slim_themes/archive/master.tar.gz";
+      #  in "${path}/themes/greeny_dark";
 
       sessionCommands = ''
         ${pkgs.xlibs.xrdb}/bin/xrdb -merge ${./dotfiles/Xresources}
