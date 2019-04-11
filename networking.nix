@@ -35,6 +35,7 @@ in {
 
   };
 
+  # TODO: move that into Tinc and add all hosts
   networking.extraHosts = ''
     ${config.topology.serverAddress} huh.lan
   '';
