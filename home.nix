@@ -471,16 +471,7 @@ in
         enable = true;
         colorTheme = "dark-16";
 
-        config = {
-          taskd = {
-            certificate = "/etc/nixos/res/taskwarrior/private.certificate.pem";
-            key         = "/etc/nixos/res/taskwarrior/private.key.pem";
-            ca          = "/etc/nixos/res/taskwarrior/ca.cert.pem";
-            server      = "${globalConfig.topology.serverAddress}:53589";
-            # credentials set in taskwarrior-secret.nix
-            trust       = "ignore hostname";
-          };
-        };
+        # config set in taskwarrior-secret.nix
       };
 
       rofi = {
