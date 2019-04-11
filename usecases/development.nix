@@ -26,6 +26,8 @@ in {
       clangCxxStdlibFlags = "split(system('bash -c \"echo -n \\\"${pkgs.clang.default_cxx_stdlib_compile}\\\"\"'))";
       clangCxxFlagsJson = "json_encode(${clangGlibcFlags} + ${clangCxxStdlibFlags})";
       clangCFlagsJson   = "json_encode(${clangGlibcFlags})";
+
+      pylsPath = "${pkgs.python37Packages.python-language-server}/bin/pyls";
     in ''
       let g:LanguageClient_autoStart = 1
       augroup LanguageClient_config
@@ -40,9 +42,10 @@ in {
       augroup END
 
       let g:LanguageClient_serverCommands = {
-            \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-            \ 'cpp' : [ '${cqueryPath}' ],
-            \ 'c'   : [ '${cqueryPath}' ],
+            \ 'rust':   ['rustup', 'run', 'nightly', 'rls'],
+            \ 'cpp' :   [ '${cqueryPath}' ],
+            \ 'c'   :   [ '${cqueryPath}' ],
+            \ 'python': [ '${pylsPath}' ],
             \ }
     '';
             #\ 'cpp' : [ '${cqueryPath}', '--init={"extraClangArguments": ' . ${clangCxxFlagsJson} . ', "cacheDirectory": "/tmp/' . $USER . '/cquery"}' ],
