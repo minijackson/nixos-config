@@ -11,10 +11,14 @@ let
         in "rgba(${toString rgb.red}, ${toString rgb.green}, ${toString rgb.blue}";
   in {
     "#5294e2" = dominant; # Dominant color
-    # TODO: this should be slightly lighter
-    "rgba(77, 173, 212" = hex2RgbaPrefix dominant; # Dominant color
     # Same but allows opacity
     "rgba(82, 148, 226" = hex2RgbaPrefix dominant;
+
+    # TODO: this should be slightly lighter
+    "#4DADD4" = dominant; # Lighter Dominant color
+    # Same but allows opacity
+    "rgba(77, 173, 212" = hex2RgbaPrefix dominant;
+
       #"#252a35" = "#121212";  # Gnome Panel Background
       #"#262932" = "#101010";  # Dark WM bordard
     "#2f343f" = background0;  # Dark Header BG
