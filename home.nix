@@ -9,6 +9,12 @@ let
         enable = true;
         userEmail = "minijackson@riseup.net";
         userName = "Minijackson";
+
+        extraConfig = {
+          core = { whitespace = "trailing-space,space-before-tab"; };
+          merge = { tool = "nvimdiff"; };
+          "mergetool \"nvimdiff\"" = { cmd = "nvim -d \"$LOCAL\" \"$MERGED\" \"$REMOTE\""; };
+        };
       };
 
       bat = {
@@ -462,6 +468,12 @@ in
     };
 
     programs = {
+
+      git.signing = {
+        signByDefault = true;
+        key = "minijackson@riseup.net";
+      };
+
       firefox.enable = true;
       pidgin.enable = true;
 
