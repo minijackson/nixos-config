@@ -27,6 +27,8 @@ set modeline
 
 set title
 
+set wildmode=longest,list,full
+
 let g:maplocalleader = ','
 let g:mapleader = ';'
 
@@ -56,7 +58,8 @@ let g:lightline = {
 
 set noshowmode
 
-set listchars=tab:│\ ,trail:-,nbsp:+
+" Do not set "trail:-" because it messes up the highlighting
+set listchars=tab:│\ ,extends:>,precedes:<,nbsp:+
 set list
 
 set fillchars=fold:─,vert:│
