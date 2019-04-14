@@ -31,8 +31,6 @@ in {
       hostsDirs.server = {};
     };
 
-    wifi.macAddress = "8e:00:2f:29:5c:39";
-
   };
 
   # TODO: move that into Tinc and add all hosts
