@@ -801,14 +801,33 @@ in
       '';
     };
 
-    gtk = {
+    gtk = let
+      override-arc-theme = import ./lib/override-arc-theme.nix { inherit lib; themeConfig = globalConfig.theme; };
+    in {
       enable = true;
       iconTheme = {
-        package = pkgs.arc-icon-theme;
+        package = (override-arc-theme pkgs.arc-icon-theme).overrideAttrs (oldAttrs: {
+          nativeBuildInputs = with pkgs; oldAttrs.nativeBuildInputs ++ [ inkscape optipng ];
+          postPatch = ''
+            rm -rf Arc
+            substituteInPlace src/render_icons.sh --replace '/usr/bin/inkscape' 'inkscape' --replace '/usr/bin/optipng' 'optipng'
+
+          '' + oldAttrs.postPatch;
+          # Re-generate PNG icons from SVG files
+          postAutoreconf = ''
+            cd src
+
+            # Shut up inkscape's warnings about creating profile directory
+            export HOME="$NIX_BUILD_ROOT"
+            bash render_icons.sh
+
+            cd ..
+          '';
+        });
         name = "Arc";
       };
       theme = {
-        package = myPackages.gruvbox-arc-theme;
+        package = override-arc-theme pkgs.arc-theme;
         name = "Arc-Dark";
       };
     };

@@ -1,10 +1,10 @@
-{ pkgs, lib, themeConfig, ... }:
+{ lib, themeConfig, ... }:
 
 let
   # Thank you:
   # https://github.com/vedard/Arc-Theme-Generator/blob/master/arc-theme-generator.py
   colorMapping = with themeConfig.colors;
-  with import ../../lib/theme.nix { inherit lib; };
+  with import ./theme.nix { inherit lib; };
   let
     hex2RgbaPrefix = color:
       let rgb = hex2RGB color;
@@ -13,9 +13,10 @@ let
     "#5294e2" = dominant; # Dominant color
     # Same but allows opacity
     "rgba(82, 148, 226" = hex2RgbaPrefix dominant;
+    "#6ba4e7" = dominant; # Dominant color but in icons
 
     # TODO: this should be slightly lighter
-    "#4DADD4" = dominant; # Lighter Dominant color
+    "#4dadd4" = dominant; # Lighter Dominant color
     # Same but allows opacity
     "rgba(77, 173, 212" = hex2RgbaPrefix dominant;
 
@@ -50,6 +51,8 @@ let
     "rgba(207, 218, 231" = hex2RgbaPrefix foreground;
     # Some more labels (list sorting)
     "#b6bcc6" = dimForeground;
+    # Action icons
+    "#9699a2" = dimForeground;
     # Links
     "#a9caf1" = brightBlue;
 
@@ -57,7 +60,11 @@ let
     "#4a85cb" = dimDominant;
 
       #"#323644" = "#202020";  # Dark Gnome Shell Modal background
-      #"#5c616c" = "#616161";  # Light Gnome Shell Foreground
+
+    # Light Gnome Shell Foreground
+    "#5c616c" = foreground;
+    "rgba(92, 97, 108" = hex2RgbaPrefix foreground;
+
       #"#2d323d" = "#171717";  # Dark Checkbox Background
       #"#5b627b" = "#505050";  # Dark Switch Background
       #"#353a47" = "#232323";  # Dark Switch Circle
@@ -87,14 +94,18 @@ let
     (mapAttrsToList
       (previousColor: newColor: "--replace '${previousColor}' '${newColor}' --replace '${toUpper previousColor}' '${newColor}' ")
       colorMapping);
-in {
-  gruvbox-arc-theme = pkgs.arc-theme.overrideAttrs (oldAttrs: {
-    name = "gruvbox-arc-theme-${oldAttrs.version}";
-    postPatch = ''
-      # For every plaintext file
-      for file in $(find . -type f -exec grep -Iq . {} \; -and -print); do
-        substituteInPlace "$file" ${substituteArguments}
-      done
-    '';
-  });
-}
+in
+  package:
+
+package.overrideAttrs (oldAttrs: {
+  name = if (oldAttrs ? name)
+         then "gruvbox-${oldAttrs.name}"
+         else "gruvbox-${oldAttrs.pname}-${oldAttrs.version}";
+  postPatch = ''
+    # For every plaintext file
+    for file in $(find . -type f -exec grep -Iq . {} \; -and -print); do
+      substituteInPlace "$file" ${substituteArguments} 2>/dev/null
+    done
+  '';
+})
+
