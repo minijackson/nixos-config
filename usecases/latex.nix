@@ -24,12 +24,14 @@ let
 
       microtype
       fontspec
+      lm-math
       cm-super
       a4wide
 
       biber
       biblatex
       biblatex-ieee
+      biblatex-apa
 
       nath
       stmaryrd
@@ -48,6 +50,7 @@ let
       standalone
 
       cleveref
+      xurl
       # For varioref
       tools
 
