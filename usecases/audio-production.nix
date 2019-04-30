@@ -1,19 +1,6 @@
 { config, pkgs, lib, ... }:
 
-let
-  qsynth = pkgs.qsynth.overrideAttrs (oldAttrs: rec {
-    name = "qsynth-0.5.4";
-    version = "0.5.4";
-    src = pkgs.fetchurl {
-      url = "mirror://sourceforge/qsynth/${name}.tar.gz";
-      sha256 = "0kpq5fxr96wnii18ax780w1ivq8ksk892ac0bprn92iz0asfysrd";
-    };
-    postPatch = "";
-    preInstall = ''
-      mv ../src/qsynth.desktop src/qsynth.desktop
-    '';
-  });
-in {
+{
   options = with lib; {
     lv2Packages = mkOption {
       type = types.listOf types.package;
