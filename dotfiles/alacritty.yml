@@ -22,6 +22,14 @@ window:
     columns: 80
     lines: 24
 
+  # Window position (changes require restart)
+  #
+  # Specified in number of pixels.
+  # If the position is not set, the window manager will handle the placement.
+  #position:
+  # x: 0
+  # y: 0
+
   # Adds this many blank pixels of padding around the window
   # Units are physical pixels; this is not DPI aware.
   # (change requires restart)
@@ -130,6 +138,15 @@ colors:
   primary:
     background: '0x32302f'
     foreground: '0xebdbb2'
+
+  # Selection colors
+  #
+  # Colors which should be used to draw the selection area. If selection
+  # background is unset, selection color will be the inverse of the cell colors.
+  # If only text is unset the cell text color will remain the same.
+  #selection:
+  # text: '0xeaeaea'
+  # background: '0x404040'
 
   # Cursor colors
   #
