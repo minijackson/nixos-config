@@ -30,7 +30,7 @@ window#waybar {
     border-bottom: 3px solid @foreground@;
 }
 
-#clock, #battery, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio, #custom-mpd, #tray, #mode, #idle_inhibitor {
+#clock, #battery, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio, #custom-mpd, #mpd, #tray, #mode, #idle_inhibitor {
     padding: 0 10px;
     margin: 0 5px;
 }
@@ -123,4 +123,22 @@ window#waybar {
 
 #custom-mpd {
 	background-color: @dominant@;
+}
+
+#mpd {
+	background: @dominant@;
+}
+
+#mpd.disconnected {
+	background: @lightBackground@;
+	color: @foreground@;
+}
+
+#mpd.stopped {
+	background: @foreground@;
+	color: @background@;
+}
+
+#mpd.paused {
+	background: @dimDominant@;
 }

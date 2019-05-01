@@ -698,7 +698,7 @@ in
 
         # TODO: maybe add transparency?
         inherit (globalConfig.theme.colors)
-          dominant
+          dominant dimDominant
           background lightBackground background6
           foreground
           neutralPurple neutralYellow fadedRed neutralOrange brightBlue neutralGreen neutralAqua brightAqua;
@@ -709,7 +709,37 @@ in
         position = "bottom";
         height = 25;
         modules-left = [ "sway/workspaces" "sway/mode" ];
-        modules-right = [ "idle_inhibitor" "custom/mpd" "pulseaudio" "network#eth" "network#wlan" "cpu" "memory" "temperature" "backlight" "battery" "clock" "tray" ];
+        modules-center = [ "mpd" ];
+        modules-right = [ "idle_inhibitor" "pulseaudio" "network#eth" "network#wlan" "cpu" "memory" "temperature" "backlight" "battery" "clock" "tray" ];
+
+        mpd = {
+          format = "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) <span font_desc='Font Awesome 5 Free'></span>";
+          format-stopped = "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped <span font_desc='Font Awesome 5 Free'></span>";
+          format-disconnected = "Disconnected <span font_desc='Font Awesome 5 Free'></span>";
+
+          on-click-middle = "alacritty --dimensions 200 50 --command ncmpcpp";
+
+          consume-icons = {
+            on = " ";
+          };
+
+          random-icons = {
+            on = " ";
+          };
+
+          repeat-icons = {
+            on = " ";
+          };
+
+          single-icons = {
+            on = "1 ";
+          };
+
+          state-icons = {
+            playing = "";
+            paused = "";
+          };
+        };
 
         idle_inhibitor = {
           format = "{icon}";
