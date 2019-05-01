@@ -119,6 +119,14 @@ in {
   };
 
   config = {
+    nixpkgs.overlays = let
+      unstable = import <nixpkgs-unstable> {};
+    in [
+      (self: super: {
+        vimPlugins = unstable.vimPlugins;
+      })
+    ];
+
     environment.systemPackages = with pkgs; [
       myNeovim
       (neovim-qt.override { neovim = myNeovim; })
