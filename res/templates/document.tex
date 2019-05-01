@@ -1,0 +1,191 @@
+% Install:
+%
+%     - Fira Code font:
+%       https://github.com/tonsky/FiraCode
+%     - Tommorrow Pygments Theme:
+%       https://github.com/MozMorris/tomorrow-pygments
+%
+% Compile with:
+%
+%     latexmk -shell-escape -xelatex -8bit -output-directory=./latexmk-build document
+%
+% Result in: ./latexmk-build/document.pdf
+%
+
+\PassOptionsToPackage{hyphens}{url}
+
+\documentclass[12pt,a4paper]{article}
+
+% For pdflatex
+%\usepackage[utf8]{inputenc}
+%\usepackage[T1]{fontenc}
+
+% Language {{{
+\usepackage[american]{babel}
+\usepackage[outputdir=latexmk-build]{minted}
+\usepackage{csquotes}
+% }}}
+
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+
+% Math {{{
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+
+% For better engines
+\usepackage{unicode-math}
+\defaultfontfeatures{Scale=MatchLowercase}
+\defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+
+%\usepackage{nath}
+% }}}
+
+\usepackage[margin=1in]{geometry}
+\raggedbottom
+
+% Fonts {{{
+\usepackage{microtype}
+% disable protrusion for tt fonts
+\UseMicrotypeSet[protrusion]{basicmath}
+
+\usepackage{fontspec}
+\setmainfont[Scale=0.9]{CMU Serif}
+\setmonofont[Scale=0.8]{Fira Code}
+% }}}
+
+\usepackage{parskip}
+\usepackage{xurl}
+
+% Bibliography {{{
+\usepackage[style=apa, backend=biber]{biblatex}
+%\bibliography{references}
+% }}}
+
+\usepackage{tikz}
+
+% Floats {{{
+\usepackage{ctable}
+\usepackage{graphicx}
+% Put "french" or other language here if not English
+\usepackage{varioref}
+% Links {{{
+\usepackage{bookmark}
+\hypersetup{hidelinks}
+\renewcommand\UrlFont{\color[HTML]{4271ae}\ttfamily}
+% }}}
+\usepackage[noabbrev]{cleveref}
+\usepackage[format=hang,labelsep=endash,labelfont=bf,textformat=period]{caption}
+
+% Code listings {{{
+% Package minted loaded above, before csquotes to prevent a warning
+
+% Light Theme
+\usemintedstyle{tomorrow}
+%\usemintedstyle{arduino}
+\definecolor{bg}{rgb}{0.95,0.95,0.95}
+
+% Dark Dracula Theme
+%\usemintedstyle{dracula}
+%\definecolor{bg}{rgb}{0.207843, 0.219608, 0.27451}
+
+\setminted{linenos,bgcolor=bg,tabsize=4,breaklines}
+
+%\renewcommand\listingscaption{Extrait de code}
+%\renewcommand\listoflistingscaption{Liste des extraits de code}
+% }}}
+
+% }}}
+
+%\usepackage{dirtree}
+
+\usepackage[colorinlistoftodos]{todonotes}
+
+\newcommand{\includeplantuml}[1]{
+	\resizebox{\textwidth}{!}{\texttt{\input{#1.latex}}}
+}
+
+\author{Rémi \textsc{Nicole}}
+\title{}
+
+\begin{document}
+
+\maketitle
+
+%~\clearpage
+
+\tableofcontents
+
+\listoftodos
+
+\section{Introduction}\label{sec:intro}
+
+%\begin{figure}
+%	\centering
+%	\includeplantuml{example}
+%	\caption{Usual interactions when a user wants to synchronization Kube's
+%	Email list view}
+%\end{figure}
+
+See \vref{sec:intro}.
+
+\todo[inline]{This is a TODO}
+
+$\text{Rémi}~ÜTF—8~m_a t^h$
+
+\begin{minted}{rust}
+fn main() {
+	match "hello" {
+		"hello" => println!("Hello, {}!", "World");
+		_       => panic!("Waaah");
+	};
+}
+\end{minted}
+
+\begin{minted}{html}
+<!DOCTYPE html>
+<title>huh?!</title>
+<p>huh?!</p>
+\end{minted}
+
+\begin{minted}{haskell}
+main :: IO ()
+main = print . md5 . pack . unwords =<< getArgs
+         where md5 x = hash x :: Digest MD5
+\end{minted}
+
+Hello, hello, World! \url{http://texdoc.net/texmf-dist/doc/latex/unicode-math/unicode-math.pdf}
+
+% Use ctable if need for footnotes
+\begin{table}
+	\centering
+	\begin{tabular}{llr}
+		\toprule
+		\multicolumn{2}{c}{Item} \\
+		\cmidrule(r){1-2}
+		Animal    & Description & Price (\$) \\
+		\midrule
+		Gnat      & per gram    & 13.65      \\
+		          &    each     & 0.01       \\
+		Gnu       & stuffed     & 92.50      \\
+		Emu       & stuffed     & 33.33      \\
+		Armadillo & frozen      & 8.99       \\
+		\bottomrule
+	\end{tabular}\label{tab:mytable}
+	\caption{This is a table}
+\end{table}
+
+\section{Unè séctiön àvec des acçents}
+
+\newpage
+
+\Vref{sec:intro} shows that \enquote{\texttt{varioref}} is awesome!
+
+\listoflistings%
+\listoffigures
+\listoftables
+
+\nocite{*}
+
+\printbibliography%
+
+\end{document}

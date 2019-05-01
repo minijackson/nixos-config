@@ -585,6 +585,13 @@ in
       };
     };
 
+    home.file = {
+      "Templates" = {
+        source = ./res/templates;
+        recursive = true;
+      };
+    };
+
     xdg.configFile = {
       "alacritty/alacritty.yml".source = ./dotfiles/alacritty.yml;
 
