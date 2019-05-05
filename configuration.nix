@@ -86,7 +86,10 @@
     openssh.authorizedKeys.keys = ["ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCmyjB5yuU8GK3ZVFznELVEwXN7zzjQJcPYZ89YCGTANjPHpHxZv5R9/kgjTtIKrqqHdTvfr8V8sao9Nr7PhtcV9UywrFn+kplyGf9WDl2oDF9eZprX3beR9zwDj/YIcFRx3wXk4JK/ioZJjcVZ3+xWPixiFplvHIyMsTjKfgRplntHpvoyLM8vURjLOCdPr6SRPReVXuSR2DRlVO7q7y+4FwA1FKAndg9YACoM1g2bEJ6eGyCPp2kFde+GvMv1y6FlBS1OFddGmBpUJzJ4mQ4ebqDVFsKQMx1xCkiz0l7tfVpXqXToHF+baTESEKbC4654PunD99BC0J4otHKrerdmX0HdTgHKtAnslSwRD5NZVAojk/CR3DiSQYFSO9OhFVjHNQsc1zpoKPtJYMe1ax3pcvc+XLCrKLUdHH8x9rVGefZXwIyLrrGrB7fVlyIyX7j04dNALQZiuFOKCInaYypVLHLy0k+buhQlVqKCS6N1xP5O6JiWUKXFYYyoRmSoX9+bfPiwsMrPL+rYXkee0K67BI1NiFAYPmdFFM0jtdFaYuvgEAWw7b9WyWyO/JAdHRwtlqfAqraPBrb4sldvQfLBm8RdORBYMaVbg4EUKMOJjIeAAK+7xWPtg2XeJNnsje/IsWaVXIBx2IAC50uAnIZ/ksw5lyAZP+HyGIHhCAQChQ== minijackson@riseup.net"];
   };
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    config.allowUnfree = true;
+    overlays = [ (import ./packages) ];
+  };
 
   nix = {
     binaryCaches = [ "https://hydra.huh.gdn/" "https://cache.nixos.org/" ];

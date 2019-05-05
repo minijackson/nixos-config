@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }:
 
 let
-  myPackages = import ./packages { inherit pkgs config; };
   common-home-configuration = {
     manual.manpages.enable = true;
     programs = {

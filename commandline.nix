@@ -3,7 +3,6 @@
 with import ./lib/theme.nix { inherit lib; };
 let
   dominantEscapeCode = fgEscapeCode config.theme.colors.dominant;
-  myPackages = import ./packages { inherit pkgs config; };
 
   shellScripts = {
     split-cue = ./scripts/standalone/split-cue.sh;
@@ -25,7 +24,7 @@ in
       PATH="${pkgs.fasd}/bin:$PATH"
       eval "$(fasd --init auto)"
 
-      source "${myPackages.zsh-history-substring-search}"
+      source "${pkgs.zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
 
       alias ${concatStringsSep " "
         (mapAttrsToList

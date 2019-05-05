@@ -1,8 +1,6 @@
 { pkgs, ... }:
 
-let
-  myPackages = import ../packages { inherit pkgs; };
-in {
+{
 
   imports = [
     ../vim.nix

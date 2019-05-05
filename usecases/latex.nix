@@ -1,8 +1,6 @@
 { pkgs, config, ... }:
 
 let
-  myPackages = import ../packages { inherit pkgs config; };
-# TODO: https://github.com/MozMorris/tomorrow-pygments
 # TODO: add latexmkrc
   texliveEnv = with pkgs; texlive.combine {
     inherit (texlive)
@@ -78,7 +76,7 @@ in {
   users.extraUsers.minijackson.packages = with pkgs; [
     texliveEnv
     biber
-    myPackages.tomorrowPygments
+    tomorrowPygments
     asymptote ghostscript
     xdotool
   ];

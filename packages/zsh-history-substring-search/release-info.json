@@ -1,7 +1,0 @@
-{
-  "url": "https://github.com/zsh-users/zsh-history-substring-search.git",
-  "rev": "47a7d416c652a109f6e8856081abc042b50125f4",
-  "date": "2018-02-21T10:15:09-08:00",
-  "sha256": "1mvilqivq0qlsvx2rqn6xkxyf9yf4wj8r85qrxizkf0biyzyy4hl",
-  "fetchSubmodules": true
-}
