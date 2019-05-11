@@ -28,8 +28,6 @@ let myNeovim = (pkgs.neovim.override {
           CamelCaseMotion = vimPluginFromGit "CamelCaseMotion";
           deoplete-zsh    = vimPluginFromGit "deoplete-zsh";
           tmux-complete   = vimPluginFromGit "tmux-complete";
-          vim-dirvish     = vimPluginFromGit "vim-dirvish";
-          vim-unimpaired  = vimPluginFromGit "vim-unimpaired";
 
         };
 
