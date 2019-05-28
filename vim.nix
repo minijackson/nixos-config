@@ -57,6 +57,8 @@ let myNeovim = (pkgs.neovim.override {
               # Vim completion for deoplete
               { name = "neco-vim"; }
               { name = "deoplete-zsh"; }
+              { name = "vim-pandoc"; }
+              { name = "vim-pandoc-syntax"; }
 
               # Languages (but not programming languages)
               { name = "vim-grammarous"; }

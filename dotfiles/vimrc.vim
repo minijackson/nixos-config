@@ -44,6 +44,7 @@ let &grepformat = '%f:%l:%c:%m,' . &grepformat
 
 set termguicolors
 let g:gruvbox_contrast_dark = 'soft'
+let g:gruvbox_italic = 1
 set background=dark
 colorscheme gruvbox
 
