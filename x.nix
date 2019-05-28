@@ -113,7 +113,13 @@
   };
 
   fonts = {
-    fonts = with pkgs; [ fira-mono dejavu_fonts freefont_ttf liberation_ttf noto-fonts-cjk unifont siji font-awesome_5 ];
+    fonts = with pkgs; [
+      fira-mono dejavu_fonts freefont_ttf liberation_ttf noto-fonts-cjk
+      # Symbols
+      unifont siji font-awesome_5
+      # Collections
+      league-of-moveable-type
+    ];
 
     fontconfig = {
       ultimate.enable = true;
