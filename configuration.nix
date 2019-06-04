@@ -43,7 +43,6 @@
     lm_sensors hddtemp smartmontools
     elinks
     wipe
-    git
     gnupg
     nox nix-prefetch-scripts
     shellcheck

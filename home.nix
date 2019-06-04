@@ -8,6 +8,7 @@ let
     programs = {
       git = {
         enable = true;
+        package = pkgs.gitAndTools.gitFull;
         userEmail = "minijackson@riseup.net";
         userName = "Minijackson";
 
