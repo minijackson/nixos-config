@@ -34,7 +34,7 @@ let myNeovim = (pkgs.neovim.override {
         pluginDictionaries = [
               # UI
               { name = "undotree"; }
-              { name = "gruvbox"; }
+              { name = "gruvbox-community"; }
               { name = "gitgutter"; }
               { name = "lightline-vim"; }
               { name = "vim-dirvish"; }
@@ -46,6 +46,8 @@ let myNeovim = (pkgs.neovim.override {
 
               # Frameworks
               { name = "deoplete-nvim"; }
+              { name = "neosnippet"; }
+              { name = "neosnippet-snippets"; }
               { name = "neoformat"; }
               { name = "ctrlp"; }
               # Syntax generic completion for deoplete

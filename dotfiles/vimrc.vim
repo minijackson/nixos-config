@@ -87,6 +87,17 @@ let g:deoplete#enable_at_startup = 1
 
 " }}}
 
+" Neosnippets {{{
+
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+set conceallevel=2
+set concealcursor=niv
+
+" }}}
+
 " CtrlP {{{
 let g:ctrlp_user_command = g:fd_path . ' --type f --color never "" %s'
 let g:ctrlp_use_caching = 0
