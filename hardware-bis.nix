@@ -27,8 +27,8 @@
       # For Steam
       driSupport32Bit = true;
 
-      extraPackages = with pkgs; [ vaapiIntel libvdpau-va-gl vaapiVdpau intel-ocl ];
-      extraPackages32 = with pkgs.pkgsi686Linux; [ vaapiIntel libvdpau-va-gl vaapiVdpau ];
+      extraPackages = with pkgs; [ (vaapiIntel.override { enableHybridCodec = true; }) libvdpau-va-gl vaapiVdpau intel-ocl intel-media-driver ];
+      extraPackages32 = with pkgs.pkgsi686Linux; [ (vaapiIntel.override { enableHybridCodec = true; }) libvdpau-va-gl vaapiVdpau ];
     };
 
   };
