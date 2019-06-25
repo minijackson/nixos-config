@@ -2,6 +2,10 @@
 
 {
 
+  environment.sessionVariables = {
+    BROWSER = "firefox";
+  };
+
   users.extraUsers.minijackson.packages = with pkgs; [
     qt5.qtwayland
     alacritty
@@ -45,6 +49,8 @@
   nixpkgs.config.kodi = {
     enableVFSSFTP = true;
   };
+
+  programs.qt5ct.enable = true;
 
   programs.sway = {
     enable = true;
