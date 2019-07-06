@@ -73,7 +73,7 @@ let
 in
 {
   imports = [
-    ./home-manager/nixos
+    <home-manager/nixos>
     ./taskwarrior-secret.nix
     ./theme.nix
   ];
