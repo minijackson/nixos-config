@@ -101,6 +101,7 @@ in {
         paths = "/home/minijackson/";
         exclude = [
           "/home/minijackson/.cache" "/home/minijackson/Downloads"
+          "/home/minijackson/.local/share/Steam" "/home/minijackson/.steam"
           "/home/minijackson/Music"
           "/home/minijackson/.rustup" "/home/minijackson/.cargo/git" "/home/minijackson/.cargo/registry" "target/debug" "target/release" "target/rls" "*.rlib"
           "*.o" "*.pyc"
