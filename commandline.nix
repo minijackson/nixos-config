@@ -12,6 +12,7 @@ in
   environment.shellAliases = {
     ll = "ls -l";
     e = "\${EDITOR}";
+    cpr = "${pkgs.rsync}/bin/rsync -ah --inplace --info=progress2";
   };
 
   programs.bash.enableCompletion = true;
