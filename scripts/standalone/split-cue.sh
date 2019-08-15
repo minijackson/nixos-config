@@ -1,5 +1,5 @@
 #!/usr/bin/env nix-shell
-#! nix-shell -i bash -p shntool cuetools
+#! nix-shell -i bash -p shntool cuetools flac
 
 set -xeuo pipefail
 
