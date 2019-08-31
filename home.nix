@@ -63,10 +63,10 @@ let
 
   wRedshift = pkgs.redshift.overrideAttrs (oldAttrs: {
     src = pkgs.fetchFromGitHub {
-      owner = "giucam";
+      owner = "minus7";
       repo = "redshift";
-      rev = "1b9c8ac11125e2df0b8f9779376dd35cd56d5951";
-      sha256 = "0llylabqp38y7mq3wzvnwm82f079n24gzf2hy53v1zpwklvcwjg9";
+      rev = "7da875d34854a6a34612d5ce4bd8718c32bec804";
+      sha256 = "0nbkcw3avmzjg1jr1g9yfpm80kzisy55idl09b6wvzv2sz27n957";
     };
   });
 
