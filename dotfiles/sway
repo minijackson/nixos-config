@@ -298,8 +298,13 @@ exec_always @import_gsettings@ \
 				cursor-theme:gtk-cursor-theme-name
 
 # TODO: hardcoded applications
-exec mako
+exec_always mako
 bindsym $mod+comma exec makoctl dismiss
 bindsym $mod+Shift+comma exec makoctl dismiss --all
+
+# TODO: not using graphical-session-pre.target and graphical-session.target
+#       because of X11 only dependencies (xautolock, polybar,
+#       random-background)
+exec "source ~/.xprofile; systemctl --user start gnome-keyring.service kdeconnect kdeconnect-indicator.service udiskie.service redshift.service"
 
 # vim: ft=i3config
