@@ -61,7 +61,7 @@ let
 
   globalConfig = config;
 
-  wRedshift = pkgs.redshift.overrideAttrs (oldAttrs: {
+  redshift = pkgs.redshift.overrideAttrs (oldAttrs: {
     src = pkgs.fetchFromGitHub {
       owner = "minus7";
       repo = "redshift";
@@ -88,8 +88,6 @@ in
     pandoc poppler_utils
     rr rtags gcc clang clang-tools
     aspell aspellDicts.en aspellDicts.en-computers aspellDicts.en-science aspellDicts.fr
-
-    wRedshift
   ];
 
   home-manager.users.root = { ... }:
@@ -105,6 +103,7 @@ in
 
       redshift = {
         enable = true;
+        package = redshift;
 
         latitude = "48.864716";
         longitude = "2.349014";
