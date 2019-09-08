@@ -56,8 +56,11 @@ let
 
       morewrites
 
-      # For Metropolis Beamer theme (TODO: install in Nix configuration)
+      # For Metropolis Beamer theme
       pgfopts
+
+      beamertheme-metropolis
+      beamercolorthemeowl
 
       # Dependencies somehow missing
       logreq xstring fvextra ifplatform framed
