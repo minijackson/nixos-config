@@ -80,6 +80,7 @@ nmap =of :set <C-R>=(&formatoptions =~ "a") ? 'formatoptions-=a' : 'formatoption
 " }}}
 
 set completefunc=syntaxcomplete#Complete
+set completeopt+=noinsert,noselect
 
 " Deoplete {{{
 
