@@ -181,6 +181,11 @@ alias gwD='git diff --word-diff'
 
 # }}}
 
+# Prevents some mistakes
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
+
 # }}}
 
 # Abbreviations {{{
