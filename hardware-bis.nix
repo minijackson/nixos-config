@@ -18,7 +18,6 @@
         resample-method = "speex-float-7";
       };
       extraConfig = ''
-        load-module module-equalizer-sink
         load-module module-dbus-protocol
       '';
     };
