@@ -9,13 +9,27 @@ let
   };
 in
 {
+  nixpkgs.overlays = let
+    unstable = import <nixos-unstable> {};
+  in [
+    (self: super: {
+      inherit (unstable) starship;
+    })
+  ];
+
   environment.shellAliases = {
     ll = "ls -l";
     e = "\${EDITOR}";
     cpr = "${pkgs.rsync}/bin/rsync -ah --inplace --info=progress2";
   };
 
-  programs.bash.enableCompletion = true;
+  programs.bash = {
+    enableCompletion = true;
+    interactiveShellInit = ''
+      eval "$(${pkgs.starship}/bin/starship init bash)"
+    '';
+  };
+
   programs.zsh = {
     enable = true;
 
@@ -44,6 +58,8 @@ in
         (mapAttrsToList
           (variable: value: "${variable}=\"${value}\"")
           config.programs.less.envVariables)}
+
+      #eval "$(${pkgs.starship}/bin/starship init zsh)"
     '';
     promptInit = ""; # otherwise it'll override the grml prompt
 
@@ -83,4 +99,19 @@ in
     Defaults lecture_file = "${lectureFile}"
     '';
 
+    home-manager.users.minijackson = { ... }:
+    {
+      xdg.configFile."starship.toml".text = ''
+        [directory]
+        fish_style_pwd_dir_length = 2
+
+        [git_status]
+        ahead = "^"
+        behind = "v"
+        deleted = "x"
+
+        [jobs]
+        symbol = "+ "
+      '';
+    };
 }
