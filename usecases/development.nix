@@ -15,14 +15,16 @@
       { name = "neoinclude"; }
 
       # Elixir
-      { name = "alchemist-vim"; }
+      { name = "alchemist-vim"; ft_regex = "^elixir|erlang\$"; }
     ];
 
     extraConfig = let
-      cqueryPath = "${pkgs.cquery}/bin/cquery";
+      cclsPath = "${pkgs.ccls}/bin/ccls";
+      clangdPath = "${pkgs.libclang}/bin/clangd";
       clangGlibcFlags = "['-idirafter', '${pkgs.glibc.dev}/include']";
       clangCxxStdlibFlags = "split(system('bash -c \"echo -n \\\"${pkgs.clang.default_cxx_stdlib_compile}\\\"\"'))";
-      clangCxxFlagsJson = "json_encode(${clangGlibcFlags} + ${clangCxxStdlibFlags})";
+      #clangCxxFlagsJson = "json_encode(${clangGlibcFlags} + ${clangCxxStdlibFlags})";
+      clangCxxFlagsJson = "json_encode(${clangCxxStdlibFlags})";
       clangCFlagsJson   = "json_encode(${clangGlibcFlags})";
 
       pylsPath = "${pkgs.python37Packages.python-language-server}/bin/pyls";
@@ -41,15 +43,24 @@
 
       let g:LanguageClient_serverCommands = {
             \ 'rust':   ['rustup', 'run', 'nightly', 'rls'],
-            \ 'cpp' :   [ '${cqueryPath}' ],
-            \ 'c'   :   [ '${cqueryPath}' ],
+            \ 'cpp' :   [ '${cclsPath}' ],
+            \ 'c'   :   [ '${cclsPath}' ],
             \ 'python': [ '${pylsPath}' ],
             \ }
     '';
-            #\ 'cpp' : [ '${cqueryPath}', '--init={"extraClangArguments": ' . ${clangCxxFlagsJson} . ', "cacheDirectory": "/tmp/' . $USER . '/cquery"}' ],
-            #\ 'c'   : [ '${cqueryPath}', '--init={"extraClangArguments": ' . ${clangCFlagsJson}   . ', "cacheDirectory": "/tmp/' . $USER . '/cquery"}' ],
+            #\ 'cpp' : [ '${cclsPath}', '--init={"extraClangArguments": ' . ${clangCxxFlagsJson} . ', "cacheDirectory": "/tmp/' . $USER . '/ccls"}' ],
+            #\ 'c'   : [ '${cclsPath}', '--init={"extraClangArguments": ' . ${clangCFlagsJson}   . ', "cacheDirectory": "/tmp/' . $USER . '/ccls"}' ],
 
   };
+
+  nixpkgs.overlays = let
+    unstable = import <nixos-unstable> {};
+  in [
+    (self: super: {
+      inherit (unstable) ccls;
+      inherit (unstable.llvmPackages_latest) libclang;
+    })
+  ];
 
   users.extraUsers.minijackson.packages = with pkgs; [
     gdb rr
