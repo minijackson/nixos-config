@@ -75,4 +75,9 @@
     "kernel.perf_event_paranoid" = 1;
   };
 
+  home-manager.users.minijackson = { config, ... }:
+  {
+    home.file.".clang-format".source = ../dotfiles/clang-format.yml;
+  };
+
 }
