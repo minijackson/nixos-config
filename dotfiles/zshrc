@@ -1,5 +1,10 @@
 # Some variables are defined in ../commandline.nix
 
+# For users using home-manager
+if [ -f "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
+	. "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+fi
+
 # Grml Zsh configuration {{{
 # ==========================
 
