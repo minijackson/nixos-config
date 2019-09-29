@@ -193,6 +193,16 @@ alias rm='rm -i'
 
 # }}}
 
+# Helpful functions {{{
+# =====================
+
+function ssht
+{
+	/usr/bin/env ssh -t "$@" "tmux new-session -A -s 'ssh-$HOST'"
+}
+
+# }}}
+
 # Abbreviations {{{
 # =================
 
@@ -219,7 +229,8 @@ abk=(
 # GPG / SSH agents {{{
 # ====================
 
-function _gpg-agent-update-tty {
+function _gpg-agent-update-tty
+{
 	gpg-connect-agent UPDATESTARTUPTTY /bye >/dev/null
 }
 
