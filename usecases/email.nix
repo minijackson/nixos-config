@@ -8,18 +8,41 @@
 
   home-manager.users.minijackson = { config, ... }: {
     programs = {
-      alot.enable = true;
-      afew.enable = true;
+      alot = {
+        enable = true;
+        extraConfig = ''
+          theme = gruvbox
+        '';
+      };
+      afew = {
+        enable = true;
+        extraConfig = ''
+          [SpamFilter]
+          [KillThreadsFilter]
+          [ListMailsFilter]
+
+          [FolderNameFilter]
+          folder_explicit_list = Trash Corbeille
+          folder_transforms = Trash:deleted Corbeille:deleted
+          maildir_separator = /
+
+          [ArchiveSentMailsFilter]
+          [InboxFilter]
+        '';
+      };
       mbsync.enable = true;
       msmtp.enable = true;
       notmuch = {
         enable = true;
+        new.tags = [ "unread" "inbox" "new" ];
         hooks = with pkgs; {
           preNew = "${isync}/bin/mbsync --verbose --all";
           postNew = "${afew}/bin/afew --verbose --tag --new";
         };
       };
     };
+
+    xdg.configFile."alot/themes/gruvbox".source = ../res/alot-theme.ini;
 
     /*
     systemd.user = {
