@@ -120,7 +120,8 @@
 
   fonts = {
     fonts = with pkgs; [
-      fira-mono dejavu_fonts freefont_ttf liberation_ttf noto-fonts-cjk
+      fira fira-mono dejavu_fonts freefont_ttf liberation_ttf noto-fonts-cjk
+      lmodern
       # Symbols
       unifont siji font-awesome_5
       # Collections
