@@ -44,7 +44,7 @@
     elinks
     wipe
     gnupg
-    nox nix-prefetch-scripts
+    nix-prefetch-scripts
     shellcheck
   ];
 
