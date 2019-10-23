@@ -68,6 +68,10 @@
     man-pages
   ];
 
+  programs.zsh.interactiveShellInit = ''
+    (( $+commands[rustc] )) && fpath+="$(rustc --print sysroot)/share/zsh/site-functions"
+  '';
+
   documentation.dev.enable = true;
 
   boot.kernel.sysctl = {
