@@ -19,6 +19,14 @@ python36Packages.pygments.overrideAttrs (oldAttrs: rec {
   postPatch = ''
     cp ${tomorrowTheme}/styles/* pygments/styles/
     cp ${draculaTheme}/dracula.py pygments/styles/
+    sed -i \
+      -e 's/String.Symbol: "#f1fa8c"/String.Symbol: "#50fa7b"/' \
+      -e 's/Generic.Output: "#44475a"/Generic.Output: "#ffb86c"/' \
+      -e 's/Generic.Prompt: "#f8f8f2"/Generic.Prompt: "#6272a4"/' \
+      -e 's/Name.Constant: "#f8f8f2"/Name.Constant: "#ff5555"/' \
+      -e 's/Name.Constant: "#f8f8f2"/Name.Constant: "#ff5555"/' \
+      -e 's/Literal: "#f8f8f2"/Literal: "#bd93f9"/' \
+      pygments/styles/dracula.py
   '';
 
   patches = [ ./mime-message-lexer.patch ];
