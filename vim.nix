@@ -125,13 +125,14 @@ in {
       unstable = import <nixpkgs-unstable> {};
     in [
       (self: super: {
-        vimPlugins = unstable.vimPlugins;
+        inherit (unstable) gnvim vimPlugins neovim;
       })
     ];
 
     environment.systemPackages = with pkgs; [
       myNeovim
       (neovim-qt.override { neovim = myNeovim; })
+      (gnvim.override { neovim = myNeovim; })
     ];
 
     environment.sessionVariables = {
