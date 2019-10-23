@@ -42,7 +42,7 @@
       augroup END
 
       let g:LanguageClient_serverCommands = {
-            \ 'rust':   ['rustup', 'run', 'nightly', 'rls'],
+            \ 'rust':   ['rustup', 'run', 'stable', 'rls'],
             \ 'cpp' :   [ '${cclsPath}' ],
             \ 'c'   :   [ '${cclsPath}' ],
             \ 'python': [ '${pylsPath}' ],
