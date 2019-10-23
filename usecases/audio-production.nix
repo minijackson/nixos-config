@@ -21,9 +21,9 @@
       '';
     };
 
-    lv2Packages = with pkgs; [
-      linuxsampler
+    lv2Packages = with (import <nixpkgs-unstable> {}); [
       calf fmsynth infamousPlugins yoshimi zynaddsubfx helm distrho
+      carla
     ];
 
     environment.variables.LV2_PATH = map (package: "${package}/lib/lv2") config.lv2Packages;
