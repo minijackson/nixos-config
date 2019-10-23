@@ -36,6 +36,7 @@ in
     interactiveShellInit = with lib;
     ''
       source "${pkgs.grml-zsh-config}/etc/zsh/zshrc"
+      is4 && xsource "${pkgs.grml-zsh-config}/etc/zsh/keephack"
       PATH="${pkgs.fasd}/bin:$PATH"
       eval "$(fasd --init auto)"
 
@@ -61,7 +62,11 @@ in
 
       #eval "$(${pkgs.starship}/bin/starship init zsh)"
     '';
-    promptInit = ""; # otherwise it'll override the grml prompt
+
+    # otherwise it'll override the grml prompt
+    promptInit = "";
+    # Grml handles that, and supports cache (faster!!!)
+    enableGlobalCompInit = false;
 
     syntaxHighlighting = {
       enable = true;
