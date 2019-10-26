@@ -40,7 +40,8 @@
 
       hosts = with config.tinc;
       lib.genAttrs hosts (name: builtins.readFile (../res/tinc + "/${networkName}/hosts/${name}"));
-
     };
+
+    systemd.services."tinc.${config.tinc.networkName}".after = [ "network.target" ];
   };
 }
