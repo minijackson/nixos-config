@@ -44,7 +44,7 @@
 
   services.gnome3.evolution-data-server.enable = true;
 
-  services.gnome3.gvfs.enable = true;
+  services.gvfs.enable = true;
 
   nixpkgs.config.kodi = {
     enableVFSSFTP = true;
