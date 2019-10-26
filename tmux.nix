@@ -55,10 +55,10 @@ in {
       # Colorscheme
       set-option -g status-style 'fg=${colors.dimForeground}, bg=${colors.background}'
 
-      set-option -g window-status-current-fg '${colors.dominant}'
+      set-option -g window-status-current-style 'fg=${colors.dominant}'
 
-      set-option -g pane-border-fg '${colors.background}'
-      set-option -g pane-active-border-fg '${colors.dominant}'
+      set-option -g pane-border-style 'fg=${colors.background}'
+      set-option -g pane-active-border-style 'fg=${colors.dominant}'
 
       set-option -g message-style 'fg=${colors.background}, bg=${colors.dimForeground}'
 
