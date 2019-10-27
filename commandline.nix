@@ -37,8 +37,9 @@ in
     ''
       source "${pkgs.grml-zsh-config}/etc/zsh/zshrc"
       is4 && xsource "${pkgs.grml-zsh-config}/etc/zsh/keephack"
-      PATH="${pkgs.fasd}/bin:$PATH"
-      eval "$(fasd --init auto)"
+
+      PATH="${pkgs.pazi}/bin:$PATH"
+      eval "$(pazi init zsh)"
 
       source "${pkgs.zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
 
