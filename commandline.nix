@@ -27,6 +27,9 @@ in
     enableCompletion = true;
     interactiveShellInit = ''
       eval "$(${pkgs.starship}/bin/starship init bash)"
+
+      PATH="${pkgs.pazi}/bin:$PATH"
+      eval "$(pazi init bash)"
     '';
   };
 
