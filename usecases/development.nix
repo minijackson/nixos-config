@@ -20,6 +20,12 @@
 
     extraConfig = let
       cclsPath = "${pkgs.ccls}/bin/ccls";
+      cclsInitOptions = builtins.toJSON {
+        # Veeery hacky
+        cache.directory = "/run/user/' . system('id --user')[:-2] . '/ccls-cache";
+      };
+      cclsCliOption = "--init=${cclsInitOptions}";
+
       clangdPath = "${pkgs.libclang}/bin/clangd";
       clangGlibcFlags = "['-idirafter', '${pkgs.glibc.dev}/include']";
       clangCxxStdlibFlags = "split(system('bash -c \"echo -n \\\"${pkgs.clang.default_cxx_stdlib_compile}\\\"\"'))";
@@ -43,8 +49,8 @@
 
       let g:LanguageClient_serverCommands = {
             \ 'rust':   ['rustup', 'run', 'stable', 'rls'],
-            \ 'cpp' :   [ '${cclsPath}' ],
-            \ 'c'   :   [ '${cclsPath}' ],
+            \ 'cpp' :   [ '${cclsPath}', '${cclsCliOption}' ],
+            \ 'c'   :   [ '${cclsPath}', '${cclsCliOption}' ],
             \ 'python': [ '${pylsPath}' ],
             \ }
     '';
