@@ -88,6 +88,13 @@
   home-manager.users.minijackson = { config, ... }:
   {
     home.file.".clang-format".source = ../dotfiles/clang-format.yml;
+
+    programs.direnv = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+    };
+
   };
 
 }

@@ -487,6 +487,12 @@ in
         # config set in taskwarrior-secret.nix
       };
 
+      zsh = {
+        enable = true;
+        # Completion is already handled by the GRML conf
+        enableCompletion = false;
+      };
+
       rofi = {
         enable = true;
 
