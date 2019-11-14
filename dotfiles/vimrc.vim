@@ -27,7 +27,7 @@ set modeline
 
 set title
 
-set wildmode=longest,list,full
+set wildmode=longest:full,full
 
 let g:maplocalleader = ','
 let g:mapleader = ';'
