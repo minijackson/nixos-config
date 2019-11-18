@@ -778,13 +778,13 @@ in
         };
 
         "network#eth" = {
-          interface = "enp3s0";
+          interface = "enp*";
           format-ethernet = "{ipaddr}/{cidr} ";
           format-disconnected = "Disconnected ";
         };
 
         "network#wlan" = {
-          interface = "wlp2s0";
+          interface = "wlp*";
           format-wifi = "{essid} ({signalStrength}%) <span font_desc='Font Awesome 5 Free'></span>";
           format-disconnected = "Disconnected <span font_desc='Font Awesome 5 Free'></span>";
           tooltip = true;
