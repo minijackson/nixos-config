@@ -1,0 +1,47 @@
+diff --git a/src/render_icons.sh b/src/render_icons.sh
+index 9152e8d..ef33a18 100644
+--- a/src/render_icons.sh
++++ b/src/render_icons.sh
+@@ -10,6 +10,9 @@ popd > /dev/null
+ cd ${DIR}
+ 
+ THEMEDIR=../Arc
++S=/tmp/async.sock
++
++async -s="$S" server --start
+ 
+ mkdir -p $THEMEDIR
+ 
+@@ -41,26 +44,28 @@ do
+             else
+                 echo
+                 echo Rendering $THEMEDIR/$CONTEXT/$SIZE/$ICON_NAME.png
+-                $INKSCAPE --export-id=$OBJECT_ID \
++                async -s="$S" cmd -- bash -c "$INKSCAPE --export-id=$OBJECT_ID \
+                           --export-id-only \
+                           --export-png=$THEMEDIR/$CONTEXT/$SIZE/$ICON_NAME.png $CONTEXT.svg >/dev/null \
+-                && $OPTIPNG -o7 --quiet $ASSETS_DIR/$i.png 
++                && $OPTIPNG -o7 --quiet $ASSETS_DIR/$i.png"
+             fi
+             if [ -f $THEMEDIR/$CONTEXT/$SIZE@2x/$ICON_NAME.png ]; then
+                 echo $THEMEDIR/$CONTEXT/$SIZE@2x/$ICON_NAME.png exists.
+             else
+                 echo
+                 echo Rendering $THEMEDIR/$CONTEXT/$SIZE@2x/$ICON_NAME.png
+-                $INKSCAPE --export-id=$OBJECT_ID \
++                async -s="$S" cmd -- bash -c "$INKSCAPE --export-id=$OBJECT_ID \
+                           --export-dpi=180 \
+                           --export-id-only \
+                           --export-png=$THEMEDIR/$CONTEXT/$SIZE@2x/$ICON_NAME.png $CONTEXT.svg >/dev/null \
+-                && $OPTIPNG -o7 --quiet $ASSETS_DIR/$i@2.png 
++                && $OPTIPNG -o7 --quiet $ASSETS_DIR/$i@2.png"
+             fi
+         done
+     done
+ done
+ 
++async -s="$S" wait
++
+ rm index.tmp
+ cp index.theme $THEMEDIR/index.theme
+ rm -rf $THEMEDIR/actions/{32,32@2x,48,48@2x,64,64@2x,96,96@2x,128,128@2x} # derp
