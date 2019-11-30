@@ -119,22 +119,24 @@
   };
 
   fonts = {
+    enableDefaultFonts = false;
     fonts = with pkgs; [
       fira fira-mono dejavu_fonts freefont_ttf liberation_ttf noto-fonts-cjk
       lmodern
       # Symbols
-      unifont siji font-awesome_5
+      unifont siji font-awesome_5 joypixels
       # Collections
       league-of-moveable-type
     ];
 
     fontconfig = {
-      ultimate.enable = true;
+      #ultimate.enable = true;
 
       defaultFonts = {
         serif = [ "DejaVu Serif" ];
         sansSerif = [ "DejaVu Sans" ];
         monospace = [ "Fira Mono" ];
+        emoji = [ "JoyPixels" ];
       };
     };
 
