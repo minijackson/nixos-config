@@ -62,6 +62,8 @@
     '';
   };
 
+  systemd.services.display-manager.enable = false;
+
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
