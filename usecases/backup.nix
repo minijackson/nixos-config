@@ -86,9 +86,12 @@ in {
       "nixos-config" = {
         paths = "/etc/nixos";
         compression = "auto,zstd";
-        encryption.mode = "none";
+        encryption = {
+          mode = "repokey";
+          passCommand = "cat /etc/nixos/res/backups/pass";
+        };
         environment = { BORG_RSH = "ssh -i '${config.backup.sshKey}'"; };
-        repo = "${config.backup.repoBase}/borg_blah/nixos-config";
+        repo = "${config.backup.repoBase}/borg_${config.networking.hostName}/nixos-config";
         extraCreateArgs = "--stats";
         extraPruneArgs = "--list --stats";
         prune.keep = {
@@ -107,9 +110,12 @@ in {
           "*.o" "*.pyc"
         ];
         compression = "auto,zstd";
-        encryption.mode = "none";
+        encryption = {
+          mode = "repokey";
+          passCommand = "cat /etc/nixos/res/backups/pass";
+        };
         environment = { BORG_RSH = "ssh -i '${config.backup.sshKey}'"; };
-        repo = "${config.backup.repoBase}/borg_blah/minijackson-home";
+        repo = "${config.backup.repoBase}/borg_${config.networking.hostName}/minijackson-home";
         startAt = "weekly";
         extraCreateArgs = "--stats";
         extraPruneArgs = "--list --stats";

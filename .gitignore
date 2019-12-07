@@ -2,6 +2,7 @@
 /host.nix
 *-secret.nix
 
+/res/backups
 /res/tinc
 /res/taskwarrior
 /res/rsync
