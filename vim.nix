@@ -72,6 +72,7 @@ let myNeovim = (pkgs.neovim.override {
               { name = "repeat"; }
               { name = "vim-unimpaired"; }
               { name = "tabular"; }
+              { name = "vimwiki"; }
 
             ] ++ config.vim.extraPlugins;
 

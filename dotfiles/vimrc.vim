@@ -95,7 +95,7 @@ smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 set conceallevel=2
-set concealcursor=niv
+set concealcursor=nv
 
 " }}}
 
@@ -107,6 +107,12 @@ let g:ctrlp_use_caching = 0
 " LanguageClient {{{
 let g:LanguageClient_loggingFile  = stdpath('data') . '/LanguageClient.log'
 let g:LanguageClient_serverStderr = stdpath('data') . '/LanguageServer.log'
+" }}}
+
+" VimWiki {{{
+let g:vimwiki_list = [{'path': '~/Documents/Wiki', 'path_html': '~/Documents/Wiki/html'}]
+
+call deoplete#custom#var('omni', 'input_patterns', { 'vimwiki': '\[\[\w*|\:\w+' })
 " }}}
 
 " vim: fdm=marker
