@@ -112,6 +112,16 @@ let g:LanguageClient_serverStderr = stdpath('data') . '/LanguageServer.log'
 " VimWiki {{{
 let g:vimwiki_list = [{'path': '~/Documents/Wiki', 'path_html': '~/Documents/Wiki/html'}]
 
+let g:vimwiki_auto_header = 1
+let g:vimwiki_hl_headers = 1
+let g:vimwiki_hl_cb_checked = 1
+let g:vimwiki_html_header_numbering = 2
+let g:vimwiki_html_header_numbering_sym = '.'
+
+let g:vimwiki_links_header_level = 2
+let g:vimwiki_tags_header_level = 2
+let g:vimwiki_toc_header_level = 2
+
 call deoplete#custom#var('omni', 'input_patterns', { 'vimwiki': '\[\[\w*|\:\w+' })
 " }}}
 
