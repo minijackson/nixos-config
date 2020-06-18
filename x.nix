@@ -124,6 +124,7 @@
     enableDefaultFonts = false;
     fonts = with pkgs; [
       fira fira-mono dejavu_fonts freefont_ttf liberation_ttf noto-fonts-cjk
+      fira-mono-italic
       lmodern
       # Symbols
       unifont siji font-awesome_5 joypixels
