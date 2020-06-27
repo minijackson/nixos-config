@@ -23,11 +23,15 @@
 
   # Select internationalisation properties.
   i18n = {
-    consolePackages = with pkgs; [ terminus_font ];
-    consoleFont = "ter-d22n";
-    consoleColors = [ "282a2e" "a54242" "8c9440" "de935f" "5f819d" "85678f" "5e8d87" "707880" "373b41" "cc6666" "b5bd68" "f0c674" "81a2be" "b294bb" "8abeb7" "c5c8c6" ];
-    consoleKeyMap = "fr";
-    defaultLocale = "fr_FR.UTF-8";
+    #defaultLocale = "fr_FR.UTF-8";
+    extraLocaleSettings = { LC_TIME = "en_DK.UTF-8"; };
+  };
+
+  console = {
+    packages = with pkgs; [ terminus_font ];
+    font = "ter-d22n";
+    colors = [ "282a2e" "a54242" "8c9440" "de935f" "5f819d" "85678f" "5e8d87" "707880" "373b41" "cc6666" "b5bd68" "f0c674" "81a2be" "b294bb" "8abeb7" "c5c8c6" ];
+    keyMap = "fr";
   };
 
   # Set your time zone.

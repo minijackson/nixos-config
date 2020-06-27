@@ -48,6 +48,7 @@
       augroup END
 
       let g:LanguageClient_serverCommands = {
+            \ 'nix' :   ['env', 'RUST_LOG=trace ${pkgs.rnix-lsp}/bin/rnix-lsp'],
             \ 'rust':   ['rustup', 'run', 'stable', 'rls'],
             \ 'cpp' :   [ '${cclsPath}', '${cclsCliOption}' ],
             \ 'c'   :   [ '${cclsPath}', '${cclsCliOption}' ],
@@ -63,14 +64,14 @@
     unstable = import <nixos-unstable> {};
   in [
     (self: super: {
-      inherit (unstable) ccls;
+      inherit (unstable) ccls rnix-lsp;
       inherit (unstable.llvmPackages_latest) libclang;
     })
   ];
 
   users.extraUsers.minijackson.packages = with pkgs; [
     gdb rr
-    beam.packages.erlangR20.elixir
+    elixir
     man-pages
   ];
 

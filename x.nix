@@ -40,8 +40,6 @@
     };
   };
 
-  security.pam.services.slim.enableGnomeKeyring = true;
-
   services.gnome3.evolution-data-server.enable = true;
 
   services.gvfs.enable = true;
@@ -77,12 +75,6 @@
     };
 
     displayManager = {
-      slim.enable = false;
-      slim.defaultUser = "minijackson";
-      #slim.theme =
-      #  let path = builtins.fetchTarball "https://github.com/adi1090x/slim_themes/archive/master.tar.gz";
-      #  in "${path}/themes/greeny_dark";
-
       sessionCommands = ''
         ${pkgs.xlibs.xrdb}/bin/xrdb -merge ${./dotfiles/Xresources}
       '';
@@ -93,8 +85,6 @@
       xfce.enable = true;
       #xfce.screenLock = "xscreensaver";
       #gnome3.enable = true;
-
-      default = "xfce";
     };
 
     wacom.enable = true;
