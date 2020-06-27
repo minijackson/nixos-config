@@ -126,6 +126,7 @@ in
         [package]
         symbol = "version "
         style = "bold green"
+        disabled = true
 
         [rust]
         symbol = "rust "
