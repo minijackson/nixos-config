@@ -47,6 +47,8 @@ let
 
       standalone
 
+      dirtree
+
       cleveref
       xurl
       # For varioref
