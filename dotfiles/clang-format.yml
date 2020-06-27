@@ -14,6 +14,7 @@ DerivePointerAlignment: false
 PointerAlignment: Left
 AlwaysBreakTemplateDeclarations: true
 AlwaysBreakAfterDefinitionReturnType: None
+AlwaysBreakAfterReturnType: None
 BinPackArguments: false
 BinPackParameters: false
 PenaltyBreakBeforeFirstCallParameter: 2
