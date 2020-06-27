@@ -14,9 +14,8 @@
     gnome3.gucharmap
     kdeconnect
     xsel
-    qutebrowser opera
-    kodi #mpv
-    calibre
+    qutebrowser
+    kodi mpv
     gnome3.evolution
     #steam kodiPlugins.steam-launcher
     zathura
