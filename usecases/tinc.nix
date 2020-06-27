@@ -30,6 +30,11 @@
       };
       firewall.allowedUDPPorts = [ 655 ];
       firewall.allowedTCPPorts = [ 655 ];
+
+      hosts = {
+        ${config.topology.serverAddress} = [ "huh.lan" ];
+      };
+
     };
 
     services.tinc.networks.${config.tinc.networkName} = {
