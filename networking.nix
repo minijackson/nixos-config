@@ -1,61 +1,51 @@
 { config, pkgs, lib, ... }:
 
-let
-  nameServers = [
-    # ns2.he.de
-    "172.104.136.243" "2a01:7e01::f03c:91ff:febc:322"
-    # ns10.fr.dns.opennic.glue
-    "87.98.175.85" "2001:41d0:2:73d4::100"
-    # ns12.fr.dns.opennic.glue
-    "5.135.183.146"
-    # ns1.pra.cz
-    "51.254.25.115" "2001:41d0:2:73d4::125"
-    # ns1.ti.ch
-    "31.3.135.232"
-    # ns2.hau.fr
-    "188.165.200.156"
-  ];
-in {
-
-  networking.firewall.allowedTCPPorts = [];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+{
   networking.firewall.allowPing = true;
 
   networking.networkmanager = {
+    enable = config.hardware.isLaptop;
+    dns = "none";
+  };
+
+  services.dnscrypt-proxy2 = {
     enable = true;
-    dns = "dnsmasq";
-    appendNameservers = nameServers;
+    settings = {
+      static = {
+        "ns3.fr.dns.opennic.glue iriseden DNSCrypt IPv4".stamp =
+          "sdns://AQcAAAAAAAAAEzYyLjIxMC4xNzcuMTg5OjEwNTMgW8vytBGk6u3kvCpl4q88XjqW-w6JJiJ7QBObcFV7gYAfMi5kbnNjcnlwdC1jZXJ0Lm5zMS5pcmlzZWRlbi5mcg";
+        "ns3.fr.dns.opennic.glue iriseden DNSCrypt IPv6".stamp =
+          "sdns://AQcAAAAAAAAAHVsyMDAxOmJjODozMmQ3OjMwODo6MjAxXToxMDUzIEUAcwKTPY6tyEQxtfO3rIzEyqN9w7WGPLz7ZsHsx5EGHzIuZG5zY3J5cHQtY2VydC5uczEuaXJpc2VkZW4uZnI";
+        "ns3.fr.dns.opennic.glue iriseden DoH".stamp =
+          "sdns://AgcAAAAAAAAAAAAPbnMxLmlyaXNlZGVuLmV1CWRucy1xdWVyeQ";
 
-    dynamicHosts = {
-      enable = true;
-      hostsDirs.server = {};
+        "ns4.fr.dns.opennic.glue iriseden DNSCrypt IPv4".stamp =
+          "sdns://AQcAAAAAAAAAEjYyLjIxMC4xODAuNzE6MTA1MyBxLWt8kNHoMqM7vKXCkuZ3PnB32c0qV2I3KGQYtlDKSB8yLmRuc2NyeXB0LWNlcnQubnMyLmlyaXNlZGVuLmZy";
+        "ns4.fr.dns.opennic.glue iriseden DNSCrypt IPv6".stamp =
+          "sdns://AQcAAAAAAAAAHVsyMDAxOmJjODozMmQ3OjMwNzo6MzAxXToxMDUzIJjeEela3WTzMuuZTskr7aOchIg2llSDNRsHfcggITn6HzIuZG5zY3J5cHQtY2VydC5uczIuaXJpc2VkZW4uZnI";
+        "ns4.fr.dns.opennic.glue iriseden DoH".stamp =
+          "sdns://AgcAAAAAAAAAAAAPbnMyLmlyaXNlZGVuLmV1CWRucy1xdWVyeQ";
+
+        "ns8.he.de.dns.opennic.glue ethservices DoH".stamp =
+          "sdns://AgcAAAAAAAAAAAAcb3Blbm5pYzEuZXRoLXNlcnZpY2VzLmRlOjg1MwA";
+
+        "ns31.de.dns.opennic.glue ethservices DoH".stamp =
+          "sdns://AgcAAAAAAAAAAAAcb3Blbm5pYzIuZXRoLXNlcnZpY2VzLmRlOjg1MwA";
+
+        "ns3.de.dns.opennic.glue Eleix DoH".stamp =
+          "sdns://AgcAAAAAAAAAAAAQZG9oLmJvb3RobGFicy5tZQlkbnMtcXVlcnk";
+      };
+
+      cloaking_rules = with lib;
+      let
+        inherit (config.networking) hosts;
+        entryToCloak = addr:
+          concatMapStringsSep "\n" (hostname: "${hostname} ${addr}") hosts.${addr};
+      in builtins.toFile
+        "cloaking-rules.txt"
+        (concatMapStringsSep "\n" entryToCloak (attrNames config.networking.hosts));
     };
-
   };
 
-  # TODO: move that into Tinc and add all hosts
-  networking.extraHosts = ''
-    ${config.topology.serverAddress} huh.lan
-  '';
-
-  environment.etc = {
-    "NetworkManager/dnsmasq.d/nameServers.conf".text =
-      lib.concatMapStrings (server: ''
-        server=${server}
-      '') nameServers;
-
-    "NetworkManager/dnsmasq.d/local.conf".text = ''
-      local=/lan/
-      addn-hosts=/etc/hosts
-    '';
-  };
-
-  services.dnsmasq = {
-    enable = false;
-    extraConfig = ''
-    cache-size=1000
-    '';
-    servers = nameServers;
-  };
-
+  networking.resolvconf.useLocalResolver = true;
 }
