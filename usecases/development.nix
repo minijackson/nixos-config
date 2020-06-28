@@ -48,12 +48,17 @@
       augroup END
 
       let g:LanguageClient_serverCommands = {
-            \ 'nix' :   ['env', 'RUST_LOG=trace ${pkgs.rnix-lsp}/bin/rnix-lsp'],
+            \ 'nix' :   ['${pkgs.rnix-lsp}/bin/rnix-lsp'],
             \ 'rust':   ['rustup', 'run', 'stable', 'rls'],
             \ 'cpp' :   [ '${cclsPath}', '${cclsCliOption}' ],
             \ 'c'   :   [ '${cclsPath}', '${cclsCliOption}' ],
             \ 'python': [ '${pylsPath}' ],
             \ }
+
+      let g:LanguageClient_rootMarkers = {
+        \ 'nix': ['flake.nix', 'configuration.nix'],
+        \ 'rust': ['Cargo.toml'],
+        \ }
     '';
             #\ 'cpp' : [ '${cclsPath}', '--init={"extraClangArguments": ' . ${clangCxxFlagsJson} . ', "cacheDirectory": "/tmp/' . $USER . '/ccls"}' ],
             #\ 'c'   : [ '${cclsPath}', '--init={"extraClangArguments": ' . ${clangCFlagsJson}   . ', "cacheDirectory": "/tmp/' . $USER . '/ccls"}' ],
