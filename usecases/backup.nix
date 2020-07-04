@@ -75,11 +75,13 @@ in {
     systemd.timers = lib.mapAttrs' mkPeriodicRsyncTimer config.backup.periodicRsync;
 
     backup.periodicRsync = {
+      /*
       music = {
         localPath = "/home/minijackson/Music/";
         remoteDirName = "Music";
         startAt = "weekly";
       };
+      */
     };
 
     services.borgbackup.jobs = {
