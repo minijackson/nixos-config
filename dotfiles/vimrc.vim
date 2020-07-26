@@ -112,11 +112,14 @@ let g:LanguageClient_serverStderr = stdpath('data') . '/LanguageServer.log'
 " VimWiki {{{
 	" {'path': '~/Documents/Wiki', 'path_html': '~/Documents/Wiki/html'} \
 let g:vimwiki_list = [
-	\ {'path': '~/Documents/Wiki/personal', 'path_html': '~/Documents/Wiki/personal/html', 'auto_tags': 1},
+	\ {'path': '~/Documents/Wiki/personal',
+		\ 'path_html': '~/Documents/Wiki/personal/html',
+		\ 'auto_tags': 1},
 	\ {'path': '~/Documents/Wiki/science', 'path_html': '~/Documents/Wiki/science/html', 'auto_tags': 1},
 	\ {'path': '~/Documents/Wiki/work', 'path_html': '~/Documents/Wiki/work/html', 'auto_tags': 1},
-	\ {'path': '~/Documents/Wiki/wtf_is_linux', 'path_html': '~/Documents/Wiki/wtf_is_linux/html', 'auto_tags': 1}
 \ ]
+
+let g:vimwiki_global_ext = 0
 
 let g:vimwiki_auto_header = 1
 let g:vimwiki_hl_headers = 1
