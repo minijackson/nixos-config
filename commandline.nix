@@ -86,6 +86,7 @@ in
 
   programs.less = {
     envVariables = {
+      LESS = "-W -z-4 -R -J";
       LESS_TERMCAP_mb = dominantEscapeCode;
       LESS_TERMCAP_md = dominantEscapeCode;
     };
