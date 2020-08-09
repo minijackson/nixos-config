@@ -422,8 +422,8 @@ in
             time-alt = "%H:%M:%S";
 
             format-prefix = "";
-            format-prefix-foreground = neutralPurple;
-            format-underline = neutralPurple;
+            format-prefix-foreground = neutralMagenta;
+            format-underline = neutralMagenta;
 
             label = "%date% %time%";
           };
@@ -650,8 +650,7 @@ in
               green = neutralGreen;
               yellow = neutralYellow;
               blue = neutralBlue;
-              # TODO: rename purple -> magenta
-              magenta = neutralPurple;
+              magenta = neutralMagenta;
               cyan = neutralCyan;
             };
 
@@ -662,7 +661,7 @@ in
               green = brightGreen;
               yellow = brightYellow;
               blue = brightBlue;
-              magenta = brightPurple;
+              magenta = brightMagenta;
               cyan = brightCyan;
             };
 
@@ -786,7 +785,7 @@ in
           dominant dimDominant
           background lightBackground background6
           foreground
-          neutralPurple neutralYellow fadedRed neutralOrange brightBlue neutralGreen neutralCyan brightCyan;
+          neutralMagenta neutralYellow fadedRed neutralOrange brightBlue neutralGreen neutralCyan brightCyan;
       };
 
       "waybar/config".text = builtins.toJSON {

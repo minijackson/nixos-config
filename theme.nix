@@ -132,7 +132,7 @@ with lib;
       default = "#83a598";
     };
 
-    brightPurple = mkOption {
+    brightMagenta = mkOption {
       type = types.str;
       default = "#d3869b";
     };
@@ -168,7 +168,7 @@ with lib;
       default = "#458588";
     };
 
-    neutralPurple = mkOption {
+    neutralMagenta = mkOption {
       type = types.str;
       default = "#b16286";
     };
@@ -204,7 +204,7 @@ with lib;
       default = "#076678";
     };
 
-    fadedPurple = mkOption {
+    fadedMagenta = mkOption {
       type = types.str;
       default = "#8f3f71";
     };

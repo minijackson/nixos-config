@@ -29,9 +29,9 @@ with lib; with config.theme.colors; {
     neutralYellow = mkDefault brightYellow;
     fadedYellow = mkDefault brightYellow;
 
-    brightPurple = mkDefault "#b48ead";
-    neutralPurple = mkDefault brightPurple;
-    fadedPurple = mkDefault brightPurple;
+    brightMagenta = mkDefault "#b48ead";
+    neutralMagenta = mkDefault brightMagenta;
+    fadedMagenta = mkDefault brightMagenta;
 
     brightOrange = mkDefault "#b48ead";
     neutralOrange = mkDefault brightOrange;

@@ -36,7 +36,7 @@ window#waybar {
 }
 
 #clock {
-    background-color: @neutralPurple@;
+    background-color: @neutralMagenta@;
 	color: @background@;
 }
 

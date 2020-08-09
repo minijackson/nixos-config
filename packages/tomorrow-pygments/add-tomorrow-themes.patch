@@ -28,7 +28,7 @@ index 0000000..f08bb02
 +GREEN = "#718c00"
 +CYAN = "#3e999f"
 +BLUE = "#4271ae"
-+PURPLE = "#8959a8"
++MAGENTA = "#8959a8"
 +
 +
 +class TomorrowStyle(Style):
@@ -58,7 +58,7 @@ index 0000000..f08bb02
 +        Comment.Single:            "",        # class: 'c1'
 +        Comment.Special:           "",        # class: 'cs'
 +
-+        Keyword:                   PURPLE,    # class: 'k'
++        Keyword:                   MAGENTA,    # class: 'k'
 +        Keyword.Constant:          "",        # class: 'kc'
 +        Keyword.Declaration:       "",        # class: 'kd'
 +        Keyword.Namespace:         CYAN,      # class: 'kn'
@@ -156,7 +156,7 @@ index 0000000..35db132
 +GREEN = "#b5bd68"
 +CYAN = "#8abeb7"
 +BLUE = "#81a2be"
-+PURPLE = "#b294bb"
++MAGENTA = "#b294bb"
 +
 +
 +class TomorrownightStyle(Style):
@@ -186,7 +186,7 @@ index 0000000..35db132
 +        Comment.Single:            "",        # class: 'c1'
 +        Comment.Special:           "",        # class: 'cs'
 +
-+        Keyword:                   PURPLE,    # class: 'k'
++        Keyword:                   MAGENTA,    # class: 'k'
 +        Keyword.Constant:          "",        # class: 'kc'
 +        Keyword.Declaration:       "",        # class: 'kd'
 +        Keyword.Namespace:         CYAN,      # class: 'kn'
@@ -284,7 +284,7 @@ index 0000000..82c5a24
 +GREEN = "#d1f1a9"
 +CYAN = "#99ffff"
 +BLUE = "#bbdaff"
-+PURPLE = "#ebbbff"
++MAGENTA = "#ebbbff"
 +
 +
 +class TomorrownightblueStyle(Style):
@@ -314,7 +314,7 @@ index 0000000..82c5a24
 +        Comment.Single:            "",        # class: 'c1'
 +        Comment.Special:           "",        # class: 'cs'
 +
-+        Keyword:                   PURPLE,    # class: 'k'
++        Keyword:                   MAGENTA,    # class: 'k'
 +        Keyword.Constant:          "",        # class: 'kc'
 +        Keyword.Declaration:       "",        # class: 'kd'
 +        Keyword.Namespace:         CYAN,      # class: 'kn'
@@ -412,7 +412,7 @@ index 0000000..f1e2017
 +GREEN = "#b9ca4a"
 +CYAN = "#70c0b1"
 +BLUE = "#7aa6da"
-+PURPLE = "#c397d8"
++MAGENTA = "#c397d8"
 +
 +
 +class TomorrownightbrightStyle(Style):
@@ -442,7 +442,7 @@ index 0000000..f1e2017
 +        Comment.Single:            "",        # class: 'c1'
 +        Comment.Special:           "",        # class: 'cs'
 +
-+        Keyword:                   PURPLE,    # class: 'k'
++        Keyword:                   MAGENTA,    # class: 'k'
 +        Keyword.Constant:          "",        # class: 'kc'
 +        Keyword.Declaration:       "",        # class: 'kd'
 +        Keyword.Namespace:         CYAN,      # class: 'kn'
@@ -540,7 +540,7 @@ index 0000000..3a7e764
 +GREEN = "#99cc99"
 +CYAN = "#66cccc"
 +BLUE = "#6699cc"
-+PURPLE = "#cc99cc"
++MAGENTA = "#cc99cc"
 +
 +
 +class TomorrownighteightiesStyle(Style):
@@ -570,7 +570,7 @@ index 0000000..3a7e764
 +        Comment.Single:            "",        # class: 'c1'
 +        Comment.Special:           "",        # class: 'cs'
 +
-+        Keyword:                   PURPLE,    # class: 'k'
++        Keyword:                   MAGENTA,    # class: 'k'
 +        Keyword.Constant:          "",        # class: 'kc'
 +        Keyword.Declaration:       "",        # class: 'kd'
 +        Keyword.Namespace:         CYAN,      # class: 'kn'
