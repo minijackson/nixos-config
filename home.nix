@@ -624,6 +624,52 @@ in
         '';
 
       };
+
+      alacritty = {
+        enable = true;
+        settings = {
+          padding.x = 2;
+          padding.y = 2;
+
+          font ={
+            size = 8.0;
+            italic.style = "Regular Italic";
+            use_thin_strokes = false;
+          };
+
+          colors = with globalConfig.theme.colors; {
+            primary.background = softBackground;
+            primary.foreground = foreground;
+
+            normal = {
+              black = background;
+              # TODO: bright white is same
+              #white = "0xa89984";
+              white = foreground;
+              red = neutralRed;
+              green = neutralGreen;
+              yellow = neutralYellow;
+              blue = neutralBlue;
+              # TODO: rename purple -> magenta
+              magenta = neutralPurple;
+              cyan = neutralCyan;
+            };
+
+            bright = {
+              black = dimForeground;
+              white = foreground;
+              red = brightRed;
+              green = brightGreen;
+              yellow = brightYellow;
+              blue = brightBlue;
+              magenta = brightPurple;
+              cyan = brightCyan;
+            };
+
+          };
+
+        };
+      };
     };
 
     home.file = {
@@ -634,8 +680,6 @@ in
     };
 
     xdg.configFile = {
-      "alacritty/alacritty.yml".source = ./dotfiles/alacritty.yml;
-
       "mpv/mpv.conf".text = ''
         hwdec=auto
       '';
