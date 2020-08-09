@@ -10,7 +10,7 @@ let
 in
 {
   nixpkgs.overlays = let
-    unstable = import <nixos-unstable> {};
+    unstable = import <nixpkgs-unstable> {};
   in [
     (self: super: {
       inherit (unstable) starship;
