@@ -103,4 +103,5 @@
 
   };
 
+  services.lorri.enable = true;
 }
