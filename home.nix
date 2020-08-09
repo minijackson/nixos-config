@@ -698,7 +698,6 @@ in
           font ={
             size = 8.0;
             italic.style = "Regular Italic";
-            use_thin_strokes = false;
           };
 
           colors = with globalConfig.theme.colors; {
