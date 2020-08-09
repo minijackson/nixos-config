@@ -366,7 +366,7 @@ in
             type = "internal/temperature";
 
             format = "<ramp> <label>";
-            format-underline = brightAqua;
+            format-underline = brightCyan;
 
             label = "%temperature%";
             label-warn = "%temperature%";
@@ -375,7 +375,7 @@ in
             ramp-0 = "";
             ramp-1 = "";
             ramp-2 = "";
-            ramp-foreground = brightAqua;
+            ramp-foreground = brightCyan;
           };
 
           "module/date" = {
@@ -708,7 +708,7 @@ in
           dominant dimDominant
           background lightBackground background6
           foreground
-          neutralPurple neutralYellow fadedRed neutralOrange brightBlue neutralGreen neutralAqua brightAqua;
+          neutralPurple neutralYellow fadedRed neutralOrange brightBlue neutralGreen neutralCyan brightCyan;
       };
 
       "waybar/config".text = builtins.toJSON {

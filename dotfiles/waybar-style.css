@@ -95,7 +95,7 @@ window#waybar {
 }
 
 #pulseaudio {
-    background: @neutralAqua@;
+    background: @neutralCyan@;
     color: @background@;
 }
 
@@ -104,7 +104,7 @@ window#waybar {
 }
 
 #temperature {
-	background: @brightAqua@;
+	background: @brightCyan@;
 	color: @background@;
 }
 

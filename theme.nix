@@ -12,6 +12,16 @@ with lib;
 {
   options.theme.colors = {
 
+    dominantName = mkOption {
+      type = types.str;
+      default = "green";
+      description = ''
+        The dominant color name of the theme.
+
+        This color should be different on different hosts.
+      '';
+    };
+
     dominant = mkOption {
       type = types.str;
       default = "#b8bb26";
@@ -127,7 +137,7 @@ with lib;
       default = "#d3869b";
     };
 
-    brightAqua = mkOption {
+    brightCyan = mkOption {
       type = types.str;
       default = "#8ec07c";
     };
@@ -163,7 +173,7 @@ with lib;
       default = "#b16286";
     };
 
-    neutralAqua = mkOption {
+    neutralCyan = mkOption {
       type = types.str;
       default = "#689d6a";
     };
@@ -199,7 +209,7 @@ with lib;
       default = "#8f3f71";
     };
 
-    fadedAqua = mkOption {
+    fadedCyan = mkOption {
       type = types.str;
       default = "#427b58";
     };

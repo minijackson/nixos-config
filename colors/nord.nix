@@ -41,8 +41,8 @@ with lib; with config.theme.colors; {
     neutralBlue = mkDefault "#5e81ac";
     fadedBlue = mkDefault neutralBlue;
 
-    brightAqua = mkDefault "#88c0d0";
-    neutralAqua = mkDefault "#8fbcbb";
-    fadedAqua = mkDefault neutralAqua;
+    brightCyan = mkDefault "#88c0d0";
+    neutralCyan = mkDefault "#8fbcbb";
+    fadedCyan = mkDefault neutralCyan;
   };
 }

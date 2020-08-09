@@ -26,7 +26,7 @@ index 0000000..f08bb02
 +ORANGE = "#f5871f"
 +YELLOW = "#eab700"
 +GREEN = "#718c00"
-+AQUA = "#3e999f"
++CYAN = "#3e999f"
 +BLUE = "#4271ae"
 +PURPLE = "#8959a8"
 +
@@ -61,12 +61,12 @@ index 0000000..f08bb02
 +        Keyword:                   PURPLE,    # class: 'k'
 +        Keyword.Constant:          "",        # class: 'kc'
 +        Keyword.Declaration:       "",        # class: 'kd'
-+        Keyword.Namespace:         AQUA,      # class: 'kn'
++        Keyword.Namespace:         CYAN,      # class: 'kn'
 +        Keyword.Pseudo:            "",        # class: 'kp'
 +        Keyword.Reserved:          "",        # class: 'kr'
 +        Keyword.Type:              YELLOW,    # class: 'kt'
 +
-+        Operator:                  AQUA,      # class: 'o'
++        Operator:                  CYAN,      # class: 'o'
 +        Operator.Word:             "",        # class: 'ow' - like keywords
 +
 +        Punctuation:               FOREGROUND,  # class: 'p'
@@ -77,7 +77,7 @@ index 0000000..f08bb02
 +        Name.Builtin.Pseudo:       "",          # class: 'bp'
 +        Name.Class:                YELLOW,      # class: 'nc' - to be revised
 +        Name.Constant:             RED,         # class: 'no' - to be revised
-+        Name.Decorator:            AQUA,        # class: 'nd' - to be revised
++        Name.Decorator:            CYAN,        # class: 'nd' - to be revised
 +        Name.Entity:               "",          # class: 'ni'
 +        Name.Exception:            RED,         # class: 'ne'
 +        Name.Function:             BLUE,        # class: 'nf'
@@ -85,7 +85,7 @@ index 0000000..f08bb02
 +        Name.Label:                "",          # class: 'nl'
 +        Name.Namespace:            YELLOW,      # class: 'nn' - to be revised
 +        Name.Other:                BLUE,        # class: 'nx'
-+        Name.Tag:                  AQUA,        # class: 'nt' - like a keyword
++        Name.Tag:                  CYAN,        # class: 'nt' - like a keyword
 +        Name.Variable:             RED,         # class: 'nv' - to be revised
 +        Name.Variable.Class:       "",          # class: 'vc' - to be revised
 +        Name.Variable.Global:      "",          # class: 'vg' - to be revised
@@ -123,7 +123,7 @@ index 0000000..f08bb02
 +        Generic.Output:            "",                    # class: 'go'
 +        Generic.Prompt:            "bold " + COMMENT,     # class: 'gp'
 +        Generic.Strong:            "bold",                # class: 'gs'
-+        Generic.Subheading:        "bold " + AQUA,        # class: 'gu'
++        Generic.Subheading:        "bold " + CYAN,        # class: 'gu'
 +        Generic.Traceback:         "",                    # class: 'gt'
 +    }
 diff --git a/pygments/styles/tomorrownight.py b/pygments/styles/tomorrownight.py
@@ -154,7 +154,7 @@ index 0000000..35db132
 +ORANGE = "#de935f"
 +YELLOW = "#f0c674"
 +GREEN = "#b5bd68"
-+AQUA = "#8abeb7"
++CYAN = "#8abeb7"
 +BLUE = "#81a2be"
 +PURPLE = "#b294bb"
 +
@@ -189,12 +189,12 @@ index 0000000..35db132
 +        Keyword:                   PURPLE,    # class: 'k'
 +        Keyword.Constant:          "",        # class: 'kc'
 +        Keyword.Declaration:       "",        # class: 'kd'
-+        Keyword.Namespace:         AQUA,      # class: 'kn'
++        Keyword.Namespace:         CYAN,      # class: 'kn'
 +        Keyword.Pseudo:            "",        # class: 'kp'
 +        Keyword.Reserved:          "",        # class: 'kr'
 +        Keyword.Type:              YELLOW,    # class: 'kt'
 +
-+        Operator:                  AQUA,      # class: 'o'
++        Operator:                  CYAN,      # class: 'o'
 +        Operator.Word:             "",        # class: 'ow' - like keywords
 +
 +        Punctuation:               FOREGROUND,  # class: 'p'
@@ -205,7 +205,7 @@ index 0000000..35db132
 +        Name.Builtin.Pseudo:       "",          # class: 'bp'
 +        Name.Class:                YELLOW,      # class: 'nc' - to be revised
 +        Name.Constant:             RED,         # class: 'no' - to be revised
-+        Name.Decorator:            AQUA,        # class: 'nd' - to be revised
++        Name.Decorator:            CYAN,        # class: 'nd' - to be revised
 +        Name.Entity:               "",          # class: 'ni'
 +        Name.Exception:            RED,         # class: 'ne'
 +        Name.Function:             BLUE,        # class: 'nf'
@@ -213,7 +213,7 @@ index 0000000..35db132
 +        Name.Label:                "",          # class: 'nl'
 +        Name.Namespace:            YELLOW,      # class: 'nn' - to be revised
 +        Name.Other:                BLUE,        # class: 'nx'
-+        Name.Tag:                  AQUA,        # class: 'nt' - like a keyword
++        Name.Tag:                  CYAN,        # class: 'nt' - like a keyword
 +        Name.Variable:             RED,         # class: 'nv' - to be revised
 +        Name.Variable.Class:       "",          # class: 'vc' - to be revised
 +        Name.Variable.Global:      "",          # class: 'vg' - to be revised
@@ -251,7 +251,7 @@ index 0000000..35db132
 +        Generic.Output:            "",                    # class: 'go'
 +        Generic.Prompt:            "bold " + COMMENT,     # class: 'gp'
 +        Generic.Strong:            "bold",                # class: 'gs'
-+        Generic.Subheading:        "bold " + AQUA,        # class: 'gu'
++        Generic.Subheading:        "bold " + CYAN,        # class: 'gu'
 +        Generic.Traceback:         "",                    # class: 'gt'
 +    }
 diff --git a/pygments/styles/tomorrownightblue.py b/pygments/styles/tomorrownightblue.py
@@ -282,7 +282,7 @@ index 0000000..82c5a24
 +ORANGE = "#ffc58f"
 +YELLOW = "#ffeead"
 +GREEN = "#d1f1a9"
-+AQUA = "#99ffff"
++CYAN = "#99ffff"
 +BLUE = "#bbdaff"
 +PURPLE = "#ebbbff"
 +
@@ -317,12 +317,12 @@ index 0000000..82c5a24
 +        Keyword:                   PURPLE,    # class: 'k'
 +        Keyword.Constant:          "",        # class: 'kc'
 +        Keyword.Declaration:       "",        # class: 'kd'
-+        Keyword.Namespace:         AQUA,      # class: 'kn'
++        Keyword.Namespace:         CYAN,      # class: 'kn'
 +        Keyword.Pseudo:            "",        # class: 'kp'
 +        Keyword.Reserved:          "",        # class: 'kr'
 +        Keyword.Type:              YELLOW,    # class: 'kt'
 +
-+        Operator:                  AQUA,      # class: 'o'
++        Operator:                  CYAN,      # class: 'o'
 +        Operator.Word:             "",        # class: 'ow' - like keywords
 +
 +        Punctuation:               FOREGROUND,  # class: 'p'
@@ -333,7 +333,7 @@ index 0000000..82c5a24
 +        Name.Builtin.Pseudo:       "",          # class: 'bp'
 +        Name.Class:                YELLOW,      # class: 'nc' - to be revised
 +        Name.Constant:             RED,         # class: 'no' - to be revised
-+        Name.Decorator:            AQUA,        # class: 'nd' - to be revised
++        Name.Decorator:            CYAN,        # class: 'nd' - to be revised
 +        Name.Entity:               "",          # class: 'ni'
 +        Name.Exception:            RED,         # class: 'ne'
 +        Name.Function:             BLUE,        # class: 'nf'
@@ -341,7 +341,7 @@ index 0000000..82c5a24
 +        Name.Label:                "",          # class: 'nl'
 +        Name.Namespace:            YELLOW,      # class: 'nn' - to be revised
 +        Name.Other:                BLUE,        # class: 'nx'
-+        Name.Tag:                  AQUA,        # class: 'nt' - like a keyword
++        Name.Tag:                  CYAN,        # class: 'nt' - like a keyword
 +        Name.Variable:             RED,         # class: 'nv' - to be revised
 +        Name.Variable.Class:       "",          # class: 'vc' - to be revised
 +        Name.Variable.Global:      "",          # class: 'vg' - to be revised
@@ -379,7 +379,7 @@ index 0000000..82c5a24
 +        Generic.Output:            "",                    # class: 'go'
 +        Generic.Prompt:            "bold " + COMMENT,     # class: 'gp'
 +        Generic.Strong:            "bold",                # class: 'gs'
-+        Generic.Subheading:        "bold " + AQUA,        # class: 'gu'
++        Generic.Subheading:        "bold " + CYAN,        # class: 'gu'
 +        Generic.Traceback:         "",                    # class: 'gt'
 +    }
 diff --git a/pygments/styles/tomorrownightbright.py b/pygments/styles/tomorrownightbright.py
@@ -410,7 +410,7 @@ index 0000000..f1e2017
 +ORANGE = "#e78c45"
 +YELLOW = "#e7c547"
 +GREEN = "#b9ca4a"
-+AQUA = "#70c0b1"
++CYAN = "#70c0b1"
 +BLUE = "#7aa6da"
 +PURPLE = "#c397d8"
 +
@@ -445,12 +445,12 @@ index 0000000..f1e2017
 +        Keyword:                   PURPLE,    # class: 'k'
 +        Keyword.Constant:          "",        # class: 'kc'
 +        Keyword.Declaration:       "",        # class: 'kd'
-+        Keyword.Namespace:         AQUA,      # class: 'kn'
++        Keyword.Namespace:         CYAN,      # class: 'kn'
 +        Keyword.Pseudo:            "",        # class: 'kp'
 +        Keyword.Reserved:          "",        # class: 'kr'
 +        Keyword.Type:              YELLOW,    # class: 'kt'
 +
-+        Operator:                  AQUA,      # class: 'o'
++        Operator:                  CYAN,      # class: 'o'
 +        Operator.Word:             "",        # class: 'ow' - like keywords
 +
 +        Punctuation:               FOREGROUND,  # class: 'p'
@@ -461,7 +461,7 @@ index 0000000..f1e2017
 +        Name.Builtin.Pseudo:       "",          # class: 'bp'
 +        Name.Class:                YELLOW,      # class: 'nc' - to be revised
 +        Name.Constant:             RED,         # class: 'no' - to be revised
-+        Name.Decorator:            AQUA,        # class: 'nd' - to be revised
++        Name.Decorator:            CYAN,        # class: 'nd' - to be revised
 +        Name.Entity:               "",          # class: 'ni'
 +        Name.Exception:            RED,         # class: 'ne'
 +        Name.Function:             BLUE,        # class: 'nf'
@@ -469,7 +469,7 @@ index 0000000..f1e2017
 +        Name.Label:                "",          # class: 'nl'
 +        Name.Namespace:            YELLOW,      # class: 'nn' - to be revised
 +        Name.Other:                BLUE,        # class: 'nx'
-+        Name.Tag:                  AQUA,        # class: 'nt' - like a keyword
++        Name.Tag:                  CYAN,        # class: 'nt' - like a keyword
 +        Name.Variable:             RED,         # class: 'nv' - to be revised
 +        Name.Variable.Class:       "",          # class: 'vc' - to be revised
 +        Name.Variable.Global:      "",          # class: 'vg' - to be revised
@@ -507,7 +507,7 @@ index 0000000..f1e2017
 +        Generic.Output:            "",                    # class: 'go'
 +        Generic.Prompt:            "bold " + COMMENT,     # class: 'gp'
 +        Generic.Strong:            "bold",                # class: 'gs'
-+        Generic.Subheading:        "bold " + AQUA,        # class: 'gu'
++        Generic.Subheading:        "bold " + CYAN,        # class: 'gu'
 +        Generic.Traceback:         "",                    # class: 'gt'
 +    }
 diff --git a/pygments/styles/tomorrownighteighties.py b/pygments/styles/tomorrownighteighties.py
@@ -538,7 +538,7 @@ index 0000000..3a7e764
 +ORANGE = "#f99157"
 +YELLOW = "#ffcc66"
 +GREEN = "#99cc99"
-+AQUA = "#66cccc"
++CYAN = "#66cccc"
 +BLUE = "#6699cc"
 +PURPLE = "#cc99cc"
 +
@@ -573,12 +573,12 @@ index 0000000..3a7e764
 +        Keyword:                   PURPLE,    # class: 'k'
 +        Keyword.Constant:          "",        # class: 'kc'
 +        Keyword.Declaration:       "",        # class: 'kd'
-+        Keyword.Namespace:         AQUA,      # class: 'kn'
++        Keyword.Namespace:         CYAN,      # class: 'kn'
 +        Keyword.Pseudo:            "",        # class: 'kp'
 +        Keyword.Reserved:          "",        # class: 'kr'
 +        Keyword.Type:              YELLOW,    # class: 'kt'
 +
-+        Operator:                  AQUA,      # class: 'o'
++        Operator:                  CYAN,      # class: 'o'
 +        Operator.Word:             "",        # class: 'ow' - like keywords
 +
 +        Punctuation:               FOREGROUND,  # class: 'p'
@@ -589,7 +589,7 @@ index 0000000..3a7e764
 +        Name.Builtin.Pseudo:       "",          # class: 'bp'
 +        Name.Class:                YELLOW,      # class: 'nc' - to be revised
 +        Name.Constant:             RED,         # class: 'no' - to be revised
-+        Name.Decorator:            AQUA,        # class: 'nd' - to be revised
++        Name.Decorator:            CYAN,        # class: 'nd' - to be revised
 +        Name.Entity:               "",          # class: 'ni'
 +        Name.Exception:            RED,         # class: 'ne'
 +        Name.Function:             BLUE,        # class: 'nf'
@@ -597,7 +597,7 @@ index 0000000..3a7e764
 +        Name.Label:                "",          # class: 'nl'
 +        Name.Namespace:            YELLOW,      # class: 'nn' - to be revised
 +        Name.Other:                BLUE,        # class: 'nx'
-+        Name.Tag:                  AQUA,        # class: 'nt' - like a keyword
++        Name.Tag:                  CYAN,        # class: 'nt' - like a keyword
 +        Name.Variable:             RED,         # class: 'nv' - to be revised
 +        Name.Variable.Class:       "",          # class: 'vc' - to be revised
 +        Name.Variable.Global:      "",          # class: 'vg' - to be revised
@@ -635,6 +635,6 @@ index 0000000..3a7e764
 +        Generic.Output:            "",                    # class: 'go'
 +        Generic.Prompt:            "bold " + COMMENT,     # class: 'gp'
 +        Generic.Strong:            "bold",                # class: 'gs'
-+        Generic.Subheading:        "bold " + AQUA,        # class: 'gu'
++        Generic.Subheading:        "bold " + CYAN,        # class: 'gu'
 +        Generic.Traceback:         "",                    # class: 'gt'
 +    }
