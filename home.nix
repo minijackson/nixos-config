@@ -12,10 +12,44 @@ let
         userEmail = "minijackson@riseup.net";
         userName = "Minijackson";
 
-        extraConfig = {
-          core = { whitespace = "trailing-space,space-before-tab"; };
+        extraConfig = let
+          delta = (import <nixpkgs-unstable> {}).gitAndTools.delta;
+          deltaCommand = "${delta}/bin/delta";
+        in {
+          core = {
+            whitespace = "trailing-space,space-before-tab";
+            pager = deltaCommand;
+            interactive.diffFilter = "${deltaCommand} --color-only";
+          };
           merge = { tool = "nvimdiff"; };
           "mergetool \"nvimdiff\"" = { cmd = "nvim -d \"$LOCAL\" \"$MERGED\" \"$REMOTE\""; };
+
+          delta = with globalConfig.theme.colors; {
+            features = "line-numbers decorations";
+            whitespace-error-style = "22 reverse";
+            decorations = {
+              minus-style = "normal red";
+              minus-non-emph-style = "normal red";
+              minus-emph-style = "normal brightred";
+              minus-empty-line-marker-style = "normal red";
+
+              plus-style = "reverse green";
+              plus-non-emph-style = "reverse green";
+              plus-emph-style = "reverse brightgreen";
+              plus-empty-line-marker-style = "reverse green";
+
+              whitespace-error-style = "reverse green";
+
+              line-numbers-minus-style = "brightred";
+              line-numbers-zero-style = "brightblack";
+              line-numbers-plus-style = "brightgreen";
+
+              file-style = "bright${dominantName}";
+              line-numbers-left-style = dominantName;
+              line-numbers-right-style = dominantName;
+            };
+          };
+
         };
       };
 
