@@ -3,6 +3,8 @@
 with import ./lib/theme.nix { inherit lib; };
 let
   dominantEscapeCode = fgEscapeCode config.theme.colors.dominant;
+  bgDominantEscapeCode = bgEscapeCode config.theme.colors.dominant;
+  backgroundEscapeCode = fgEscapeCode config.theme.colors.background;
 
   shellScripts = {
     split-cue = ./scripts/standalone/split-cue.sh;
@@ -89,6 +91,8 @@ in
       LESS = "-W -z-4 -R -J";
       LESS_TERMCAP_mb = dominantEscapeCode;
       LESS_TERMCAP_md = dominantEscapeCode;
+      LESS_TERMCAP_so =
+        bgDominantEscapeCode + backgroundEscapeCode + "$(tput bold)";
     };
   };
 
