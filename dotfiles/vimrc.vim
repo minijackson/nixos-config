@@ -38,6 +38,8 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 let &grepprg = g:ripgrep_path . ' --vimgrep $*'
 let &grepformat = '%f:%l:%c:%m,' . &grepformat
 
+let g:tex_flavor = 'latex'
+
 " }}}
 
 " Colors, Statusline, Tabline, Code display {{{
