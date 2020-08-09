@@ -1,16 +1,9 @@
 { config, pkgs, ... }:
 
-{
-  nixpkgs.overlays = let
-    unstable = import <nixpkgs-unstable> {};
-  in [
-    (self: super: {
-      inherit (unstable)
-        krita gimp-with-plugins gimpPlugins darktable inkscape blender;
-    })
-  ];
-
-  users.extraUsers.minijackson.packages = with pkgs;
+let
+  unstable = import <nixpkgs-unstable> {};
+in {
+  users.extraUsers.minijackson.packages = with unstable;
   [
     krita (gimp-with-plugins.override { plugins = [ gimpPlugins.gmic ]; })
     darktable inkscape blender
