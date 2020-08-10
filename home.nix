@@ -2,7 +2,7 @@
 
 let
   common-home-configuration = {
-    home.stateVersion = "19.03";
+    home.stateVersion = "20.03";
 
     manual.manpages.enable = true;
     programs = {
