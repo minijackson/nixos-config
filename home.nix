@@ -692,8 +692,10 @@ in
       alacritty = {
         enable = true;
         settings = {
-          padding.x = 2;
-          padding.y = 2;
+          window = {
+            padding.x = 2;
+            padding.y = 2;
+          };
 
           font ={
             size = 8.0;
