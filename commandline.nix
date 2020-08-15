@@ -118,7 +118,7 @@ in
       xdg.configFile."starship.toml".text = ''
         [directory]
         fish_style_pwd_dir_length = 2
-        style = "bold dimmed blue"
+        style = "bold blue"
 
         [git_status]
         ahead = "^"
