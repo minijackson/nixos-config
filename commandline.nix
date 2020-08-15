@@ -120,6 +120,9 @@ in
         fish_style_pwd_dir_length = 2
         style = "bold blue"
 
+        [git_branch]
+        symbol = "branch "
+
         [git_status]
         ahead = "^"
         behind = "v"
@@ -139,6 +142,9 @@ in
 
         [nix_shell]
         style = "bold blue"
+
+        [character]
+        symbol = ">"
       '';
     };
 }
