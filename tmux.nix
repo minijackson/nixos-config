@@ -29,6 +29,10 @@ in {
       run-shell '${sensible}/share/tmux-plugins/sensible/sensible.tmux'
       run-shell '${urlview}/share/tmux-plugins/urlview/urlview.tmux'
 
+      bind-key R run-shell ' \
+        tmux source-file /etc/tmux.conf > /dev/null; \
+        tmux display-message "sourced /etc/tmux.conf"'
+
       if -F "$SSH_CONNECTION" "source-file '${remoteConf}'"
 
       set-option -g status-right ' #{prefix_highlight} "#{=21:pane_title}" %H:%M %d-%b-%y'
@@ -41,7 +45,11 @@ in {
       bind C-n next-window
       bind C-p previous-window
 
-      bind C-y run "${pkgs.tmux}/bin/tmux show-buffer > /dev/null 2>&1 && ${pkgs.tmux}/bin/tmux show-buffer | ${pkgs.xsel}/bin/xsel -ib"
+      set-option -g set-titles on
+
+      bind C-y run-shell ' \
+        ${pkgs.tmux}/bin/tmux show-buffer > /dev/null 2>&1 \
+        && ${pkgs.tmux}/bin/tmux show-buffer | ${pkgs.xsel}/bin/xsel -ib'
 
       # Force true colors
       set-option -ga terminal-overrides ",*:Tc"
