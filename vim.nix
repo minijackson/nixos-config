@@ -3,6 +3,8 @@
 let myNeovim = (pkgs.neovim.override {
   configure = {
 
+    inherit (config.vim) beforePlugins;
+
     customRC = with lib;
     (concatStringsSep
     "\n"
@@ -113,6 +115,12 @@ in {
       type = types.listOf (types.attrsOf types.str);
       default = [];
       description = "Names of extra plugins to add that are present in the local repository";
+    };
+
+    beforePlugins = mkOption {
+      type = types.lines;
+      default = "";
+      description = "Extra lines to add in the vim configuration before loading plugins";
     };
 
     extraConfig = mkOption {
