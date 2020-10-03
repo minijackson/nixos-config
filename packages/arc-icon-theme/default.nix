@@ -1,8 +1,8 @@
-{ override-arc-theme, arc-icon-theme, inkscape, optipng, async }:
+{ override-arc-theme, arc-icon-theme, inkscape_0, optipng, async }:
 
 (override-arc-theme arc-icon-theme).overrideAttrs (oldAttrs: {
 
-  nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [ inkscape optipng async ];
+  nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [ inkscape_0 optipng async ];
 
   patches = [ ./render_icons_async.patch ];
 
