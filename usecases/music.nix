@@ -33,12 +33,27 @@
     programs.beets = {
       enable = true;
       settings = {
-        plugins = "convert edit fromfilename mbsync mbsubmit missing mpdupdate the fetchart random zero";
+        plugins = [
+          "convert"
+          "edit"
+          "export"
+          "fetchart"
+          "fromfilename"
+          "lastgenre"
+          "mbsubmit"
+          "mbsync"
+          "missing"
+          "mpdupdate"
+          "random"
+          "the"
+          "zero"
+        ];
         paths = {
           default   = "%the{$albumartist}/%the{$album}%aunique{}/$track $title";
           singleton = "Non-Album/%the{$artist}/%the{$title}";
           comp      = "Compilations/%the{$album}%aunique{}/$track $title";
         };
+        lastgenre.count = 3;
         zero.fields = "comments";
       };
     };
@@ -92,6 +107,5 @@
       visualizerSupport = true;
     })
   ];
-
 
 }
