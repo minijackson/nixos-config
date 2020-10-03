@@ -44,7 +44,6 @@ zstyle ':completion:*' menu select
 
 # Case insensitive completion and substring completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-unsetopt CASE_GLOB
 
 # Increase the number of errors based on the length of the typed word. But make
 # sure to cap (at 7) the max-errors to avoid hanging.
@@ -200,6 +199,8 @@ function ssht
 {
 	/usr/bin/env ssh -t "$@" "tmux new-session -A -s 'ssh-$HOST'"
 }
+
+compdef ssht=ssh
 
 # }}}
 

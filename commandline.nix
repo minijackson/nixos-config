@@ -82,6 +82,12 @@ in
     shellAliases = {
       e = "\${(z)EDITOR}";
     };
+
+    setOptions = [
+      "HIST_IGNORE_DUPS" "SHARE_HISTORY" "HIST_FCNTL_LOCK"
+      "NO_CLOBBER"
+      "NO_CASE_GLOB"
+    ];
   };
 
   users.defaultUserShell = pkgs.zsh;
