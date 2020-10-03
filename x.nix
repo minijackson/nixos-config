@@ -8,14 +8,13 @@
 
   users.extraUsers.minijackson.packages = with pkgs; [
     qt5.qtwayland
-    alacritty
     polkit_gnome
     gnome3.dconf gnome3.nautilus gnome3.file-roller
     gnome3.gucharmap
     kdeconnect
     xsel
     qutebrowser
-    kodi mpv
+    kodi (wrapMpv mpv-unwrapped { scripts = with pkgs.mpvScripts; [ mpris sponsorblock ]; })
     gnome3.evolution
     #steam kodiPlugins.steam-launcher
     zathura
@@ -133,6 +132,14 @@
     };
 
   };
+
+  nixpkgs.overlays = let
+    unstable = import <nixpkgs-unstable> {};
+  in [
+    (self: super: {
+      inherit (unstable) mpv-unwrapped wrapMpv mpvScripts;
+    })
+  ];
 
   xdg.sounds.enable = true;
 
