@@ -43,6 +43,7 @@ in {
         # Privacy Settings
         # Rust Search Extension
         # SponsorBlock
+        # French dictionary
       ];
 
       profiles.home-manager-default = {
@@ -130,11 +131,20 @@ in {
           "dom.event.clipboardevents.enabled" = false;
           "dom.event.contextmenu.enabled" = false;
           "dom.gamepad.enabled" = false;
+          "dom.maxHardwareConcurrency" = 2;
           "dom.netinfo.enabled" = false;
           "dom.network.enabled" = false;
           "dom.telephony.enabled" = false;
           "dom.vr.enabled" = false;
           "dom.vibrator.enabled" = false;
+
+          # User-Agent already spoofed by 'resistFingerprinting'
+          # Apparently doesn't work
+          /*
+          "general.appversion.override" = "5.0 (Windows)";
+          "general.platform.override" = "Win32";
+          "general.oscpu.override" = "Windows NT 6.1";
+          */
 
           "geo.enabled" = false;
           "geo.wifi.uri" = "https://location.services.mozilla.com/v1/geolocate?key=%MOZILLA_API_KEY%";
@@ -169,6 +179,7 @@ in {
           "network.prefetch-next" = false;
 
           "privacy.donottrackheader.enabled" = true;
+          "privacy.resistFingerprinting" = true;
           "privacy.trackingprotection.enabled" = true;
           "privacy.trackingprotection.pbmode.enabled" = true;
           # Enable containers
@@ -177,6 +188,11 @@ in {
           "security.fileuri.strict_origin_policy" = true;
           "security.mixed_content.block_active_content" = true;
           "security.mixed_content.block_display_content" = true;
+
+          "webgl.min_capability_mode" = true;
+          "webgl.disable-extensions" = true;
+          "webgl.disable-fail-if-major-performance-caveat" = true;
+          "webgl.enable-debug-renderer-info" = false;
 
           # == Telemetry :( ==
 
