@@ -12,8 +12,6 @@
   };
 
   config = {
-    hardware.pulseaudio.package = pkgs.pulseaudioLight.override { jackaudioSupport = true; };
-
     home-manager.users.minijackson = { ... }:
     {
       xdg.configFile."pulse/client.conf".text = ''
@@ -34,10 +32,6 @@
         fluidsynth qsynth soundfont-fluid
         qsampler
         ardour musescore hydrogen lmms
-
-        (mpv.override {
-          jackaudioSupport = true;
-        })
       ] ++ config.lv2Packages;
       extraGroups = [ "audio" ];
     };
