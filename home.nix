@@ -180,6 +180,8 @@ in
     <home-manager/nixos>
     ./taskwarrior-secret.nix
     ./theme.nix
+
+    ./home/firefox.nix
   ];
 
   users.extraUsers.minijackson.packages = with pkgs; [
