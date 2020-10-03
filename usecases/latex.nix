@@ -39,6 +39,10 @@ let
 
       algorithms
       algorithmicx
+
+      # For Metropolis Beamer theme
+      catchfile
+
       minted
 
       asymptote
