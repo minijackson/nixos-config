@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 let
   firefox = (import <nixpkgs-unstable> {}).firefox-wayland;
@@ -50,7 +50,17 @@ in {
         id = 0;
         isDefault = true;
 
-        settings = {
+        settings = let
+          homepage = pkgs.substituteAll {
+            src = ../res/homepage.html;
+
+            inherit (config.theme.colors)
+              dominant
+              background background2
+              foreground
+              neutralRed;
+          };
+        in {
           # == Performance ==
 
           "gfx.webrender.all" = true;
@@ -92,6 +102,7 @@ in {
           "browser.fixup.domainwhitelist.huh.lan" = true;
           "browser.ctrlTab.recentlyUsedOrder" = false;
           "browser.startup.page" = 3; # Restore previous session
+          "browser.startup.homepage" = "file://${homepage}";
           "browser.tabs.warnOnClose" = false;
 
           "reader.color_scheme" = "dark";
@@ -180,6 +191,7 @@ in {
 
           "privacy.donottrackheader.enabled" = true;
           "privacy.resistFingerprinting" = true;
+          "privacy.resistFingerprinting.autoDeclineNoUserInputCanvasPrompts" = false;
           "privacy.trackingprotection.enabled" = true;
           "privacy.trackingprotection.pbmode.enabled" = true;
           # Enable containers
