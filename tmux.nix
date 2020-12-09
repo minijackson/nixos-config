@@ -45,6 +45,9 @@ in {
       bind C-n next-window
       bind C-p previous-window
 
+      # Send the bracketed paste mode when pasting
+      bind ] paste-buffer -p
+
       set-option -g set-titles on
 
       bind C-y run-shell ' \
